@@ -14,8 +14,6 @@ results = []
 # Message text
 message = "Metalkas: cena odpowiednika Sum 320 W "
 
-# Metalkas's product URL
-#url = 'https://sklep.metalkas.com.pl/szafa-ubraniowa-2-msu-eco-mtd.html'
 
 def scrap(touple):
 
@@ -39,7 +37,7 @@ def scrap(touple):
   cprice = cprice[0].replace(u'\xa0', u'')
 
   if pprice == cprice:
-    message_suffix = ""
+    message_suffix = "\tcena nie zmieniła się"
   else:
     # Calculate diff in prices in precent
     percent = str((int(cprice) / int(pprice))*100).split(".")
