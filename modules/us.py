@@ -3,6 +3,7 @@ import requests
 from datetime import datetime
 
 # List of link to scrapp
+# Structure <link>, <price>, <equivalent>
 links = [
   ("https://umstahl.pl/metalowa-szafka-ubraniowa-se-30r2-24h,id102.html", "500", "Sum 320 W"),
  ("https://umstahl.pl/metalowa-szafa-ubraniowa-sle-40r2-24h,id104.html", "1024", "Sus 333 W"),
@@ -66,6 +67,5 @@ def scrapp_all():
 
 def print_result():
   scrapp_all()
-  #print(results)
   for result in results:
         print(result["msg"])

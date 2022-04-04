@@ -3,6 +3,7 @@ import requests
 from datetime import datetime
 
 # List of link to scrapp
+# Structure <link>, <price>, <equivalent>
 links = [
   ("https://sklep.metalkas.com.pl/szafa-ubraniowa-2-msu-eco-mtd.html", "500", "Sum 320 W"),
   ("https://sklep.metalkas.com.pl/tg-5msu-eco.html", "600", "Sus 333 W"),
