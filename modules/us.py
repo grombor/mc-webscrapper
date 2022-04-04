@@ -39,7 +39,7 @@ def scrap(touple):
   cprice = cprice[0].replace(u'\xa0', u'')
 
   if pprice == cprice:
-    message_suffix = "\tcena nie zmieniła się"
+    message_suffix = "\tcena nie zmieniła się\n"
   else:
     # Calculate diff in prices in precent
     percent = str((int(cprice) / int(pprice))*100).split(".")

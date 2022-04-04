@@ -12,9 +12,6 @@ links = [
 # Results: list of dict
 results = []
 
-# Message text
-message = "Metalkas: cena odpowiednika Sum 320 W "
-
 
 def scrap(touple):
 
@@ -38,7 +35,7 @@ def scrap(touple):
   cprice = cprice[0].replace(u'\xa0', u'')
 
   if pprice == cprice:
-    message_suffix = "\tcena nie zmieniła się"
+    message_suffix = "\tcena nie zmieniła się\n"
   else:
     # Calculate diff in prices in precent
     percent = str((int(cprice) / int(pprice))*100).split(".")
@@ -66,6 +63,5 @@ def scrapp_all():
 
 def print_result():
   scrapp_all()
-  #print(results)
   for result in results:
         print(result["msg"])
