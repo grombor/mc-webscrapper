@@ -45,7 +45,7 @@ def scrap(touple):
     message_suffix = "\tcena nie zmieniła się\n"
   else:
     # Calculate diff in prices in precent
-    percent = str((int(cprice) / int(pprice))*100).split(".")
+    percent = str(1-(int(cprice) / int(pprice))*100).split(".")
     message_suffix = f"\tróżni się od poprzednio odnotowanej ceny ({pprice} brutto) o {percent[0]}%\n"
 
   # Save current date
@@ -79,7 +79,7 @@ def scrap(touple):
 
 
 def scrap_all():
-  for link in links:
+  for link in links_mk:
     scrap(link)
 
 

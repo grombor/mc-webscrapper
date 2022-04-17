@@ -66,7 +66,7 @@ def scrap(touple):
 
 
 def scrapp_all():
-  for link in links:
+  for link in links_us:
     scrap(link)
 
 
