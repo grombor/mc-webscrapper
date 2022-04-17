@@ -4,12 +4,13 @@ from datetime import datetime
 
 # List of link to scrapp
 # Structure <link>, <price>, <equivalent>
-links = [
+links_mk = [
   ("https://sklep.metalkas.com.pl/szafy-schowkowe-metalowe-tg-4mss-eco.html", "718", "Sus 322 W"),
   ("https://sklep.metalkas.com.pl/szafa-ubraniowa-2-msu.html", "807", "Sum 320 W"),
   ("https://sklep.metalkas.com.pl/szafa-ubraniowa-3-msu-eco.html", "897", "Sum 420 W"),
   ("https://sklep.metalkas.com.pl/szafa-ubraniowa-tg-2msl-eco-basic.html", "1011", "Sul 32 W"),
   ("https://sklep.metalkas.com.pl/szafa-biurowa-1-sdb-eco.html", "1252", "Sbm 201 M"),
+  ("https://sklep.metalkas.com.pl/szafa-metalowa-biurowa-tg-1sdb.html", "1450", "Sbm 202 M"),
   ("https://sklep.metalkas.com.pl/szafa-biurowa-3-sdb-eco.html", "1198", "Sbm 203 M"),
   ("https://sklep.metalkas.com.pl/szafa-kartotekowa-3-sdk.html", "2424", "Szk 301"),
   ("https://sklep.metalkas.com.pl/szafa-kartotekowa-szufladowa-tg-2sdk.html", "1888", "Szk 301"),
@@ -48,26 +49,42 @@ def scrap(touple):
     message_suffix = f"\tróżni się od poprzednio odnotowanej ceny ({pprice} brutto) o {percent[0]}%\n"
 
   # Save current date
-  date = datetime.now().strftime("%x")
+  date = datetime.now().strftime("%d/%m/%Y")
   
   # Save results of scrapping as dict
   result = {}
-  result["link"] = touple[0]
-  result["odpowiednik"] = touple[2] + f" ( {str(product_name)} )"
-  result["cena"] = cprice
-  result["data"] = date
-  result["msg"] = f"Metalkas: odpowiednik {result['odpowiednik']}\n{message_suffix}"
+
+  # find time to ship
+  t_ship = str(soup.find('div', {'class': 'single-attr unavailable'}))
+  index = t_ship.find("do ")
+  czas_realizacji = t_ship[index+3:-6]
+
+  #new result
+  result["KONKURENCJA"] = "Metalkas"
+  result["DATA"] = date
+  result["ODPOWIEDNIK"] = touple[2] + f" ( {str(product_name)} )"
+  result["NETTO"] = int(int(cprice) / 1.23)
+  result["BRUTTO"] = cprice
+  result["WYSOKOŚĆ"] = soup.find('td', {'data-th': 'Wysokość zewnętrzna [mm]'}).string
+  result["SZEROKOŚĆ"] = soup.find('td', {'data-th': 'Szerokość zewnętrzna [mm]'}).string
+  result["GŁĘBOKOŚĆ"] = soup.find('td', {'data-th': 'Głębokość zewnętrzna'}).string
+  result["CECHY CHARAKTERYSTYCZNE"] = soup.find('div', {'id': 'description'}).string
+  result["LINK DO SKLEPU"] = touple[0]
+  result["CZAS REALIZACJI"] = czas_realizacji
+  result["GWARANCJA"] = "24 miesiące"
+  result["msg"] = f"Metalkas: odpowiednik {result['ODPOWIEDNIK']}\n{message_suffix}"
   # TODO: add more fields from competitors database
 
   return results.append(result)
 
 
-def scrapp_all():
+def scrap_all():
   for link in links:
     scrap(link)
 
 
 def print_result():
-  scrapp_all()
+  scrap_all()
   for result in results:
+        print(result["CZAS REALIZACJI"])
         print(result["msg"])

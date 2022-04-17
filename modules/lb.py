@@ -4,7 +4,7 @@ from datetime import datetime
 
 # List of link to scrapp
 # Structure <link>, <price>, <equivalent>
-links = [
+links_lb = [
   ("https://locobox.pl/pl/p/Szafka-szkolna-dla-4-uczniow-4D-s60-cm%2C-h180-cm/257", "628", "Sus 322 W"),
   ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-U2-s60-cm/284", "449", "Sum 320 W"),
   ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-U2-s80-cm/288", "583", "Sum 420 W"),
