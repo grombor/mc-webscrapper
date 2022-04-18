@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from datetime import datetime
+from .utils import compare_prices
 
 # List of link to scrapp
 # Structure <link>, <price>, <equivalent>
@@ -47,8 +48,8 @@ def scrap(touple):
     message_suffix = "\tcena nie zmieniła się\n"
   else:
     # Calculate diff in prices in precent
-    percent = str((int(cprice) / int(pprice))*100).split(".")
-    message_suffix = f"\tróżni się od poprzednio odnotowanej ceny ({pprice} brutto) o {percent[0]}%\n"
+    percent = compare_prices(cprice, pprice)
+    message_suffix = f"\tróżni się od poprzednio odnotowanej ceny ({pprice} brutto) o {percent}%\n"
 
   # Save current date
   date = datetime.now().strftime("%x")
