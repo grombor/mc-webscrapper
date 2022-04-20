@@ -7,5 +7,5 @@ links = [
   ("https://sklep.metalkas.com.pl/szafa-metalowa-biurowa-tg-1sdb.html", "1450", "Sbm 202 M"),
   ("https://sklep.metalkas.com.pl/szafa-biurowa-3-sdb-eco.html", "1198", "Sbm 203 M"),
   ("https://sklep.metalkas.com.pl/szafa-kartotekowa-3-sdk.html", "2424", "Szk 301"),
-  ("https://sklep.metalkas.com.pl/szafa-kartotekowa-szufladowa-tg-2sdk.html", "1888", "Szk 301"),
+  # ("https://sklep.metalkas.com.pl/szafa-kartotekowa-szufladowa-tg-2sdk.html", "1888", "Szk 301"),
 ]

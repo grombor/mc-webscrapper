@@ -1,19 +1,13 @@
 from bs4 import BeautifulSoup as bs4
+from numpy import record
 import requests
 from datetime import datetime
-from .utils import compare_prices
+from .utils import compare_prices, records
+from .lb_links import links
 
 # List of link to scrapp
 # Structure <link>, <price>, <equivalent>
-links_lb = [
-  ("https://locobox.pl/pl/p/Szafka-szkolna-dla-4-uczniow-4D-s60-cm%2C-h180-cm/257", "628", "Sus 322 W"),
-  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-U2-s60-cm/284", "449", "Sum 320 W"),
-  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-U2-s80-cm/288", "583", "Sum 420 W"),
-  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-L4-s60-cm/323", "1013", "Sul 32 W"),
-  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O80200-RODO/545", "855", "Sbm 202 M"),
-  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O80200-RODO/545", "905", "Sbm 203 M"),
-  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4xA4/1028", "775", "Szk 301"),
-]
+links_lb = links
 
 # Results: list of dict
 results = []
@@ -39,34 +33,59 @@ def scrap(touple):
   cprice = str(cprice).split(',')
   cprice = cprice[0].replace(u'\xa0', u'')
 
-  if pprice == cprice:
-    message_suffix = "\tcena nie zmieniła się\n"
-  else:
-    # Calculate diff in prices in precent
-    percent = compare_prices(cprice, pprice)
-    message_suffix = f"\tróżni się od poprzednio odnotowanej ceny ({pprice} brutto) o {percent}%\n"
-
   # Save current date
-  date = datetime.now().strftime("%x")
+  date = datetime.now().strftime("%d/%m/%Y")
   
   # Save results of scrapping as dict
   result = {}
-  result["link"] = touple[0]
-  result["odpowiednik"] = touple[2] + f" ( {str(product_name)} )"
-  result["cena"] = cprice
-  result["data"] = date
-  result["msg"] = f"Locobox: odpowiednik {result['odpowiednik']}\n{message_suffix}"
-  # TODO: add more fields from competitors database
 
-  return results.append(result)
+  # find time to ship
+  t_ship = str(soup.find('span', {'class': 'second'}).string)
+  if t_ship == '48 - 72 H':
+    index = t_ship.find("- ")
+    czas_realizacji = str(int(t_ship[index+2:-2])/24).split('.')[0]
+  if t_ship == '3-4 tygodnie':
+    czas_realizacji = t_ship.split('-')[1]
+
+  # czas_realizacji = ''
+
+  if pprice == cprice:
+    message = "cena nie zmieniła się.\n"
+  else:
+    # Calculate diff in prices in precent
+    percent = compare_prices(cprice, pprice)
+    message = f"cena wzrosła w stosunku do poprzednio odnotowanej ceny ({pprice} brutto) o {percent}%.\n"
+
+    # Save current date
+    date = datetime.now().strftime("%x")
+
+  
+  # Save results of scrapping as dict
+    #new result
+    result["KONKURENCJA"] = "Locobox"
+    result["DATA"] = date
+    result["MODEL"] = product_name
+    result["ODPOWIEDNIK"] = touple[2]
+    result["NETTO"] = cprice
+    result["BRUTTO"] = int(int(cprice) * 1.23)
+    result["WYSOKOŚĆ"] = 'NULL'
+    result["SZEROKOŚĆ"] = 'NULL'
+    result["GŁĘBOKOŚĆ"] = 'NULL'
+    result["CECHY CHARAKTERYSTYCZNE"] = ""
+    result["ŹRÓDŁO"] = touple[0]
+    result["CZAS REALIZACJI [dni]"] = czas_realizacji
+    result["GWARANCJA [miesiące]"] = "24 miesiące"
+    result["msg"] = f"{result['KONKURENCJA']}: odpowiednik {result['ODPOWIEDNIK']}\n{message}"
+    print(result["msg"])
+
+    return records.append(result)
 
 
-def scrapp_all():
-    for link in links_lb:
-        scrap(link)
+def scrap_all():
+  for link in links_lb:
+    scrap(link)
 
 
-def print_result():
-  scrapp_all()
-  for result in results:
-        print(result["msg"])
+def get_results():
+  print("Scrapping Locobox...")
+  scrap_all()

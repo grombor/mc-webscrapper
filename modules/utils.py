@@ -1,11 +1,9 @@
-  # TODO: if save_to_file == True : create .csv record using result dict -> create fuction that prepares that record to copy/paste
-  # TODO: create function that calculate how much prices differ in %
-
-# from .mk import print_result as Metalkas
-# from .us import print_result as Umstahl
-# from .lb import print_result as Locobox
+#TODO: nie nadpisywanie, a dopisywanie do pliku csv
 
 import csv
+
+# Main data holder
+records = []
 
 def compare_prices(current_price, previous_price):
   percent = str((int(current_price)*100 / int(previous_price))-100).split(".")
@@ -21,8 +19,8 @@ def test_read_csv_file():
       if i>2:
         break
 
-def test_write_csv_file(rows):
-  with open('eggs.csv', 'w', newline='', encoding='utf-8') as csvfile:
+def test_write_csv_file():
+  with open('test.csv', 'w', newline='', encoding='utf-8') as csvfile:
     fieldnames = [
       "KONKURENCJA", 
       "DATA", 
@@ -43,5 +41,5 @@ def test_write_csv_file(rows):
     print('Printing to csv file...')
     writer.writeheader()
 
-    for row in rows:
+    for row in records:
       writer.writerow(row)

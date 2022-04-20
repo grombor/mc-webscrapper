@@ -1,26 +1,13 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from datetime import datetime
-from .utils import compare_prices
-
-# List of link to scrapp
-# Structure <link>, <price>, <equivalent>
-links_us = [
- ("https://umstahl.pl/metalowa-szafa-ubraniowa-sle-30r2,id403.html", "1102", "Sul 32 W"),
- ("https://umstahl.pl/metalowa-szafa-ubraniowa-z-podzialem-wewnetrznym-se-40r2-24h,id550.html", "721", "Sum 420 W"),
- ("https://umstahl.pl/metalowa-szafka-ubraniowa-se-30r2-24h,id102.html", "459", "Sum 320 W"),
- ("https://umstahl.pl/szafka-kartotekowa-4ra4,id50.html", "1093", "Szk 301"),
- ("https://umstahl.pl/szafa-metalowa-aktowa-m-1ola-500,id199.html", "907", "Sbm 201 M"),
- ("https://umstahl.pl/szafa-metalowa-aktowa-m-2ola-800,id57.html", "1136", "Sbm 202 M"),
- ("https://umstahl.pl/szafa-metalowa-aktowa-m-2ola-1000,id53.html", "1037", "Sbm 203 M"),
-]
-
-# Results: list of dict
-results = []
+from .utils import compare_prices, records
+from .us_links import links
 
 
-# Message text
-message = "Umstahl: cena odpowiednika Sum 320 W "
+result = {}
+
+links_us = links
 
 
 def scrap(touple):
@@ -45,33 +32,50 @@ def scrap(touple):
   cprice = cprice[0].replace(u'\xa0', u'')
 
   if pprice == cprice:
-    message_suffix = "\tcena nie zmieniła się\n"
+    message = "cena nie zmieniła się\n"
   else:
     # Calculate diff in prices in precent
     percent = compare_prices(cprice, pprice)
-    message_suffix = f"\tróżni się od poprzednio odnotowanej ceny ({pprice} brutto) o {percent}%\n"
+    message = f"różni się od poprzednio odnotowanej ceny ({pprice} brutto) o {percent}%\n"
 
-  # Save current date
-  date = datetime.now().strftime("%x")
+    # Save current date
+    date = datetime.now().strftime("%x")
+
+    # Find dimmensions
+    temp = soup.find_all('p', {'class': 'desc-short'})[0]
+    temp = str(list(temp.descendants)[2]).split('x')
+    
+    height = str(str(temp[2]).split(',')[0]+'0').replace('h','')
+    width = str(temp[0]).split(',')[0]+'0'
+    depth = str(temp[1]).split(',')[0]+'0'
+    czas_realizacji = soup.find('span', {'style': 'display: inline-block; width: 65%;'}).string
+
   
-  # Save results of scrapping as dict
-  result = {}
-  result["link"] = touple[0]
-  result["odpowiednik"] = touple[2] + f" ( {str(product_name)} )"
-  result["cena"] = cprice
-  result["data"] = date
-  result["msg"] = f"Umstahl: odpowiednik {result['odpowiednik']}\n{message_suffix}"
-  # TODO: add more fields from competitors database
+    # Save results of scrapping as dict
+    result["KONKURENCJA"] = "Umstahl"
+    result["DATA"] = date
+    result["MODEL"] = product_name
+    result["ODPOWIEDNIK"] = touple[2]
+    result["NETTO"] = cprice
+    result["BRUTTO"] = int(int(cprice)*1.23)
+    result["WYSOKOŚĆ"] = height
+    result["SZEROKOŚĆ"] = width
+    result["GŁĘBOKOŚĆ"] = depth
+    result["CECHY CHARAKTERYSTYCZNE"] = ""
+    result["ŹRÓDŁO"] = touple[0]
+    result["CZAS REALIZACJI [dni]"] = czas_realizacji
+    result["GWARANCJA [miesiące]"] = "36 miesięcy"
+    result["msg"] = f"{result['KONKURENCJA']}: odpowiednik {result['ODPOWIEDNIK']}\n{message}"
+    print(result["msg"])
 
-  return results.append(result)
+  return records.append(result)
 
 
-def scrapp_all():
+def scrap_all():
   for link in links_us:
     scrap(link)
 
 
-def print_result():
-  scrapp_all()
-  for result in results:
-        print(result["msg"])
+def get_results():
+  print("Scrapping Umstahl...")
+  scrap_all()
