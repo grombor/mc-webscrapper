@@ -9,17 +9,8 @@ def compare_prices(current_price, previous_price):
   percent = str((int(current_price)*100 / int(previous_price))-100).split(".")
   return percent[0]
 
-def test_read_csv_file():
-  with open("./modules/test.csv", newline='', encoding='UTF8') as csvfile:
-    csv_reader = csv.reader(csvfile, delimiter=' ', quotechar="|")
-    i=0
-    for row in csv_reader:
-      print(', '.join(row))
-      i+=1
-      if i>2:
-        break
 
-def test_write_csv_file():
+def write_to_csv_file():
   with open('test.csv', 'w', newline='', encoding='utf-8') as csvfile:
     fieldnames = [
       "KONKURENCJA", 

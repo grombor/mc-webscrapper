@@ -12,5 +12,5 @@ if __name__ == "__main__":
     Metalkas()
     Umstahl()
     Locobox()
-    test_write_csv_file()
+    write_to_csv_file()
     
