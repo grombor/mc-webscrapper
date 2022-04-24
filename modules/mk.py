@@ -18,7 +18,7 @@ def scrap(touple):
   soup = bs4(response.text, 'html.parser')
 
   # Parse product name
-  product_name = soup.find('span', {'itemprop': 'name'}).string
+  product_name = soup.find('span', {'class': 'base'}).string
   
   # Previous product price
   pprice = touple[1]
