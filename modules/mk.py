@@ -8,6 +8,12 @@ from .mk_links import links
 # Structure <link>, <price>, <equivalent>
 links_mk = links
 
+def calculate_nett_price(price):
+  try:
+    int(int(price) / 1.23)
+  except:
+    return "UKNOWN"
+
 
 def scrap(touple):
 
@@ -48,16 +54,24 @@ def scrap(touple):
     percent = compare_prices(cprice, pprice)
     message = f"cena wzrosła w stosunku do poprzednio odnotowanej ceny ({pprice} brutto) o {percent}%.\n"
 
+
     #new result
     result["KONKURENCJA"] = "Metalkas"
     result["DATA"] = date
     result["MODEL"] = product_name
     result["ODPOWIEDNIK"] = touple[2]
-    result["NETTO"] = int(int(cprice) / 1.23)
+    result["NETTO"] = calculate_nett_price(cprice)
     result["BRUTTO"] = cprice
-    result["WYSOKOŚĆ"] = soup.find('td', {'data-th': 'Wysokość zewnętrzna [mm]'}).string
-    result["SZEROKOŚĆ"] = soup.find('td', {'data-th': 'Szerokość zewnętrzna [mm]'}).string
-    result["GŁĘBOKOŚĆ"] = soup.find('td', {'data-th': 'Głębokość zewnętrzna'}).string
+
+    try:
+      result["WYSOKOŚĆ"] = soup.find('td', {'data-th': 'Wysokość zewnętrzna [mm]'}).string
+      result["SZEROKOŚĆ"] = soup.find('td', {'data-th': 'Szerokość zewnętrzna [mm]'}).string
+      result["GŁĘBOKOŚĆ"] = soup.find('td', {'data-th': 'Głębokość zewnętrzna'}).string
+    except:
+      result["WYSOKOŚĆ"] = 'UNKNOWN'
+      result["SZEROKOŚĆ"] = 'UNKNOWN'
+      result["GŁĘBOKOŚĆ"] = 'UNKNOWN'
+
     result["CECHY CHARAKTERYSTYCZNE"] = ""
     result["ŹRÓDŁO"] = touple[0]
     result["CZAS REALIZACJI [dni]"] = czas_realizacji

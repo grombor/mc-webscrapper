@@ -6,8 +6,12 @@ import csv
 records = []
 
 def compare_prices(current_price, previous_price):
-  percent = str((int(current_price)*100 / int(previous_price))-100).split(".")
-  return percent[0]
+  try:
+    percent = str((int(current_price)*100 / int(previous_price))-100).split(".")
+    return percent[0]
+  except:
+    print(f"Something went wrong with price comparement.")
+    return "UKNOWN"
 
 
 def write_to_csv_file():

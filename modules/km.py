@@ -82,7 +82,10 @@ def scrap(touple):
 
 def scrap_all():
   for link in links_km:
-    scrap(link)
+    try:
+      scrap(link)
+    except:
+      print(f"Something went wrong with: {link[0]}")
 
 
 def get_results():

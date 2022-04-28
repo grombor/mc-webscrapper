@@ -8,9 +8,9 @@ from modules.utils import *
 
 
 if __name__ == "__main__":
-    Kartmap()
+    # Kartmap()
     Metalkas()
-    Umstahl()
-    Locobox()
+    # Umstahl()
+    # Locobox()
     write_to_csv_file()
     
