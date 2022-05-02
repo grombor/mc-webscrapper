@@ -2,6 +2,8 @@
 
 import csv
 
+from numpy import integer
+
 # Main data holder
 records = []
 
@@ -11,13 +13,13 @@ def compare_prices(current_price, previous_price):
     return percent[0]
   except:
     print(f"Something went wrong with price comparement.")
-    return "UKNOWN"
+    return "BRAK DANYCH"
 
 
 def write_to_csv_file():
   with open('test.csv', 'w', newline='', encoding='utf-8') as csvfile:
     fieldnames = [
-      "KONKURENCJA", 
+      "DYSTRYBUTOR", 
       "DATA", 
       "MODEL", 
       "ODPOWIEDNIK",

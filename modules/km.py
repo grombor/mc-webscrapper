@@ -1,15 +1,32 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from datetime import datetime
-from .utils import compare_prices, records
+from .utils import records, compare_prices
 from .km_links import links
 
 # List of link to scrapp
-# Structure <link>, <price>, <equivalent>
 links_km = links
+
+      #   fieldnames = [
+      # "DYSTRYBUTOR", 
+      # "DATA", 
+      # "MODEL", 
+      # "ODPOWIEDNIK",
+      # "NETTO",
+      # "BRUTTO",
+      # "WYSOKOŚĆ",
+      # "SZEROKOŚĆ",
+      # "GŁĘBOKOŚĆ",
+      # "CECHY CHARAKTERYSTYCZNE",
+      # "ŹRÓDŁO",
+      # "CZAS REALIZACJI [dni]",
+      # "GWARANCJA [miesiące]",
+      # "msg"
+      # ]
 
 
 def scrap(touple):
+  result = {}
 
   # Use requests to retrieve data from a given URL
   response = requests.get(touple[0])
@@ -17,70 +34,73 @@ def scrap(touple):
   # Parse the whole HTML page using BeautifulSoup
   soup = bs4(response.text, 'html.parser')
 
-  # Parse product name
-  product_name = soup.find('h1', {'class': 'product_title entry-title'}).string.strip()
-  
-  # Previous product price
-  pprice = touple[1]
-
-  # Current product price
-  cprice = soup.find_all('span', {'class': 'woocommerce-Price-amount amount'})[1]
-
-  # Parse price text
-  index1 = str(cprice).find('<bdi>')+5
-  index2 = str(cprice).find(',00')
-  cprice = str(cprice)[index1:index2].replace(' ','')
+  # Dystrybutor
+  result["DYSTRYBUTOR"] = "Kart-Map"
 
   # Save current date
-  date = datetime.now().strftime("%d/%m/%Y")
+  data = datetime.now().strftime("%d/%m/%Y")
+  result["DATA"] = data
+
+  # Parse product name
+  model = soup.find('h1', {'class': 'product_title entry-title'}).string.strip()
+  result["MODEL"] = model
+
+  # Is comparable with
+  result["ODPOWIEDNIK"] = touple[2]
   
-  # Save results of scrapping as dict
-  result = {}
+  # Previous product price
+  poprzednia_cena = touple[1]
 
-  # find time to ship
-  t_ship = str(soup.find_all('blockquote'))
-  index1 = t_ship.find('dostawy ')+10
-  index2 = t_ship.find(' tygod')
-  czas_realizacji = (t_ship[index1:])[:1]
-  czas_realizacji = int(czas_realizacji)*7
+  # Current product price
+  netto = soup.find_all('bdi')[0].text.split(",")[0].replace(" ", "")
+  brutto = int(float(netto) * 1.23)
+  result["NETTO"] = netto
+  result["BRUTTO"] = brutto
 
-  if pprice == cprice:
+  # Find dimmensions
+  wysokosc = soup.find_all('td', {'width': '302'})[1].string
+  result["WYSOKOŚĆ"] = wysokosc[:-2]
+
+  szerokosc = soup.find_all('td', {'width': '302'})[3].string
+  result["SZEROKOŚĆ"] = szerokosc[:-2]
+
+  glebokosc = soup.find_all('td', {'width': '302'})[5].string
+  result["GŁĘBOKOŚĆ"] = glebokosc[:-2]
+
+  # Characteristics
+  # cechy_charakterystyczne = soup.find_all('p', {"align":"justify"})
+  cechy_charakterystyczne = soup.find(id="tab-description").text
+  result["CECHY CHARAKTERYSTYCZNE"] = cechy_charakterystyczne
+  print(cechy_charakterystyczne)
+
+  # Source link / cennik / katalog
+  result["ŹRÓDŁO"] = touple[0]
+
+  # Find time to ship
+  czas_realziacji = soup.find_all('p', {"style":"text-align: center;"})
+  result["CZAS REALIZACJI [dni]"] = czas_realziacji
+
+  # # Warranty
+  result["GWARANCJA [miesiące]"] = "24 miesiące"
+
+  # Comments
+  if poprzednia_cena == netto:
     message = "cena nie zmieniła się.\n"
   else:
     # Calculate diff in prices in precent
-    percent = compare_prices(cprice, pprice)
-    message = f"cena wzrosła w stosunku do poprzednio odnotowanej ceny ({pprice} brutto) o {percent}%.\n"
+    percent = compare_prices(netto, poprzednia_cena)
+    message = f"cena zmieniła się o {percent}"
+  msg = f"{result['DYSTRYBUTOR']}: odpowiednik {result['ODPOWIEDNIK']} - {message}"
+  result["msg"] = msg
 
-    # Save current date
-    date = datetime.now().strftime("%x")
 
-
-    # Find dimmensions
-    height = soup.find_all('td', {'width': '302'})[1].string
-    width = soup.find_all('td', {'width': '302'})[3].string
-    depth = soup.find_all('td', {'width': '302'})[5].string
-  
-  # Save results of scrapping as dict
-    result["KONKURENCJA"] = "Kart-Map"
-    result["DATA"] = date
-    result["MODEL"] = product_name
-    result["ODPOWIEDNIK"] = touple[2]
-    result["NETTO"] = cprice
-    result["BRUTTO"] = int(int(cprice)*1.23)
-    result["WYSOKOŚĆ"] = height[:-2]
-    result["SZEROKOŚĆ"] = width[:-2]
-    result["GŁĘBOKOŚĆ"] = depth[:-2]
-    result["CECHY CHARAKTERYSTYCZNE"] = ""
-    result["ŹRÓDŁO"] = touple[0]
-    result["CZAS REALIZACJI [dni]"] = czas_realizacji
-    result["GWARANCJA [miesiące]"] = "24 miesiące"
-    result["msg"] = f"{result['KONKURENCJA']}: odpowiednik {result['ODPOWIEDNIK']}\n{message}"
-    print(result["msg"])
-
-    return records.append(result)
+  return records.append(result)
 
 
 def scrap_all():
+  # for link in links_km:
+  #     scrap(link)
+
   for link in links_km:
     try:
       scrap(link)
