@@ -12,7 +12,7 @@ def compare_prices(current_price, previous_price):
     percent = str((int(current_price)*100 / int(previous_price))-100).split(".")
     return percent[0]
   except:
-    print(f"Something went wrong with price comparement.")
+    print(f"Warning: Something went wrong with price comparement.")
     return "BRAK DANYCH"
 
 

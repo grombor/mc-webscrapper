@@ -71,7 +71,6 @@ def scrap(touple):
   # cechy_charakterystyczne = soup.find_all('p', {"align":"justify"})
   cechy_charakterystyczne = soup.find(id="tab-description").text
   result["CECHY CHARAKTERYSTYCZNE"] = cechy_charakterystyczne
-  print(cechy_charakterystyczne)
 
   # Source link / cennik / katalog
   result["ŹRÓDŁO"] = touple[0]
