@@ -1,8 +1,10 @@
 from bs4 import BeautifulSoup as bs4
 import requests
+from time import sleep
 from datetime import datetime
 from .utils import records, compare_prices
 from .km_links import links
+from random import randint as r
 
 # List of link to scrapp
 links_km = links
@@ -84,11 +86,11 @@ def scrap(touple):
 
   # Comments
   if poprzednia_cena == netto:
-    message = "cena nie zmieniła się.\n"
+    message = "cena nie zmieniła się."
   else:
     # Calculate diff in prices in precent
     percent = compare_prices(netto, poprzednia_cena)
-    message = f"cena zmieniła się o {percent}"
+    message = f"cena zmieniła się o {percent}."
   msg = f"{result['DYSTRYBUTOR']}: odpowiednik {result['ODPOWIEDNIK']} - {message}"
   result["msg"] = msg
 
@@ -103,6 +105,7 @@ def scrap_all():
   for link in links_km:
     try:
       scrap(link)
+      sleep(r(2,10))
     except:
       print(f"Something went wrong with: {link[0]}")
 
