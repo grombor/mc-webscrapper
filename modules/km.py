@@ -1,10 +1,8 @@
 from bs4 import BeautifulSoup as bs4
 import requests
-from time import sleep
 from datetime import datetime
-from .utils import records, compare_prices
+from .utils import records, compare_prices, wait
 from .km_links import links
-from random import randint as r
 
 # List of link to scrapp
 links_km = links
@@ -30,10 +28,10 @@ links_km = links
 def scrap(touple):
   result = {}
 
-  # Use requests to retrieve data from a given URL
+  # Use requests to retrieve data from a given URL
   response = requests.get(touple[0])
 
-  # Parse the whole HTML page using BeautifulSoup
+  # Parse the whole HTML page using BeautifulSoup
   soup = bs4(response.text, 'html.parser')
 
   # Dystrybutor
@@ -53,7 +51,7 @@ def scrap(touple):
   # Previous product price
   poprzednia_cena = touple[1]
 
-  # Current product price
+  # Current product price
   netto = soup.find_all('bdi')[0].text.split(",")[0].replace(" ", "")
   brutto = int(float(netto) * 1.23)
   result["NETTO"] = netto
@@ -81,7 +79,7 @@ def scrap(touple):
   czas_realziacji = soup.find_all('p', {"style":"text-align: center;"})
   result["CZAS REALIZACJI [dni]"] = czas_realziacji
 
-  # # Warranty
+  # Warranty
   result["GWARANCJA [miesiące]"] = "24 miesiące"
 
   # Comments
@@ -99,13 +97,11 @@ def scrap(touple):
 
 
 def scrap_all():
-  # for link in links_km:
-  #     scrap(link)
 
   for link in links_km:
     try:
       scrap(link)
-      sleep(r(2,10))
+      wait(2)
     except:
       print(f"Something went wrong with: {link[0]}")
 

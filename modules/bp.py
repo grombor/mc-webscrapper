@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup as bs4
 import requests
 from time import sleep
 from datetime import datetime
-from .utils import records, compare_prices
+from .utils import records, compare_prices, wait
 from .bp_links import links
 from random import randint as r
 
@@ -112,14 +112,11 @@ def scrap(touple):
 
 def scrap_all():
   for link in links_km:
+    try:
       scrap(link)
-
-#   for link in links_km:
-#     try:
-#       scrap(link)
-#       sleep(r(2,10))
-#     except:
-#       print(f"Something went wrong with: {link[0]}")
+      wait(2)
+    except:
+      print(f"Something went wrong with: {link[0]}")
 
 
 def get_results():

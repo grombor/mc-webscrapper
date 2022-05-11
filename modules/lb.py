@@ -1,10 +1,8 @@
 from bs4 import BeautifulSoup as bs4
 import requests
-from time import sleep
 from datetime import datetime
-from .utils import records, compare_prices
+from .utils import records, compare_prices, wait
 from .lb_links import links
-from random import randint as r
 
 # List of link to scrapp
 links_lb = links
@@ -114,7 +112,7 @@ def scrap_all():
   for link in links_lb:
     try:
       scrap(link)
-      # sleep(r(2,10))
+      wait(2)
     except:
       print(f"Something went wrong with: {link[0]}")
 

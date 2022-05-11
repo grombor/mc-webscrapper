@@ -1,6 +1,8 @@
 #TODO: nie nadpisywanie, a dopisywanie do pliku csv
 
 import csv
+from random import randint as r
+from time import sleep
 
 from numpy import integer
 
@@ -40,3 +42,7 @@ def write_to_csv_file():
 
     for row in records:
       writer.writerow(row)
+
+def wait(time):
+  half_time = int(time*0.5)
+  sleep(r(half_time, time))
