@@ -9,31 +9,14 @@ from random import randint as r
 # List of link to scrapp
 links_km = links
 
-      #   fieldnames = [
-      # "DYSTRYBUTOR", 
-      # "DATA", 
-      # "MODEL", 
-      # "ODPOWIEDNIK",
-      # "NETTO",
-      # "BRUTTO",
-      # "WYSOKOŚĆ",
-      # "SZEROKOŚĆ",
-      # "GŁĘBOKOŚĆ",
-      # "CECHY CHARAKTERYSTYCZNE",
-      # "ŹRÓDŁO",
-      # "CZAS REALIZACJI [dni]",
-      # "GWARANCJA [miesiące]",
-      # "msg"
-      # ]
-
 
 def scrap(touple):
   result = {}
 
-  # Use requests to retrieve data from a given URL
+  # Use requests to retrieve data from a given URL
   response = requests.get(touple[0])
 
-  # Parse the whole HTML page using BeautifulSoup
+  # Parse the whole HTML page using BeautifulSoup
   soup = bs4(response.text, 'html.parser')
 
   # Dystrybutor
@@ -53,14 +36,16 @@ def scrap(touple):
   # Previous product price
   poprzednia_cena = touple[1]
 
-  # Current product price
+  # Current product price
   netto = soup.find('span', {"id":"our_price_display"}).string.replace(" ", "").split(",")[0]
-  brutto = soup.find('span', {"id":"our_price_display2"}).string.replace(" ", "").split(",")[0]
-  result["NETTO"] = netto
-  result["BRUTTO"] = brutto
+  # brutto = soup.find('span', {"id":"our_price_display2"}).string.replace(" ", "").split(",")[0]
+  result["CENA KATALOGOWA NETTO"] = ""
+  result["CENA SKLEPU INTERNETOWEGO NETTO"] = netto
+
+  result["RABAT"] = ""
+  result["CENA KATALOGOWA PO RABACIE"] = ""
 
   # Characteristics
-  # cechy_charakterystyczne = soup.find_all('p', {"align":"justify"})
   cechy_charakterystyczne = soup.find(class_="rte")
   result["CECHY CHARAKTERYSTYCZNE"] = cechy_charakterystyczne.text
 
@@ -70,7 +55,6 @@ def scrap(touple):
     result["WYSOKOŚĆ"] = cechy_charakterystyczne.text[wysokosc+8:wysokosc+8+5+2].replace(",","").strip()
   except:
     result["WYSOKOŚĆ"] = "brak danych"
-    print("Problem z odczytem wysokości")
 
   try:
     szerokosc = int(str(cechy_charakterystyczne.text).find('szerokość'))
@@ -90,7 +74,6 @@ def scrap(touple):
   result["ŹRÓDŁO"] = touple[0]
 
   # Find time to ship
-#   czas_realziacji = soup.find_all('p', {"style":"text-align: center;"})
   result["CZAS REALIZACJI [dni]"] = "brak danych"
 
   # # Warranty
@@ -98,13 +81,11 @@ def scrap(touple):
 
   # Comments
   if poprzednia_cena == netto:
-    message = "cena nie zmieniła się."
+    message = ""
   else:
-    # Calculate diff in prices in precent
     percent = compare_prices(netto, poprzednia_cena)
     message = f"cena zmieniła się o {percent}."
-  msg = f"{result['DYSTRYBUTOR']}: odpowiednik {result['ODPOWIEDNIK']} - {message}"
-  result["msg"] = msg
+  result["msg"] = message
 
 
   return records.append(result)
@@ -114,7 +95,7 @@ def scrap_all():
   for link in links_km:
     try:
       scrap(link)
-      wait(2)
+      wait()
     except:
       print(f"Something went wrong with: {link[0]}")
 

@@ -7,23 +7,6 @@ from .km_links import links
 # List of link to scrapp
 links_km = links
 
-      #   fieldnames = [
-      # "DYSTRYBUTOR", 
-      # "DATA", 
-      # "MODEL", 
-      # "ODPOWIEDNIK",
-      # "NETTO",
-      # "BRUTTO",
-      # "WYSOKOŚĆ",
-      # "SZEROKOŚĆ",
-      # "GŁĘBOKOŚĆ",
-      # "CECHY CHARAKTERYSTYCZNE",
-      # "ŹRÓDŁO",
-      # "CZAS REALIZACJI [dni]",
-      # "GWARANCJA [miesiące]",
-      # "msg"
-      # ]
-
 
 def scrap(touple):
   result = {}
@@ -53,9 +36,11 @@ def scrap(touple):
 
   # Current product price
   netto = soup.find_all('bdi')[0].text.split(",")[0].replace(" ", "")
-  brutto = int(float(netto) * 1.23)
-  result["NETTO"] = netto
-  result["BRUTTO"] = brutto
+  result["CENA KATALOGOWA NETTO"] = ""
+  result["CENA SKLEPU INTERNETOWEGO NETTO"] = netto
+
+  result["RABAT"] = ""
+  result["CENA KATALOGOWA PO RABACIE"] = ""
 
   # Find dimmensions
   wysokosc = soup.find_all('td', {'width': '302'})[1].string
@@ -68,7 +53,6 @@ def scrap(touple):
   result["GŁĘBOKOŚĆ"] = glebokosc[:-2]
 
   # Characteristics
-  # cechy_charakterystyczne = soup.find_all('p', {"align":"justify"})
   cechy_charakterystyczne = soup.find(id="tab-description").text
   result["CECHY CHARAKTERYSTYCZNE"] = cechy_charakterystyczne
 
@@ -84,13 +68,12 @@ def scrap(touple):
 
   # Comments
   if poprzednia_cena == netto:
-    message = "cena nie zmieniła się."
+    message = ""
   else:
     # Calculate diff in prices in precent
     percent = compare_prices(netto, poprzednia_cena)
     message = f"cena zmieniła się o {percent}."
-  msg = f"{result['DYSTRYBUTOR']}: odpowiednik {result['ODPOWIEDNIK']} - {message}"
-  result["msg"] = msg
+  result["msg"] = message
 
 
   return records.append(result)
@@ -101,7 +84,7 @@ def scrap_all():
   for link in links_km:
     try:
       scrap(link)
-      wait(2)
+      wait()
     except:
       print(f"Something went wrong with: {link[0]}")
 

@@ -59,12 +59,15 @@ def scrap(touple):
   # Odpowiednik
   result["ODPOWIEDNIK"] = touple[2]
 
-  # Current product price
+  # Current product price
   netto = soup.find_all('em')[1].string
   netto = str(netto).split(',')
   netto = netto[0].replace(u'\xa0', u'')
-  result["NETTO"] = netto
-  result["BRUTTO"] = int(int(netto) * 1.23)
+  result["CENA KATALOGOWA NETTO"] = ""
+  result["CENA SKLEPU INTERNETOWEGO NETTO"] = netto
+
+  result["RABAT"] = ""
+  result["CENA KATALOGOWA PO RABACIE"] = ""
 
   # Dimmensions
   result["WYSOKOŚĆ"] = 'BRAK DANYCH'
@@ -72,9 +75,11 @@ def scrap(touple):
   result["GŁĘBOKOŚĆ"] = 'BRAK DANYCH'
 
   # Cechy charakterystyczne
-  cechy_charakterystyczne = soup.find('div', {"itemprop":'description', "class":"resetcss"}).findChildren("p")[4]
+  try:
+    cechy_charakterystyczne = soup.find('div', {"itemprop":'description', "class":"resetcss"}).findChildren("p")[4]
+  except:
+    cechy_charakterystyczne = soup.find('div', {"class":'resetcss', "itemprop":"description"}).findChildren("p")[2]
   result["CECHY CHARAKTERYSTYCZNE"] = cechy_charakterystyczne
-  print(cechy_charakterystyczne)
 
   # Source
   result["ŹRÓDŁO"] = touple[0]
@@ -94,25 +99,21 @@ def scrap(touple):
 
   # Comments
   if poprzednia_cena == netto:
-    message = "cena nie zmieniła się."
+    message = ""
   else:
     # Calculate diff in prices in precent
     percent = compare_prices(netto, poprzednia_cena)
     message = f"cena zmieniła się o {percent}."
-  msg = f"{result['DYSTRYBUTOR']}: odpowiednik {result['ODPOWIEDNIK']} - {message}"
-  result["msg"] = msg
+  result["msg"] = message
 
   return records.append(result)
  
 
 def scrap_all():
-  # for link in links_km:
-  #     scrap(link)
-
   for link in links_lb:
     try:
       scrap(link)
-      wait(2)
+      wait()
     except:
       print(f"Something went wrong with: {link[0]}")
 

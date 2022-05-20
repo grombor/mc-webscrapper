@@ -7,14 +7,11 @@ from modules.utils import *
 
 
 if __name__ == "__main__":
-    # done:
-    # Kartmap()
-    # Locobox()
-    # Bakpol()
-
-    # todo:
-    # Metalkas()
-    # Umstahl()
+    Kartmap()
+    Locobox()
+    Bakpol()
+    Metalkas()
+    Umstahl()
     
     write_to_csv_file()
     

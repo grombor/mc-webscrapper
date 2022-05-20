@@ -14,7 +14,6 @@ def compare_prices(current_price, previous_price):
     percent = str((int(current_price)*100 / int(previous_price))-100).split(".")
     return percent[0]
   except:
-    print(f"Warning: Something went wrong with price comparement.")
     return "BRAK DANYCH"
 
 
@@ -25,8 +24,10 @@ def write_to_csv_file():
       "DATA", 
       "MODEL", 
       "ODPOWIEDNIK",
-      "NETTO",
-      "BRUTTO",
+      "CENA KATALOGOWA NETTO",
+      "CENA SKLEPU INTERNETOWEGO NETTO",
+      "RABAT",
+      "CENA KATALOGOWA PO RABACIE",
       "WYSOKOŚĆ",
       "SZEROKOŚĆ",
       "GŁĘBOKOŚĆ",
@@ -43,6 +44,6 @@ def write_to_csv_file():
     for row in records:
       writer.writerow(row)
 
-def wait(time):
+def wait(time=2):
   half_time = int(time*0.5)
   sleep(r(half_time, time))
