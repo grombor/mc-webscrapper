@@ -278,8 +278,3 @@ links = [
  ("https://umstahl.pl/metalowy-pojemnik-do-segregacji-odpadow-4-komorowy-psg4-p3w1,id436.html", "", "MPO "),
  ("https://umstahl.pl/metalowy-pojemnik-do-segregacji-odpadow-4-komorowy-psg4-w3p1,id438.html", "", "MPO "),
 ]
-
-links = [
- ("https://umstahl.pl/metalowa-szafa-ubraniowa-sle-30r2,id403.html", "1102", "Sul 32 W"),
- ("https://umstahl.pl/metalowy-pojemnik-do-segregacji-odpadow-4-komorowy-psg4-w3p1,id438.html", "", "MPO "),
-]

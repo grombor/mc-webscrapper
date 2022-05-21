@@ -1,10 +1,8 @@
 from bs4 import BeautifulSoup as bs4
 import requests
-from time import sleep
 from datetime import datetime
 from .utils import records, compare_prices, wait
 from .bp_links import links
-from random import randint as r
 
 # List of link to scrapp
 links_km = links
