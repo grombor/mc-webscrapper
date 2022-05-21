@@ -7,7 +7,15 @@ from modules.jn import get_results as JanNowak
 from modules.utils import *
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     Bakpol()
+=======
+    Kartmap()
+    Locobox()
+    Bakpol()
+    Metalkas()
+    Umstahl()
+>>>>>>> a47b302 (minor fix)
     JanNowak()
     Kartmap()
     Locobox()
