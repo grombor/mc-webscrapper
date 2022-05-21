@@ -5,7 +5,6 @@ from modules.mk import get_results as Metalkas
 from modules.us import get_results as Umstahl
 from modules.utils import *
 
-
 if __name__ == "__main__":
     Kartmap()
     Locobox()
