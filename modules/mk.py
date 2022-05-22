@@ -48,14 +48,17 @@ def scrap(touple):
   czas_realizacji = t_ship[index+3:-6]
 
   # Cechy charakterystyczne
-  cechy_charakterystyczne = soup.find("div", {"id": "description"}).find_all("li")
-  temp = []
-  for cecha in cechy_charakterystyczne:
-    temp.append(cecha.text)
-  cechy_charakterystyczne = soup.find("table", {"id": "product-attribute-specs-table"}).find_all("td")
-  for cecha in cechy_charakterystyczne:
-    temp.append(cecha.text)
-  cechy_charakterystyczne = ' '.join(temp)
+  try:
+    cechy_charakterystyczne = soup.find("div", {"id": "description"}).find_all("li")
+    temp = []
+    for cecha in cechy_charakterystyczne:
+      temp.append(cecha.text)
+    cechy_charakterystyczne = soup.find("table", {"id": "product-attribute-specs-table"}).find_all("td")
+    for cecha in cechy_charakterystyczne:
+      temp.append(cecha.text)
+    cechy_charakterystyczne = ' '.join(temp)
+  except:
+    cechy_charakterystyczne = "brak danych"
 
   # Comments
   if pprice == cprice:
@@ -97,11 +100,12 @@ def scrap(touple):
 
 def scrap_all():
   for link in links_mk:
-    try:
-      scrap(link)
-      wait()
-    except:
-      print(f"Something went wrong with: {link[0]}")
+    scrap(link)
+    # try:
+    #   scrap(link)
+    #   wait()
+    # except:
+    #   print(f"Something went wrong with: {link[0]}")
 
 
 def get_results():

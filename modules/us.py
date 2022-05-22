@@ -35,20 +35,31 @@ def scrap(touple):
   date = datetime.now().strftime("%x")
 
   # Find dimmensions
-  temp = soup.find_all('p', {'class': 'desc-short'})[0]
-  temp = str(list(temp.descendants)[2]).split('x')
+  try:
+    temp = soup.find_all('p', {'class': 'desc-short'})[0]
+    temp = str(list(temp.descendants)[2]).split('x')
 
-  height = str(str(temp[2]).split(',')[0]+'0').replace('h','')
-  width = str(temp[0]).split(',')[0]+'0'
-  depth = str(temp[1]).split(',')[0]+'0'
-  czas_realizacji = soup.find('span', {'style': 'display: inline-block; width: 65%;'}).text
+    height = str(str(temp[2]).split(',')[0]+'0').replace('h','')
+    width = str(temp[0]).split(',')[0]+'0'
+    depth = str(temp[1]).split(',')[0]+'0'
+  except:
+    height = "brak danych"
+    width = "brak danych"
+    depth = "brak danych"
+  try:
+    czas_realizacji = soup.find('span', {'style': 'display: inline-block; width: 65%;'}).text
+  except:
+    czas_realizacji = "brak danych"
 
   # Cechy charakterystyczne
   temp = []
-  cechy_charakterystyczne = soup.find('div', {"class": "tab-content tab1"}).find_all("li")
-  for cecha in cechy_charakterystyczne:
-    temp.append(cecha.text)
-  cechy_charakterystyczne = ' '.join(temp)
+  try:
+    cechy_charakterystyczne = soup.find('div', {"class": "tab-content tab1"}).find_all("li")
+    for cecha in cechy_charakterystyczne:
+      temp.append(cecha.text)
+    cechy_charakterystyczne = ' '.join(temp)
+  except:
+    cechy_charakterystyczne = "brak danych"
 
 
   # Save results of scrapping as dict
@@ -83,13 +94,11 @@ def scrap(touple):
 
 def scrap_all():
   for link in links_us:
-    scrap(link)
-  # for link in links_us:
-  #   try:
-  #     scrap(link)
-  #     wait()
-  #   except:
-  #     print(f"Something went wrong with: {link[0]}")
+    try:
+      scrap(link)
+      wait()
+    except:
+      print(f"Something went wrong with: {link[0]}")
 
 
 def get_results():

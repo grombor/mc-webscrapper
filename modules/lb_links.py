@@ -1,3 +1,13 @@
+"""dec"""
+
+"""
+Comments: 
+  - product has been changed https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3x-71%2C5x52x63cm/1050
+  - product has been changed https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3x-71%2C5x52x63cm/1051
+  - https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4x-71%2C5x47x63cm/1052
+  - https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4x-71%2C5x47x63cm/1053
+"""
+
 links = [
   # Szafy z drzwiami skrzydłowymi
   ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O120200-RODO/547", "1212", "SBM 212"),
@@ -87,10 +97,10 @@ links = [
   ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3xDinA4/1047", "1123", "SZK 204"),
   ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4xDinA4/1048", "1382", "SZK 306"),
   # Szafy kartotekowe  Pozostałe formaty
-  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3x-71%2C5x52x63cm/1050", "655", "SZK 114"),
-  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3x-71%2C5x52x63cm/1051", "742", "SZK 115"),
-  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4x-71%2C5x47x63cm/1052", "783", "SZK"),
-  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4x-71%2C5x47x63cm/1053", "883", "SZK 117"),
+  # ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3x-71%2C5x52x63cm/1050", "655", "SZK 114"),
+  # ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3x-71%2C5x52x63cm/1051", "742", "SZK 115"),
+  # ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4x-71%2C5x47x63cm/1052", "783", "SZK"),
+  # ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4x-71%2C5x47x63cm/1053", "883", "SZK 117"),
   # Szafy ubraniowo-gospodarcze
   ("https://locobox.pl/pl/p/Szafa-gospodarcza-PROFI-M1-s51%2C5cm%2C-3P/345", "", "MSU Gospodarcze"),
   ("https://locobox.pl/pl/p/Szafa-gospodarcza-PROFI-M2-s51%2C5cm%2C-3P/348", "", "MSU Gospodarcze"),
@@ -477,3 +487,4 @@ links = [
   ("https://locobox.pl/pl/p/Lawka-wysuwana-PROFI-LR-z-zamykana-skrytka-na-buty-pod-szafy-s40-cm-1K/181", "", "PW"),
   ("https://locobox.pl/pl/p/Lawka-wysuwana-PROFI-LR-z-zamykana-skrytka-na-buty-pod-szafy-s30-cm-1K/177", "", "PW"),
 ]
+

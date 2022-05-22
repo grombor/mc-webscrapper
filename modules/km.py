@@ -43,14 +43,23 @@ def scrap(touple):
   result["CENA KATALOGOWA PO RABACIE"] = ""
 
   # Find dimmensions
-  wysokosc = soup.find_all('td', {'width': '302'})[1].string
-  result["WYSOKOŚĆ"] = wysokosc[:-2]
+  try:
+    wysokosc = soup.find_all('td', {'width': '302'})[1].string
+    result["WYSOKOŚĆ"] = wysokosc[:-2]
+  except:
+    result["WYSOKOŚĆ"] = "brak danych"
 
-  szerokosc = soup.find_all('td', {'width': '302'})[3].string
-  result["SZEROKOŚĆ"] = szerokosc[:-2]
+  try:
+    szerokosc = soup.find_all('td', {'width': '302'})[3].string
+    result["SZEROKOŚĆ"] = szerokosc[:-2]
+  except:
+    result["SZEROKOŚĆ"] = "brak danych"
 
-  glebokosc = soup.find_all('td', {'width': '302'})[5].string
-  result["GŁĘBOKOŚĆ"] = glebokosc[:-2]
+  try:
+    glebokosc = soup.find_all('td', {'width': '302'})[5].string
+    result["GŁĘBOKOŚĆ"] = glebokosc[:-2]
+  except:
+    result["GŁĘBOKOŚĆ"] = "brak danych"
 
   # Characteristics
   cechy_charakterystyczne = soup.find(id="tab-description").text
