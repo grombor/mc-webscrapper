@@ -14,7 +14,7 @@ def compare_prices(current_price, previous_price):
     percent = str((int(current_price)*100 / int(previous_price))-100).split(".")
     return percent[0]
   except:
-    return "BRAK DANYCH"
+    return "brak danych"
 
 
 def write_to_csv_file():
@@ -44,6 +44,6 @@ def write_to_csv_file():
     for row in records:
       writer.writerow(row)
 
-def wait(time=2):
+def wait(time=1):
   half_time = int(time*0.5)
   sleep(r(half_time, time))
