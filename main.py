@@ -7,12 +7,13 @@ from modules.jn import get_results as JanNowak
 from modules.utils import *
 
 if __name__ == "__main__":
+    Bakpol()
+    JanNowak()
     Kartmap()
     Locobox()
-    Bakpol()
     Metalkas()
     Umstahl()
-    JanNowak()
+
     
     write_to_csv_file()
     
