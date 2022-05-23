@@ -37,3 +37,4 @@ links = [
     ("https://jannowak.com/178-szafa-metalowa-oliver-szara-socjalna", "", "SUS"),
     ("https://jannowak.com/97-szafa-metalowa-bartek-szara-socjalna", "", "SUS"),
 ]
+
