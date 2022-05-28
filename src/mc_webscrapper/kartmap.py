@@ -1,10 +1,10 @@
 from bs4 import BeautifulSoup as bs4
 import requests
-from src.mc_webscrapper.bakpol_links import links
+from src.mc_webscrapper.kartmap_links import links
 from src.mc_webscrapper.utils import get_date, Error, compare_prices, records
 
 
-class Bakpol:
+class KartMap:
     """ This class represents products of Bakpol manufacturer (https://bakpol.pl/)"""
 
 
@@ -21,30 +21,27 @@ class Bakpol:
     def get_model(self, url, soup) -> str:
         """ Get product model. """
         try:
-            model = soup.find('h1', {'class': 'nazwa-produktu'}).string.strip()
-            return model
+            return soup.find('h1', {'class': 'product_title entry-title'}).string.strip()
             raise Error(f"Something wrong with product name in {url}.")
         except Error as ve:
             print(ve)
-            model = ""
+            return ""
 
 
     def get_price(self, url, soup):
         """ Get product price. """
         try:
-            return soup.find('span', {"id": "our_price_display"}).string.replace(" ", "").split(",")[0]
+            return soup.find_all('bdi')[0].text.split(",")[0].replace(" ", "")
             raise Error(f"Something wrong with product price in {url}.")
         except Error as ve:
             print(ve)
-            return f""
+            return ""
 
 
     def get_height(self, url, soup) -> str:
         """ Get product height. """
         try:
-            cechy_charakterystyczne = soup.find(class_="rte")
-            wysokosc = int(str(cechy_charakterystyczne.text).find('wysokość'))
-            return cechy_charakterystyczne.text[wysokosc+8:wysokosc+8+5+2].replace(",", "").strip()
+            return soup.find_all('td', {'width': '302'})[1].string
             raise Error(f"Something wrong with height in {url}.")
         except Error as ve:
             print(ve)
@@ -54,9 +51,8 @@ class Bakpol:
     def get_width(self, url, soup) -> str:
         """ Get product width. """
         try:
-            cechy_charakterystyczne = soup.find(class_="rte")
-            szerokosc = int(str(cechy_charakterystyczne.text).find('szerokość'))
-            return cechy_charakterystyczne.text[szerokosc + 9:szerokosc + 9 + 5 + 2].replace(",","").strip()
+            szerokosc = soup.find_all('td', {'width': '302'})[3].string
+            return szerokosc[:-2]
             raise Error(f"Something wrong with width in {url}.")
         except Error as ve:
             print(ve)
@@ -66,9 +62,7 @@ class Bakpol:
     def get_depth(self, url, soup) -> str:
         """ Get product depth. """
         try:
-            cechy_charakterystyczne = soup.find(class_="rte")
-            glebokosc = int(str(cechy_charakterystyczne.text).find('głębokość'))
-            return cechy_charakterystyczne.text[glebokosc + 9:glebokosc + 9 + 5 + 2].replace(",","").strip()
+            return soup.find_all('td', {'width': '302'})[5].string
             raise Error(f"Something wrong with depth in {url}.")
         except Error as ve:
             print(ve)
@@ -78,8 +72,7 @@ class Bakpol:
     def get_description(self, url, soup) -> str:
         """ Get product description. """
         try:
-            cechy_charakterystyczne = soup.find(class_="rte").text
-            return cechy_charakterystyczne
+            return soup.find(id="tab-description").text
             raise Error(f"Something wrong with description in {url}.")
         except Error as ve:
             print(ve)
@@ -105,7 +98,7 @@ class Bakpol:
         result = dict()
 
         # Save current dealer
-        result["DYSTRYBUTOR"] = "Bakpol"
+        result["DYSTRYBUTOR"] = "Kart-Map"
 
         # Save current date
         result["DATA"] = get_date()
@@ -149,7 +142,7 @@ class Bakpol:
         result["ŹRÓDŁO"] = url
 
         # Find shipping time
-        result["CZAS REALIZACJI [dni]"] = ""
+        result["CZAS REALIZACJI [dni]"] = soup.find_all('p', {"style":"text-align: center;"})
 
         # Warranty
         result["GWARANCJA [miesiące]"] = "24 miesiące"

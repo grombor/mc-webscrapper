@@ -19,6 +19,7 @@ class JanNowak:
 
 
     def get_model(self, url, soup) -> str:
+        """ Get product model. """
         try:
             model = soup.find('form', {'id': 'product-cart-form'}).find('p').contents
             temp_string = str(model).replace("\\n", "")
@@ -32,6 +33,7 @@ class JanNowak:
 
 
     def get_price(self, url, soup):
+        """ Get product price. """
         try:
             brutto = soup.find('div', {"class":"pricing"}).find('p', {"class":"current-price js-price"}).string.replace(" ", "").split(",")[0]
             return int(int(brutto)/1.23)
@@ -42,6 +44,7 @@ class JanNowak:
 
 
     def get_height(self, url, soup) -> str:
+        """ Get product height. """
         try:
             size_box = soup.find(class_='product-sizes-panel')
             return str(size_box.find("p", class_="normal").contents[1])[-6:-3]+"0"
@@ -52,6 +55,7 @@ class JanNowak:
 
 
     def get_width(self, url, soup) -> str:
+        """ Get product width. """
         try:
             size_box = soup.find(class_='product-sizes-panel')
             szerokosc = size_box.find_all("p", class_="normal")[1].contents[1]
@@ -63,6 +67,7 @@ class JanNowak:
 
 
     def get_depth(self, url, soup) -> str:
+        """ Get product depth. """
         try:
             size_box = soup.find(class_='product-sizes-panel')
             glebokosc = size_box.find_all("p", class_="normal")[2].contents[1]
@@ -74,6 +79,7 @@ class JanNowak:
 
 
     def get_description(self, url, soup) -> str:
+        """ Get product description. """
         try:
             return soup.find(class_="product-desc").contents
             raise Error(f"Something wrong with description in {url}.")
@@ -83,6 +89,7 @@ class JanNowak:
 
 
     def get_comment(self, previous_price, nett) -> str:
+        """ Create product comment. """
         try:
             if previous_price == nett:
                 return ""
@@ -95,6 +102,7 @@ class JanNowak:
 
 
     def scrap_link(self, link):
+        """ Scraps given url, gathers all data and create dictionary record. """
 
         result = dict()
 
@@ -106,7 +114,11 @@ class JanNowak:
 
         # Use requests to retrieve data from a given URL
         url = link[0]
-        response = requests.get(url)
+        headers = requests.utils.default_headers()
+        headers.update({
+            'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
+        })
+        response = requests.get(url, headers=headers)
 
         # Parse the whole HTML page using BeautifulSoup
         soup = bs4(response.text, 'html.parser')
