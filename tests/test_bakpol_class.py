@@ -48,12 +48,11 @@ def test_random_link(bakpol):
     # Calculate how much is 10% of links
     percent = 10
     sample_links_range = int(len(links)/percent)
-    print(sample_links_range)
 
     # Create list of samples
     test_link_list = list()
     for i in range(sample_links_range):
-        test_link_list.append(links[i])
+        test_link_list.append(links[randint(0,len(links))])
 
     for link in test_link_list:
         bakpol.scrap_link(link)
