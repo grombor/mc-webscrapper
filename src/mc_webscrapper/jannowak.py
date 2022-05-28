@@ -4,7 +4,7 @@ from src.mc_webscrapper.jannowak_links import links
 from src.mc_webscrapper.utils import get_date, Error, compare_prices, records
 
 
-class Bakpol:
+class JanNowak:
     """ This class represents products of Jan Nowak manufacturer & dealer (https://bakpol.pl/)"""
 
 
@@ -20,20 +20,31 @@ class Bakpol:
 
     def get_model(self, url, soup) -> str:
         try:
-            model = soup.find('h1', {'class': 'nazwa-produktu'}).string.strip()
+            model = soup.find('form', {'id': 'product-cart-form'}).find('p').contents
+            temp_string = str(model).replace("\\n", "")
+            temp_index = str(temp_string).find('Model')
+            model = temp_string[temp_index + 6:-2]
             return model
             raise Error(f"Something wrong with product name in {url}.")
         except Error as ve:
             print(ve)
             model = ""
-        return model
+
+
+    def get_price(self, url, soup):
+        try:
+            brutto = soup.find('div', {"class":"pricing"}).find('p', {"class":"current-price js-price"}).string.replace(" ", "").split(",")[0]
+            return int(int(brutto)/1.23)
+            raise Error(f"Something wrong with product price in {url}.")
+        except Error as ve:
+            print(ve)
+            return f""
 
 
     def get_height(self, url, soup) -> str:
         try:
-            cechy_charakterystyczne = soup.find(class_="rte")
-            wysokosc = int(str(cechy_charakterystyczne.text).find('wysokość'))
-            return cechy_charakterystyczne.text[wysokosc+8:wysokosc+8+5+2].replace(",", "").strip()
+            size_box = soup.find(class_='product-sizes-panel')
+            return str(size_box.find("p", class_="normal").contents[1])[-6:-3]+"0"
             raise Error(f"Something wrong with height in {url}.")
         except Error as ve:
             print(ve)
@@ -42,9 +53,9 @@ class Bakpol:
 
     def get_width(self, url, soup) -> str:
         try:
-            cechy_charakterystyczne = soup.find(class_="rte")
-            szerokosc = int(str(cechy_charakterystyczne.text).find('szerokość'))
-            return cechy_charakterystyczne.text[szerokosc + 9:szerokosc + 9 + 5 + 2].replace(",","").strip()
+            size_box = soup.find(class_='product-sizes-panel')
+            szerokosc = size_box.find_all("p", class_="normal")[1].contents[1]
+            return szerokosc[-6:-3]+"0"
             raise Error(f"Something wrong with width in {url}.")
         except Error as ve:
             print(ve)
@@ -53,9 +64,9 @@ class Bakpol:
 
     def get_depth(self, url, soup) -> str:
         try:
-            cechy_charakterystyczne = soup.find(class_="rte")
-            glebokosc = int(str(cechy_charakterystyczne.text).find('głębokość'))
-            return cechy_charakterystyczne.text[glebokosc + 9:glebokosc + 9 + 5 + 2].replace(",","").strip()
+            size_box = soup.find(class_='product-sizes-panel')
+            glebokosc = size_box.find_all("p", class_="normal")[2].contents[1]
+            return glebokosc[-5:-3]+"0"
             raise Error(f"Something wrong with depth in {url}.")
         except Error as ve:
             print(ve)
@@ -64,8 +75,7 @@ class Bakpol:
 
     def get_description(self, url, soup) -> str:
         try:
-            cechy_charakterystyczne = soup.find(class_="rte").text
-            return cechy_charakterystyczne
+            return soup.find(class_="product-desc").contents
             raise Error(f"Something wrong with description in {url}.")
         except Error as ve:
             print(ve)
@@ -111,8 +121,7 @@ class Bakpol:
         result["CENA KATALOGOWA NETTO"] = ""
 
         # Current product price
-        nett = soup.find('span', {"id": "our_price_display"}).string.replace(" ", "").split(",")[0]
-        result["CENA SKLEPU INTERNETOWEGO NETTO"] = nett
+        result["CENA SKLEPU INTERNETOWEGO NETTO"] = self.get_price(url, soup)
 
         # If position is not from price list of catalogue - leave it empty
         result["RABAT"] = ""
@@ -133,10 +142,13 @@ class Bakpol:
         result["CZAS REALIZACJI [dni]"] = ""
 
         # Warranty
-        result["GWARANCJA [miesiące]"] = "24 miesiące"
+        result["GWARANCJA [miesiące]"] = "72 miesiące"
 
         # Comment
-        result["msg"] = self.get_comment(nett, link[1])
+        if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":
+            result["msg"] = self.get_comment(link[1], result["CENA SKLEPU INTERNETOWEGO NETTO"])
+        else:
+            result["msg"] = ""
 
         return records.append(result)
 

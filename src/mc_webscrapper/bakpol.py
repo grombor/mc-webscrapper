@@ -26,7 +26,15 @@ class Bakpol:
         except Error as ve:
             print(ve)
             model = ""
-        return model
+
+
+    def get_price(self, url, soup):
+        try:
+            return soup.find('span', {"id": "our_price_display"}).string.replace(" ", "").split(",")[0]
+            raise Error(f"Something wrong with product price in {url}.")
+        except Error as ve:
+            print(ve)
+            return f""
 
 
     def get_height(self, url, soup) -> str:
@@ -111,8 +119,7 @@ class Bakpol:
         result["CENA KATALOGOWA NETTO"] = ""
 
         # Current product price
-        nett = soup.find('span', {"id": "our_price_display"}).string.replace(" ", "").split(",")[0]
-        result["CENA SKLEPU INTERNETOWEGO NETTO"] = nett
+        result["CENA SKLEPU INTERNETOWEGO NETTO"] = self.get_price(url, soup)
 
         # If position is not from price list of catalogue - leave it empty
         result["RABAT"] = ""
@@ -136,7 +143,10 @@ class Bakpol:
         result["GWARANCJA [miesiące]"] = "24 miesiące"
 
         # Comment
-        result["msg"] = self.get_comment(nett, link[1])
+        if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":
+            result["msg"] = self.get_comment(link[1], result["CENA SKLEPU INTERNETOWEGO NETTO"])
+        else:
+            result["msg"] = ""
 
         return records.append(result)
 
