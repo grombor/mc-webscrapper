@@ -18,8 +18,14 @@ def compare_prices(current_price=int, previous_price=int):
     return f""
 
 
-def write_to_csv_file():
-  with open('test.csv', 'w', newline='', encoding='utf-8') as csvfile:
+def write_to_csv_file(test=False):
+
+  if test:
+    file_name = 'test_results.txt'
+  else:
+    file_name = 'results.txt'
+
+  with open(file_name, 'w', newline='', encoding='utf-8') as csvfile:
     fieldnames = [
       "DYSTRYBUTOR",
       "DATA",

@@ -1,6 +1,7 @@
 import pytest
 from src.mc_webscrapper.bakpol import Bakpol
 from src.mc_webscrapper.bakpol_links import links
+from src.mc_webscrapper.utils import write_to_csv_file, records
 from bs4 import BeautifulSoup as bs4
 import requests
 from random import randint
@@ -39,3 +40,24 @@ def test_get_model(bakpol):
     soup = bs4(response.text, 'html.parser')
 
     assert type(bakpol.get_model(url, soup)) == str
+
+
+def test_random_link(bakpol):
+    """ Takes random links and run it. """
+
+    # Calculate how much is 10% of links
+    percent = 10
+    sample_links_range = int(len(links)/percent)
+    print(sample_links_range)
+
+    # Create list of samples
+    test_link_list = list()
+    for i in range(sample_links_range):
+        test_link_list.append(links[i])
+
+    for link in test_link_list:
+        bakpol.scrap_link(link)
+
+    write_to_csv_file(test=True)
+
+    assert len(records) > 0
