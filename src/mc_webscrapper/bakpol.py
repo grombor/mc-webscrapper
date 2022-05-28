@@ -19,6 +19,7 @@ class Bakpol:
 
 
     def get_model(self, url, soup) -> str:
+        """ Get product model. """
         try:
             model = soup.find('h1', {'class': 'nazwa-produktu'}).string.strip()
             return model
@@ -29,6 +30,7 @@ class Bakpol:
 
 
     def get_price(self, url, soup):
+        """ Get product price. """
         try:
             return soup.find('span', {"id": "our_price_display"}).string.replace(" ", "").split(",")[0]
             raise Error(f"Something wrong with product price in {url}.")
@@ -38,6 +40,7 @@ class Bakpol:
 
 
     def get_height(self, url, soup) -> str:
+        """ Get product height. """
         try:
             cechy_charakterystyczne = soup.find(class_="rte")
             wysokosc = int(str(cechy_charakterystyczne.text).find('wysokość'))
@@ -49,6 +52,7 @@ class Bakpol:
 
 
     def get_width(self, url, soup) -> str:
+        """ Get product width. """
         try:
             cechy_charakterystyczne = soup.find(class_="rte")
             szerokosc = int(str(cechy_charakterystyczne.text).find('szerokość'))
@@ -60,6 +64,7 @@ class Bakpol:
 
 
     def get_depth(self, url, soup) -> str:
+        """ Get product depth. """
         try:
             cechy_charakterystyczne = soup.find(class_="rte")
             glebokosc = int(str(cechy_charakterystyczne.text).find('głębokość'))
@@ -71,6 +76,7 @@ class Bakpol:
 
 
     def get_description(self, url, soup) -> str:
+        """ Get product description. """
         try:
             cechy_charakterystyczne = soup.find(class_="rte").text
             return cechy_charakterystyczne
@@ -81,6 +87,7 @@ class Bakpol:
 
 
     def get_comment(self, previous_price, nett) -> str:
+        """ Create product comment. """
         try:
             if previous_price == nett:
                 return ""
@@ -93,6 +100,7 @@ class Bakpol:
 
 
     def scrap_link(self, link):
+        """ Scraps given url, gathers all data and create dictionary record. """
 
         result = dict()
 

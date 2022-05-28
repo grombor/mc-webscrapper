@@ -1,11 +1,11 @@
 from bs4 import BeautifulSoup as bs4
 import requests
-from src.mc_webscrapper.jannowak_links import links
+from src.mc_webscrapper.kartmap_links import links
 from src.mc_webscrapper.utils import get_date, Error, compare_prices, records
 
 
-class JanNowak:
-    """ This class represents products of Jan Nowak manufacturer & dealer (https://bakpol.pl/)"""
+class KartMap:
+    """ This class represents products of Bakpol manufacturer (https://bakpol.pl/)"""
 
 
     def get_links(self) -> list:
@@ -21,33 +21,27 @@ class JanNowak:
     def get_model(self, url, soup) -> str:
         """ Get product model. """
         try:
-            model = soup.find('form', {'id': 'product-cart-form'}).find('p').contents
-            temp_string = str(model).replace("\\n", "")
-            temp_index = str(temp_string).find('Model')
-            model = temp_string[temp_index + 6:-2]
-            return model
+            return soup.find('h1', {'class': 'product_title entry-title'}).string.strip()
             raise Error(f"Something wrong with product name in {url}.")
         except Error as ve:
             print(ve)
-            model = ""
+            return ""
 
 
     def get_price(self, url, soup):
         """ Get product price. """
         try:
-            brutto = soup.find('div', {"class":"pricing"}).find('p', {"class":"current-price js-price"}).string.replace(" ", "").split(",")[0]
-            return int(int(brutto)/1.23)
+            return soup.find_all('bdi')[0].text.split(",")[0].replace(" ", "")
             raise Error(f"Something wrong with product price in {url}.")
         except Error as ve:
             print(ve)
-            return f""
+            return ""
 
 
     def get_height(self, url, soup) -> str:
         """ Get product height. """
         try:
-            size_box = soup.find(class_='product-sizes-panel')
-            return str(size_box.find("p", class_="normal").contents[1])[-6:-3]+"0"
+            return soup.find_all('td', {'width': '302'})[1].string
             raise Error(f"Something wrong with height in {url}.")
         except Error as ve:
             print(ve)
@@ -57,9 +51,8 @@ class JanNowak:
     def get_width(self, url, soup) -> str:
         """ Get product width. """
         try:
-            size_box = soup.find(class_='product-sizes-panel')
-            szerokosc = size_box.find_all("p", class_="normal")[1].contents[1]
-            return szerokosc[-6:-3]+"0"
+            szerokosc = soup.find_all('td', {'width': '302'})[3].string
+            return szerokosc[:-2]
             raise Error(f"Something wrong with width in {url}.")
         except Error as ve:
             print(ve)
@@ -69,9 +62,7 @@ class JanNowak:
     def get_depth(self, url, soup) -> str:
         """ Get product depth. """
         try:
-            size_box = soup.find(class_='product-sizes-panel')
-            glebokosc = size_box.find_all("p", class_="normal")[2].contents[1]
-            return glebokosc[-5:-3]+"0"
+            return soup.find_all('td', {'width': '302'})[5].string
             raise Error(f"Something wrong with depth in {url}.")
         except Error as ve:
             print(ve)
@@ -81,7 +72,7 @@ class JanNowak:
     def get_description(self, url, soup) -> str:
         """ Get product description. """
         try:
-            return soup.find(class_="product-desc").contents
+            return soup.find(id="tab-description").text
             raise Error(f"Something wrong with description in {url}.")
         except Error as ve:
             print(ve)
@@ -107,7 +98,7 @@ class JanNowak:
         result = dict()
 
         # Save current dealer
-        result["DYSTRYBUTOR"] = "Bakpol"
+        result["DYSTRYBUTOR"] = "Kart-Map"
 
         # Save current date
         result["DATA"] = get_date()
@@ -147,10 +138,10 @@ class JanNowak:
         result["ŹRÓDŁO"] = url
 
         # Find shipping time
-        result["CZAS REALIZACJI [dni]"] = ""
+        result["CZAS REALIZACJI [dni]"] = soup.find_all('p', {"style":"text-align: center;"})
 
         # Warranty
-        result["GWARANCJA [miesiące]"] = "72 miesiące"
+        result["GWARANCJA [miesiące]"] = "24 miesiące"
 
         # Comment
         if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":

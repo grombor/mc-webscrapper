@@ -6,8 +6,10 @@ from time import sleep
 # Main data holder
 records = []
 
+
 def get_date() -> str:
     return datetime.now().strftime("%d/%m/%Y")
+
 
 def compare_prices(current_price=int, previous_price=int):
   try:
@@ -50,6 +52,7 @@ def write_to_csv_file(test=False):
 
     for row in records:
       writer.writerow(row)
+
 
 def wait(time=2):
   half_time = int(time*0.5)
