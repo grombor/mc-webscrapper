@@ -39,8 +39,12 @@ def scrap(touple):
   poprzednia_cena = touple[1]
 
 # Current product price
-  brutto = soup.find('div', {"class":"pricing"}).find('p', {"class":"current-price js-price"}).string.replace(" ", "").split(",")[0]
-  netto = int(int(brutto)/1.23)
+  try:
+    brutto = soup.find('div', {"class":"pricing"}).find('p', {"class":"current-price js-price"}).string.split(",")[0]
+    brutto = str(brutto).replace(" ", "")
+    netto = int(int(brutto) / 1.23)
+  except:
+    netto = "brak danych"
   result["CENA KATALOGOWA NETTO"] = ""
   result["CENA SKLEPU INTERNETOWEGO NETTO"] = netto
 

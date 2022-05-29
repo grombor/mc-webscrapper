@@ -7,39 +7,32 @@ from .lb_links import links
 # List of link to scrapp
 links_lb = links
 
-      #   fieldnames = [
-      # "DYSTRYBUTOR", 
-      # "DATA", 
-      # "MODEL", 
-      # "ODPOWIEDNIK",
-      # "NETTO",
-      # "BRUTTO",
-      # "WYSOKOŚĆ",
-      # "SZEROKOŚĆ",
-      # "GŁĘBOKOŚĆ",
-      # "CECHY CHARAKTERYSTYCZNE",
-      # "ŹRÓDŁO",
-      # "CZAS REALIZACJI [dni]",
-      # "GWARANCJA [miesiące]",
-      # "msg"
-      # ]
-
 # Results: list of dict
 results = []
 
 def scrap(touple):
 
-  # Use requests to retrieve data from a given URL
-  response = requests.get(touple[0])
+  # Use requests to retrieve data from a given URL
+  # response = requests.get(touple[0])
+  response = requests.get("https://www.kart-map.pl/produkt/lawka-wysuwana-podstawa-pod-szafe/")
 
-  # Parse the whole HTML page using BeautifulSoup
+  # Parse the whole HTML page using BeautifulSoup
   soup = bs4(response.text, 'html.parser')
 
   # Parse product name
-  product_name = soup.find('h1', {'class': 'name'}).string.strip()
-  
+  try:
+    product_name = soup.find('h1', {'class': 'name'}).string.strip()
+  except:
+    try:
+      product_name = soup.find('h1', {'class': 'product_title entry-title'}).text
+    except:
+      product_name = "brak danych"
+
   # Previous product price
-  poprzednia_cena = touple[1]
+  try:
+    poprzednia_cena = touple[1]
+  except:
+    poprzednia_cena = "brak danych"
  
   # Save results of scrapping as dict
   result = {}
@@ -57,12 +50,19 @@ def scrap(touple):
   result["MODEL"] = product_name
 
   # Odpowiednik
-  result["ODPOWIEDNIK"] = touple[2]
+  try:
+    result["ODPOWIEDNIK"] = touple[2]
+  except:
+    result["ODPOWIEDNIK"] = ""
 
   # Current product price
-  netto = soup.find_all('em')[1].string
-  netto = str(netto).split(',')
-  netto = netto[0].replace(u'\xa0', u'')
+  try:
+    netto = soup.find_all('em')[1].string
+    netto = str(netto).split(',')
+    netto = netto[0].replace(u'\xa0', u'')
+  except:
+    netto = "brak danych"
+
   result["CENA KATALOGOWA NETTO"] = ""
   result["CENA SKLEPU INTERNETOWEGO NETTO"] = netto
 
@@ -78,7 +78,10 @@ def scrap(touple):
   try:
     cechy_charakterystyczne = soup.find('div', {"itemprop":'description', "class":"resetcss"}).findChildren("p")[4]
   except:
-    cechy_charakterystyczne = soup.find('div', {"class":'resetcss', "itemprop":"description"}).findChildren("p")[2]
+    try:
+      cechy_charakterystyczne = soup.find('div', {"class":'resetcss', "itemprop":"description"}).findChildren("p")[2]
+    except:
+      cechy_charakterystyczne = ""
   result["CECHY CHARAKTERYSTYCZNE"] = cechy_charakterystyczne
 
   # Source
@@ -88,12 +91,15 @@ def scrap(touple):
   result["GWARANCJA [miesiące]"] = "60 miesięcy"
 
   # czas_realizacji
-  t_ship = str(soup.find('span', {'class': 'second'}).string)
-  if t_ship == '48 - 72 H':
-    index = t_ship.find("- ")
-    czas_realizacji = str(int(t_ship[index+2:-2])/24).split('.')[0]
-  if t_ship == '3-4 tygodnie':
-    czas_realizacji = t_ship.split('-')[1]
+  try:
+    t_ship = str(soup.find('span', {'class': 'second'}).string)
+    if t_ship == '48 - 72 H':
+      index = t_ship.find("- ")
+      czas_realizacji = str(int(t_ship[index+2:-2])/24).split('.')[0]
+    if t_ship == '3-4 tygodnie':
+      czas_realizacji = t_ship.split('-')[1]
+  except:
+    czas_realizacji = "brak danych"
 
   result["CZAS REALIZACJI [dni]"] = czas_realizacji
 

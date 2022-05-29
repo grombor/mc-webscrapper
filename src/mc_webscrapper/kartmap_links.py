@@ -1,11 +1,5 @@
-'''
-1. Sprawdzić linki, poprzednia cene wpisac do pierwszego miejsca po linku
-2. w drugie miejsce wpisac odpowiednik Malowa
-
-'''
-
 links = [
-  # Szafy BHP – ubraniowe 
+  # Szafy BHP – ubraniowe
   ("https://www.kart-map.pl/produkt/szafa-ubraniowa-bhp-dwudrzwiowa/", "778", "SUM 320"),
   ("https://www.kart-map.pl/produkt/szafa-ubraniowa-bhp-dwudrzwiowa-z-lawka/", "", "SUM"),
   ("https://www.kart-map.pl/produkt/szafa-ubraniowa-bhp-dwudrzwiowa-z-perforacja-i-lawka/", "", "SUM"),
