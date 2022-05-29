@@ -72,6 +72,7 @@ env/
 __pypackages__/
 
 # My files
-test.csv
+*test*.txt
+*results*.txt
 
 # End of https://www.toptal.com/developers/gitignore/api/pythonvanilla

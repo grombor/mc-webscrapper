@@ -102,5 +102,3 @@ links = [
   ("https://sklep.metalkas.com.pl/szafa-schowkowa-1mss-met-m.html", "1189", "SUS 312"),
 ]
 
-links =[("https://sklep.metalkas.com.pl/szafa-schowkowa-1mss-met-m.html", "1189", "SUS 312")]
-
