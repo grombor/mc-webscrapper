@@ -6,7 +6,7 @@ from src.mc_webscrapper.errors import Error
 
 
 class Bakpol:
-    """ This class represents products of Jan Nowak manufacturer (https://bakpol.pl/)"""
+    """ This class represents products of Bakpol manufacturer (https://bakpol.pl/)"""
 
 
     def get_links(self) -> list:
@@ -69,7 +69,7 @@ class Bakpol:
     def get_depth(self, url, soup) -> str:
         """ Get product depth. """
         try:
-            depth = soup.find('table', class_='table-data-sheet').find_all('td')[7].text
+            depth = soup.find('table', class_='table-data-sheet').find_all('td')[5].text
             if type(int(depth)) == int:
                 return depth
             else:

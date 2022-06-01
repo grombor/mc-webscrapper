@@ -6,7 +6,7 @@ from src.mc_webscrapper.metalkas import Metalkas
 
 from src.mc_webscrapper.utils import write_to_csv_file
 
-bakpol = Bakpol()
+bakpol = Bakpol() #done, but still need to do tests
 bakpol.scrap()
 # jannowak = JanNowak() # need price tests
 # jannowak.scrap()

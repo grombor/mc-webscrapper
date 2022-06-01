@@ -15,8 +15,8 @@ class JanNowak:
             if len(links) <= 0:
                 raise Error("Links list is empty or broken.")
             return links
-        except Error as ve:
-            print(ve)
+        except Error as e:
+            print(e)
 
 
     def get_model(self, url, soup) -> str:

@@ -62,11 +62,16 @@ def test_random_link(bakpol):
     assert len(records) == sample_links_range
 
 
-def test_dealer_name(bakpol):
-    """ Check dealer name. """
+def test_scrapped_page_data(bakpol):
+    """ Check scrapped page data. """
 
-    link = links[0]
+    link = ("https://bakpol.pl/szafy-typ-l/14-l300-42-szafa-ubraniowa.html", "2424", "SUL 34")
 
     bakpol.scrap_link(link)
 
     assert records[0]["DYSTRYBUTOR"] == "Bakpol"
+    assert records[0]["MODEL"].lower() == "L300/42 SZAFA UBRANIOWA".lower()
+    assert records[0]["CENA SKLEPU INTERNETOWEGO NETTO"] == "2424"
+    assert records[0]["WYSOKOŚĆ"] == "1800"
+    assert records[0]["SZEROKOŚĆ"] == "1190"
+    assert records[0]["GŁĘBOKOŚĆ"] == "480"
