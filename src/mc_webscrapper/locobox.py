@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from src.mc_webscrapper.locobox_links import links
-from src.mc_webscrapper.utils import get_date, Error, compare_prices, records
+from src.mc_webscrapper.utils import get_date, compare_prices, records
 
 
 class Locobox:
@@ -170,12 +170,11 @@ class Locobox:
     def scrap(self):
         """Scrap through all links in a list."""
 
-        print("Starting scrapping Bakpol.")
+        print("Starting scrapping Locobox.")
         for link in links:
-            try:
-                self.scrap_link(link)
-                return "Done."
-                raise Error(link[0])
-            except Error as e:
-                print(e)
+            self.scrap_link(link)
+            # try:
+            #     self.scrap_link(link)
+            # except Error as e:
+            #     print(e, f"Something wrong with {link[0]}")
 

@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from src.mc_webscrapper.metalkas_links import links
-from src.mc_webscrapper.utils import get_date, Error, compare_prices, records
+from src.mc_webscrapper.utils import get_date, compare_prices, records
+from src.mc_webscrapper.errors import Error
 
 
 class Metalkas:
@@ -192,8 +193,6 @@ class Metalkas:
         for link in links:
             try:
                 self.scrap_link(link)
-                return "Done."
-                raise Error(link[0])
             except Error as e:
-                print(e)
+                print(e, f"Something wrong with {link[0]}")
 

@@ -799,3 +799,11 @@ links = [
     ("https://bakpol.pl/szafy-typ-l/319-l400-22-szafa-ubraniowa.html", "1524", "SUL 42"),
     ("https://bakpol.pl/szafy-typ-l/320-l400-32-szafa-ubraniowa.html", "2112", "SUL 43"),
     ]
+
+links = [
+    ("https://bakpol.pl/szafy-typ-l/14-l300-42-szafa-ubraniowa.html", "2424", "SUL 34"),
+    ("https://bakpol.pl/szafy-ubraniowe-na-nogach/338-ln400-22-szafa-ubraniowa.html", "1632", "SUL 42"),
+    ("https://bakpol.pl/szafy-l/318-l400-12-szafa-ubraniowa.html", "996", "SUL 41"),
+    ("https://bakpol.pl/szafy-typ-l/319-l400-22-szafa-ubraniowa.html", "1524", "SUL 42"),
+    ("https://bakpol.pl/szafy-typ-l/320-l400-32-szafa-ubraniowa.html", "2112", "SUL 43"),
+]

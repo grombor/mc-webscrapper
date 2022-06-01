@@ -52,11 +52,21 @@ def test_random_link(bakpol):
     # Create list of samples
     test_link_list = list()
     for i in range(sample_links_range):
-        test_link_list.append(links[randint(0,len(links))])
+        test_link_list.append(links[randint(0, len(links))])
 
     for link in test_link_list:
         bakpol.scrap_link(link)
 
     write_to_csv_file(test=True)
 
-    assert len(records) > 0
+    assert len(records) == sample_links_range
+
+
+def test_dealer_name(bakpol):
+    """ Check dealer name. """
+
+    link = links[0]
+
+    bakpol.scrap_link(link)
+
+    assert records[0]["DYSTRYBUTOR"] == "Bakpol"

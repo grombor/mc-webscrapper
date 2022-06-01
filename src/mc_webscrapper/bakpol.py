@@ -1,11 +1,12 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from src.mc_webscrapper.bakpol_links import links
-from src.mc_webscrapper.utils import get_date, Error, compare_prices, records
+from src.mc_webscrapper.utils import get_date, compare_prices, records, show_status
+from src.mc_webscrapper.errors import Error
 
 
 class Bakpol:
-    """ This class represents products of Bakpol manufacturer (https://bakpol.pl/)"""
+    """ This class represents products of Jan Nowak manufacturer (https://bakpol.pl/)"""
 
 
     def get_links(self) -> list:
@@ -23,56 +24,59 @@ class Bakpol:
         try:
             model = soup.find('h1', {'class': 'nazwa-produktu'}).string.strip()
             return model
-            raise Error(f"Something wrong with product name in {url}.")
         except Error as ve:
-            print(ve)
+            print(ve, f"Something wrong with product name in {url}.")
             model = ""
 
 
     def get_price(self, url, soup):
         """ Get product price. """
         try:
-            return soup.find('span', {"id": "our_price_display"}).string.replace(" ", "").split(",")[0]
-            raise Error(f"Something wrong with product price in {url}.")
+            price = soup.find('span', {"id": "our_price_display"}).string
+            if type(price) != None:
+                return price.replace(" ", "").split(",")[0]
         except Error as ve:
-            print(ve)
+            print(ve, (f"Something wrong with product price in {url}."))
             return f""
 
 
     def get_height(self, url, soup) -> str:
         """ Get product height. """
         try:
-            cechy_charakterystyczne = soup.find(class_="rte")
-            wysokosc = int(str(cechy_charakterystyczne.text).find('wysokość'))
-            return cechy_charakterystyczne.text[wysokosc+8:wysokosc+8+5+2].replace(",", "").strip()
-            raise Error(f"Something wrong with height in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+            height = soup.find('table', class_='table-data-sheet').find_all('td')[1].text
+            if type(int(height)) == int:
+                return height
+            else:
+                raise ValueError(f"ERROR: Something wrong with height in {url}.")
+        except (Error, ValueError) as e:
+            print(e, f", method: {self.get_height.__name__} link: {url}")
+            return ""
 
 
     def get_width(self, url, soup) -> str:
         """ Get product width. """
         try:
-            cechy_charakterystyczne = soup.find(class_="rte")
-            szerokosc = int(str(cechy_charakterystyczne.text).find('szerokość'))
-            return cechy_charakterystyczne.text[szerokosc + 9:szerokosc + 9 + 5 + 2].replace(",","").strip()
-            raise Error(f"Something wrong with width in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+            width = soup.find('table', class_='table-data-sheet').find_all('td')[3].text
+            if type(int(width)) == int:
+                return width
+            else:
+                raise ValueError(f"ERROR: Something wrong with height in {url}.")
+        except (Error, ValueError) as e:
+            print(e, f", method: {self.get_width.__name__} link: {url}")
+            return ""
 
 
     def get_depth(self, url, soup) -> str:
         """ Get product depth. """
         try:
-            cechy_charakterystyczne = soup.find(class_="rte")
-            glebokosc = int(str(cechy_charakterystyczne.text).find('głębokość'))
-            return cechy_charakterystyczne.text[glebokosc + 9:glebokosc + 9 + 5 + 2].replace(",","").strip()
-            raise Error(f"Something wrong with depth in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+            depth = soup.find('table', class_='table-data-sheet').find_all('td')[7].text
+            if type(int(depth)) == int:
+                return depth
+            else:
+                raise ValueError(f"ERROR: Something wrong with height in {url}.")
+        except (Error, ValueError, IndexError) as e:
+            print(e, f", method: {self.get_depth.__name__} link: {url}")
+            return ""
 
 
     def get_description(self, url, soup) -> str:
@@ -80,23 +84,21 @@ class Bakpol:
         try:
             cechy_charakterystyczne = soup.find(class_="rte").text
             return cechy_charakterystyczne
-            raise Error(f"Something wrong with description in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+        except (Error, ValueError, IndexError) as e:
+            print(e, f", method: {self.get_description.__name__} link: {url}")
+            return ""
 
 
-    def get_comment(self, previous_price, nett) -> str:
+    def get_comment(self, previous_price, nett, url) -> str:
         """ Create product comment. """
         try:
             if previous_price == nett:
                 return ""
             else:
                 return compare_prices(nett, previous_price)
-            raise Error(f"Something wrong with comment in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+        except (Error, ValueError, IndexError) as e:
+            print(e, f", method: {self.get_depth.__name__} link: {url}")
+            return ""
 
 
     def scrap_link(self, link):
@@ -116,7 +118,7 @@ class Bakpol:
         headers.update({
             'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
         })
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, timeout=5, headers=headers)
 
         # Parse the whole HTML page using BeautifulSoup
         soup = bs4(response.text, 'html.parser')
@@ -152,11 +154,11 @@ class Bakpol:
         result["CZAS REALIZACJI [dni]"] = ""
 
         # Warranty
-        result["GWARANCJA [miesiące]"] = "24 miesiące"
+        result["GWARANCJA [miesiące]"] = "2 lata"
 
         # Comment
         if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":
-            result["msg"] = self.get_comment(link[1], result["CENA SKLEPU INTERNETOWEGO NETTO"])
+            result["msg"] = self.get_comment(link[1], result["CENA SKLEPU INTERNETOWEGO NETTO"], url)
         else:
             result["msg"] = ""
 
@@ -166,11 +168,12 @@ class Bakpol:
         """Scrap through all links in a list."""
 
         print("Starting scrapping Bakpol.")
+        i = 0
         for link in links:
             try:
+                i += 1
+                show_status(i, links)
                 self.scrap_link(link)
-                return "Done."
-                raise Error(link[0])
             except Error as e:
-                print(e)
+                print(e, f"Something wrong with {link[0]}")
 

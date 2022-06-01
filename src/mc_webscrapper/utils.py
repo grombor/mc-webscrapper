@@ -1,7 +1,8 @@
 from datetime import datetime
-import csv
+import csv, sys
 from random import randint as r
 from time import sleep
+from src.mc_webscrapper.errors import Error
 
 # Main data holder
 records = []
@@ -13,11 +14,20 @@ def get_date() -> str:
 
 def compare_prices(current_price=int, previous_price=int):
   try:
-    percent = str((int(current_price)*100 / int(previous_price))-100).split(".")
-    return f"Cena zmieniła się o {percent[0]}%"
-    raise Error("")
+    if (current_price != '' and previous_price!=''):
+      percent = str((int(current_price)*100 / int(previous_price))-100).split(".")
+      return f"Cena zmieniła się o {percent[0]}%"
+    raise Error()
   except Error as e:
+    print(e, f"Something wrong with price change logic")
     return f""
+
+
+def show_status(item, set):
+  for i in range(len(set)):
+    sys.stdout.write(f"Progress: {item} of {len(set)} \r")
+    sys.stdout.flush()
+
 
 
 def write_to_csv_file(test=False):
@@ -59,16 +69,6 @@ def wait(time=2):
   sleep(r(half_time, time))
 
 
-class Error(Exception):
-    """Base class for other exceptions"""
-
-
-    def __init__(self, msg):
-        self.message = msg
-
-
-    def __str__(self):
-        return f"ERROR: {self.message}"
 
 
 

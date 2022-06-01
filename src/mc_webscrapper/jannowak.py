@@ -1,11 +1,12 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from src.mc_webscrapper.jannowak_links import links
-from src.mc_webscrapper.utils import get_date, Error, compare_prices, records
+from src.mc_webscrapper.utils import get_date, compare_prices, records
+from src.mc_webscrapper.errors import Error
 
 
 class JanNowak:
-    """ This class represents products of Jan Nowak manufacturer & dealer (https://bakpol.pl/)"""
+    """ This class represents products of Jan Nowak manufacturer & dealer (https://jannowak.com/)"""
 
 
     def get_links(self) -> list:
@@ -35,11 +36,13 @@ class JanNowak:
     def get_price(self, url, soup):
         """ Get product price. """
         try:
-            brutto = soup.find('div', {"class":"pricing"}).find('p', {"class":"current-price js-price"}).string.replace(" ", "").split(",")[0]
-            return int(int(brutto)/1.23)
-            raise Error(f"Something wrong with product price in {url}.")
+            brutto = soup.find('div', {"class": "pricing"}).find('p', {"class": "current-price js-price"}).string.replace(" ", "").split(",")[0]
+            if type(int(brutto)) == int:
+                return int(int(brutto)/1.23)
+            else:
+                raise Error
         except Error as ve:
-            print(ve)
+            print(ve, f"Something wrong with product price in {url}.")
             return f""
 
 
@@ -118,7 +121,7 @@ class JanNowak:
         headers.update({
             'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
         })
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, timeout=5, headers=headers)
 
         # Parse the whole HTML page using BeautifulSoup
         soup = bs4(response.text, 'html.parser')
@@ -167,12 +170,10 @@ class JanNowak:
     def scrap(self):
         """Scrap through all links in a list."""
 
-        print("Starting scrapping Bakpol.")
+        print("Starting scrapping Jan Nowak.")
         for link in links:
             try:
                 self.scrap_link(link)
-                return "Done."
-                raise Error(link[0])
             except Error as e:
-                print(e)
+                print(e, f"Something wrong with {link[0]}")
 

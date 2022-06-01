@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from src.mc_webscrapper.kartmap_links import links
-from src.mc_webscrapper.utils import get_date, Error, compare_prices, records
+from src.mc_webscrapper.utils import get_date, compare_prices, records
+from src.mc_webscrapper.errors import Error
 
 
 class KartMap:
@@ -33,17 +34,21 @@ class KartMap:
         try:
             return soup.find_all('bdi')[0].text.split(",")[0].replace(" ", "")
             raise Error(f"Something wrong with product price in {url}.")
-        except Error as ve:
+        except (Error, IndexError) as ve:
             print(ve)
             return ""
+        # except (Error, IndexError) as ve:
+        #     print(ve)
+        #     return ""
 
 
     def get_height(self, url, soup) -> str:
         """ Get product height. """
         try:
-            return soup.find_all('td', {'width': '302'})[1].string
+            height = soup.find_all('td', {'width': '302'})[1].text[:-2]
+            return height
             raise Error(f"Something wrong with height in {url}.")
-        except Error as ve:
+        except (Error, IndexError) as ve:
             print(ve)
             return f""
 
@@ -54,7 +59,7 @@ class KartMap:
             szerokosc = soup.find_all('td', {'width': '302'})[3].string
             return szerokosc[:-2]
             raise Error(f"Something wrong with width in {url}.")
-        except Error as ve:
+        except (Error, IndexError) as ve:
             print(ve)
             return f""
 
@@ -64,7 +69,7 @@ class KartMap:
         try:
             return soup.find_all('td', {'width': '302'})[5].string
             raise Error(f"Something wrong with depth in {url}.")
-        except Error as ve:
+        except (Error, IndexError) as ve:
             print(ve)
             return f""
 
@@ -148,7 +153,7 @@ class KartMap:
         result["GWARANCJA [miesiące]"] = "24 miesiące"
 
         # Comment
-        if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":
+        if type(result["CENA SKLEPU INTERNETOWEGO NETTO"]) == int:
             result["msg"] = self.get_comment(link[1], result["CENA SKLEPU INTERNETOWEGO NETTO"])
         else:
             result["msg"] = ""
@@ -158,12 +163,10 @@ class KartMap:
     def scrap(self):
         """Scrap through all links in a list."""
 
-        print("Starting scrapping Bakpol.")
+        print("Starting scrapping Kartmap.")
         for link in links:
             try:
                 self.scrap_link(link)
-                return "Done."
-                raise Error(link[0])
             except Error as e:
-                print(e)
+                print(e, f"Something wrong with {link[0]}")
 
