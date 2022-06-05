@@ -37,3 +37,12 @@ links = [
     ("https://jannowak.com/178-szafa-metalowa-oliver-szara-socjalna", "", "SUS"),
     ("https://jannowak.com/97-szafa-metalowa-bartek-szara-socjalna", "", "SUS"),
 ]
+
+
+links = [
+    ("https://jannowak.com/100-szafa-metalowa-marcin-szara-socjalna", "973", "SUS 334"),
+    ("https://jannowak.com/105-szafa-metalowa-karol-szara-skrytkowa", "1054", "SUS 336"),
+    ("https://jannowak.com/175-szafa-metalowa-robert-szara-socjalna", "", "SUS"),
+    ("https://jannowak.com/178-szafa-metalowa-oliver-szara-socjalna", "", "SUS"),
+    ("https://jannowak.com/97-szafa-metalowa-bartek-szara-socjalna", "", "SUS"),
+]

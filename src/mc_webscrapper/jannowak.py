@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from src.mc_webscrapper.jannowak_links import links
-from src.mc_webscrapper.utils import get_date, compare_prices, records
+from src.mc_webscrapper.utils import get_date, compare_prices, records, show_status, requests_timeout, extract_digits
 from src.mc_webscrapper.errors import Error
 
 
@@ -28,80 +28,83 @@ class JanNowak:
             model = temp_string[temp_index + 6:-2]
             return model
             raise Error(f"Something wrong with product name in {url}.")
-        except Error as ve:
-            print(ve)
-            model = ""
+        except ValueError as e:
+            print(e, f", method: {self.get_model.__name__} link: {url}")
+            return ""
 
 
     def get_price(self, url, soup):
         """ Get product price. """
         try:
             brutto = soup.find('div', {"class": "pricing"}).find('p', {"class": "current-price js-price"}).string.replace(" ", "").split(",")[0]
-            if type(int(brutto)) == int:
-                return int(int(brutto)/1.23)
-            else:
-                raise Error
-        except Error as ve:
-            print(ve, f"Something wrong with product price in {url}.")
-            return f""
+            brutto = extract_digits(brutto)
+            return int(int(brutto)/1.23)
+        except Error as e:
+            print(e, f", method: {self.get_price.__name__} link: {url}")
+            return ""
 
 
     def get_height(self, url, soup) -> str:
         """ Get product height. """
         try:
-            size_box = soup.find(class_='product-sizes-panel')
-            return str(size_box.find("p", class_="normal").contents[1])[-6:-3]+"0"
-            raise Error(f"Something wrong with height in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+            height = soup.find_all("p", class_="normal")[0].text[:-2]
+            height = extract_digits(height)
+            return height+"0"
+        except (AttributeError, TypeError, ValueError) as e:
+            print(e, f", method: {self.get_height.__name__} link: {url}")
+            return ""
 
 
     def get_width(self, url, soup) -> str:
         """ Get product width. """
         try:
-            size_box = soup.find(class_='product-sizes-panel')
-            szerokosc = size_box.find_all("p", class_="normal")[1].contents[1]
-            return szerokosc[-6:-3]+"0"
-            raise Error(f"Something wrong with width in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+            width = soup.find_all("p", class_="normal")[1].text[:-2]
+            width = extract_digits(width)
+            return width+"0"
+        except (ValueError, AttributeError, TypeError) as e:
+            print(e, f", method: {self.get_width.__name__} link: {url}")
+            return ""
 
 
     def get_depth(self, url, soup) -> str:
         """ Get product depth. """
         try:
-            size_box = soup.find(class_='product-sizes-panel')
-            glebokosc = size_box.find_all("p", class_="normal")[2].contents[1]
-            return glebokosc[-5:-3]+"0"
-            raise Error(f"Something wrong with depth in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+            depth = soup.find_all("p", class_="normal")[2].text[:-2]
+            depth = extract_digits(depth)
+            return depth+"0"
+        except (ValueError, IndexError, AttributeError, TypeError) as e:
+            print(e, f", method: {self.get_depth.__name__} link: {url}")
+            return ""
 
 
     def get_description(self, url, soup) -> str:
         """ Get product description. """
         try:
-            return soup.find(class_="product-desc").contents
-            raise Error(f"Something wrong with description in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+            return soup.find(class_="product-desc").text[1:]
+        except (ValueError, IndexError) as e:
+            print(e, f", method: {self.get_description.__name__} link: {url}")
+            return ""
 
 
-    def get_comment(self, previous_price, nett) -> str:
+    def get_status(self, url, soup):
+        """ Get shipping status. """
+        try:
+            return soup.find("p", class_="status").text
+        except (ValueError, IndexError) as e:
+            print(e, f", method: {self.get_description.__name__} link: {url}")
+            return ""
+
+
+    def get_comment(self, previous_price, nett, url) -> str:
         """ Create product comment. """
         try:
             if previous_price == nett:
                 return ""
             else:
                 return compare_prices(nett, previous_price)
-            raise Error(f"Something wrong with comment in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+        except (ValueError, IndexError) as e:
+            print(e, f", method: {self.get_depth.__name__} link: {url}")
+            return ""
 
 
     def scrap_link(self, link):
@@ -110,7 +113,7 @@ class JanNowak:
         result = dict()
 
         # Save current dealer
-        result["DYSTRYBUTOR"] = "Bakpol"
+        result["DYSTRYBUTOR"] = "Jan Nowak"
 
         # Save current date
         result["DATA"] = get_date()
@@ -121,7 +124,7 @@ class JanNowak:
         headers.update({
             'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
         })
-        response = requests.get(url, timeout=5, headers=headers)
+        response = requests.get(url, timeout=requests_timeout, headers=headers)
 
         # Parse the whole HTML page using BeautifulSoup
         soup = bs4(response.text, 'html.parser')
@@ -154,14 +157,14 @@ class JanNowak:
         result["ŹRÓDŁO"] = url
 
         # Find shipping time
-        result["CZAS REALIZACJI [dni]"] = ""
+        result["CZAS REALIZACJI [dni]"] = self.get_status(url, soup)
 
         # Warranty
-        result["GWARANCJA [miesiące]"] = "72 miesiące"
+        result["GWARANCJA [miesiące]"] = "6 lat"
 
         # Comment
         if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":
-            result["msg"] = self.get_comment(link[1], result["CENA SKLEPU INTERNETOWEGO NETTO"])
+            result["msg"] = self.get_comment(link[1], result["CENA SKLEPU INTERNETOWEGO NETTO"], url)
         else:
             result["msg"] = ""
 
@@ -171,8 +174,11 @@ class JanNowak:
         """Scrap through all links in a list."""
 
         print("Starting scrapping Jan Nowak.")
+        i = 0
         for link in links:
             try:
+                i += 1
+                show_status(i, links)
                 self.scrap_link(link)
             except Error as e:
                 print(e, f"Something wrong with {link[0]}")

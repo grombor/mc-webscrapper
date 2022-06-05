@@ -569,3 +569,13 @@ links = [
   ("https://www.kart-map.pl/produkt/szafa-skrytkowa-przedszkolna-4/", "", "MSUS"),
   ("https://www.kart-map.pl/produkt/szafa-skrytkowa-szkolna-8/", "1809", "SUS 333"),
 ]
+
+links = [
+  ("https://www.kart-map.pl/produkt/szafa-skrytkowa-szkolna-7/", "1710", "MSUS 332S"),
+  ("https://www.kart-map.pl/produkt/szafa-skrytkowa-przedszkolna-4/", "", "MSUS"),
+  ("https://www.kart-map.pl/produkt/szafa-skrytkowa-szkolna-8/", "1809", "SUS 333"),
+  ("https://www.kart-map.pl/produkt/szafa-do-kopert-formatu-b-5-dwie-szuflady-kop-2s/", "939", "SZK 318/2"),
+  ("https://www.kart-map.pl/produkt/szafa-do-kopert-formatu-b-5-trzy-szuflady/", "1153", "SZK 318/1/5"),
+  ("https://www.kart-map.pl/produkt/szafa-do-kopert-formatu-b-5-cztery-szuflady/", "1415", "SZK 318/4"),
+]
+

@@ -6,16 +6,16 @@ from src.mc_webscrapper.metalkas import Metalkas
 
 from src.mc_webscrapper.utils import write_to_csv_file
 
-bakpol = Bakpol() #done, but still need to do tests
+bakpol = Bakpol()
 bakpol.scrap()
-# jannowak = JanNowak() # need price tests
-# jannowak.scrap()
-# kartmap = KartMap() # need price tests
-# kartmap.scrap()
-# locobox = Locobox()
-# locobox.scrap()
-# metalkas = Metalkas()
-# metalkas.scrap()
+jannowak = JanNowak()
+jannowak.scrap()
+kartmap = KartMap()
+kartmap.scrap()
+locobox = Locobox()
+locobox.scrap()
+metalkas = Metalkas()
+metalkas.scrap()
 
 write_to_csv_file()
 

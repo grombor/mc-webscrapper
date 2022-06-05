@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from src.mc_webscrapper.metalkas_links import links
-from src.mc_webscrapper.utils import get_date, compare_prices, records
+from src.mc_webscrapper.utils import get_date, compare_prices, records, requests_timeout, show_status, extract_digits
 from src.mc_webscrapper.errors import Error
 
 
@@ -22,17 +22,16 @@ class Metalkas:
             if len(links) <= 0:
                 raise Error("Links list is empty or broken.")
             return links
-        except Error as ve:
-            print(ve)
+        except Error as e:
+            print(e)
 
 
     def get_model(self, url, soup) -> str:
         """ Get product model. """
         try:
             return soup.find('span', {'class': 'base'}).string
-            raise Error(f"Something wrong with product name in {url}.")
-        except Error as ve:
-            print(ve)
+        except ValueError as e:
+            print(e, f", method: {self.get_model.__name__} link: {url}")
             return ""
 
 
@@ -40,43 +39,44 @@ class Metalkas:
         """ Get product price. """
         try:
             price = soup.find('span', {'class': 'price'})
-            price = str(price).split(',')
-            price = price[0].replace(u'\xa0', u'').replace('<span class="price">', '')
-            return price
-            raise Error(f"Something wrong with product price in {url}.")
-        except Error as ve:
-            print(ve)
+            price = str(price).split(',')[0]
+            if type(price) != None:
+                return extract_digits(price)
+            else:
+                raise Error
+        except Error as e:
+            print(e, f", method: {self.get_price.__name__} link: {url}")
             return ""
 
 
     def get_height(self, url, soup) -> str:
         """ Get product height. """
         try:
-            return soup.find('td', {'data-th': 'Wysokość zewnętrzna [mm]'}).text
-            raise Error(f"Something wrong with height in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+            height = soup.find('td', {'data-th': 'Wysokość zewnętrzna [mm]'}).text
+            return extract_digits(height)
+        except (ValueError) as e:
+            print(e, f", method: {self.get_height.__name__} link: {url}")
+            return ""
 
 
     def get_width(self, url, soup) -> str:
         """ Get product width. """
         try:
-            return soup.find('td', {'data-th': 'Szerokość zewnętrzna [mm]'}).text
-            raise Error(f"Something wrong with width in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+            width = soup.find('td', {'data-th': 'Szerokość zewnętrzna [mm]'}).text
+            return extract_digits(width)
+        except (ValueError) as e:
+            print(e, f", method: {self.get_width.__name__} link: {url}")
+            return ""
 
 
     def get_depth(self, url, soup) -> str:
         """ Get product depth. """
         try:
-            return soup.find('td', {'data-th': 'Głębokość zewnętrzna'}).text
-            raise Error(f"Something wrong with depth in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+            depth = soup.find('td', {'data-th': 'Głębokość zewnętrzna'}).text
+            return extract_digits(depth)
+        except (ValueError, IndexError) as e:
+            print(e, f", method: {self.get_depth.__name__} link: {url}")
+            return ""
 
 
     def get_description(self, url, soup) -> str:
@@ -92,22 +92,20 @@ class Metalkas:
                     temp.append(cecha.text)
                 cechy_charakterystyczne = ' '.join(temp)
                 return cechy_charakterystyczne
-                raise Error(f"Something wrong with description in {url}.")
-            except :
+            except IndexError:
                 return soup.find('div', {"class": 'resetcss', "itemprop": "description"}).findChildren("p")[2]
-            raise Error(f"Something wrong with description in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+        except ValueError as e:
+            print(e, f", method: {self.get_description.__name__} link: {url}")
+            return ""
+
 
     def get_shipping_time(self, url, soup):
         """ Get product shipping time. """
         try:
-            return soup.find_all('td', {'data-th': 'Czas realizacji'})
-            raise Error(f"Something wrong with depth in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+            return soup.find('td', {'data-th': 'Czas realizacji'}).text
+        except (ValueError, IndexError) as e:
+            print(e, f", method: {self.get_depth.__name__} link: {url}")
+            return ""
 
 
     def get_comment(self, previous_price, nett) -> str:
@@ -118,9 +116,9 @@ class Metalkas:
             else:
                 return compare_prices(nett, previous_price)
             raise Error(f"Something wrong with comment in {url}.")
-        except Error as ve:
-            print(ve)
-            return f""
+        except (ValueError, IndexError) as e:
+            print(e, f", method: {self.get_depth.__name__} link: {url}")
+            return ""
 
 
     def scrap_link(self, link):
@@ -140,7 +138,7 @@ class Metalkas:
         headers.update({
             'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
         })
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, timeout=requests_timeout, headers=headers)
 
         # Parse the whole HTML page using BeautifulSoup
         soup = bs4(response.text, 'html.parser')
@@ -176,7 +174,7 @@ class Metalkas:
         result["CZAS REALIZACJI [dni]"] = self.get_shipping_time(url, soup)
 
         # Warranty
-        result["GWARANCJA [miesiące]"] = "24 miesiące"
+        result["GWARANCJA [miesiące]"] = "2 lata"
 
         # Comment
         if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":
@@ -190,8 +188,11 @@ class Metalkas:
         """Scrap through all links in a list."""
 
         print("Starting scrapping Metalkas.")
+        i = 0
         for link in links:
             try:
+                i += 1
+                show_status(i, links)
                 self.scrap_link(link)
             except Error as e:
                 print(e, f"Something wrong with {link[0]}")

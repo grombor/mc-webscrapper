@@ -477,3 +477,12 @@ links = [
   ("https://locobox.pl/pl/p/Lawka-wysuwana-PROFI-LR-z-zamykana-skrytka-na-buty-pod-szafy-s40-cm-1K/181", "", "PW"),
   ("https://locobox.pl/pl/p/Lawka-wysuwana-PROFI-LR-z-zamykana-skrytka-na-buty-pod-szafy-s30-cm-1K/177", "", "PW"),
 ]
+
+links = [
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O120200-RODO/547", "1212", "SBM 212"),
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O100200-czarna-znakowana-RODO/910", "1458", "SBM 203"),
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O100200-RODO/546", "905", "SBM 203"),
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O80200-RODO/545", "855", "SBM 202"),
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O60200-RODO/544", "936", "SBM 201"),
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O120104/551", "935", "SBM 107"),
+]

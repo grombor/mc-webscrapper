@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from src.mc_webscrapper.bakpol_links import links
-from src.mc_webscrapper.utils import get_date, compare_prices, records, show_status
+from src.mc_webscrapper.utils import get_date, compare_prices, records, show_status, requests_timeout, extract_digits
 from src.mc_webscrapper.errors import Error
 
 
@@ -15,18 +15,17 @@ class Bakpol:
             if len(links) <= 0:
                 raise Error("Links list is empty or broken.")
             return links
-        except Error as ve:
-            print(ve)
+        except Error as e:
+            print(e)
 
 
     def get_model(self, url, soup) -> str:
         """ Get product model. """
         try:
-            model = soup.find('h1', {'class': 'nazwa-produktu'}).string.strip()
-            return model
-        except Error as ve:
-            print(ve, f"Something wrong with product name in {url}.")
-            model = ""
+            return soup.find('h1', {'class': 'nazwa-produktu'}).string.strip()
+        except ValueError as e:
+            print(e, f", method: {self.get_model.__name__} link: {url}")
+            return ""
 
 
     def get_price(self, url, soup):
@@ -35,20 +34,19 @@ class Bakpol:
             price = soup.find('span', {"id": "our_price_display"}).string
             if type(price) != None:
                 return price.replace(" ", "").split(",")[0]
-        except Error as ve:
-            print(ve, (f"Something wrong with product price in {url}."))
-            return f""
+            else:
+                raise Error
+        except Error as e:
+            print(e, f", method: {self.get_price.__name__} link: {url}")
+            return ""
 
 
     def get_height(self, url, soup) -> str:
         """ Get product height. """
         try:
             height = soup.find('table', class_='table-data-sheet').find_all('td')[1].text
-            if type(int(height)) == int:
-                return height
-            else:
-                raise ValueError(f"ERROR: Something wrong with height in {url}.")
-        except (Error, ValueError) as e:
+            return extract_digits(height)
+        except (ValueError) as e:
             print(e, f", method: {self.get_height.__name__} link: {url}")
             return ""
 
@@ -57,11 +55,8 @@ class Bakpol:
         """ Get product width. """
         try:
             width = soup.find('table', class_='table-data-sheet').find_all('td')[3].text
-            if type(int(width)) == int:
-                return width
-            else:
-                raise ValueError(f"ERROR: Something wrong with height in {url}.")
-        except (Error, ValueError) as e:
+            return extract_digits(width)
+        except (ValueError) as e:
             print(e, f", method: {self.get_width.__name__} link: {url}")
             return ""
 
@@ -70,11 +65,8 @@ class Bakpol:
         """ Get product depth. """
         try:
             depth = soup.find('table', class_='table-data-sheet').find_all('td')[5].text
-            if type(int(depth)) == int:
-                return depth
-            else:
-                raise ValueError(f"ERROR: Something wrong with height in {url}.")
-        except (Error, ValueError, IndexError) as e:
+            return extract_digits(depth)
+        except (ValueError, IndexError) as e:
             print(e, f", method: {self.get_depth.__name__} link: {url}")
             return ""
 
@@ -82,11 +74,16 @@ class Bakpol:
     def get_description(self, url, soup) -> str:
         """ Get product description. """
         try:
-            cechy_charakterystyczne = soup.find(class_="rte").text
-            return cechy_charakterystyczne
-        except (Error, ValueError, IndexError) as e:
+            desc = soup.find(class_="rte").text
+            return desc
+        except (ValueError, IndexError) as e:
             print(e, f", method: {self.get_description.__name__} link: {url}")
             return ""
+
+
+    def get_status(self, url, soup):
+        """ Get shipping status. """
+        return ""
 
 
     def get_comment(self, previous_price, nett, url) -> str:
@@ -118,7 +115,7 @@ class Bakpol:
         headers.update({
             'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
         })
-        response = requests.get(url, timeout=5, headers=headers)
+        response = requests.get(url, timeout=requests_timeout, headers=headers)
 
         # Parse the whole HTML page using BeautifulSoup
         soup = bs4(response.text, 'html.parser')
@@ -151,7 +148,7 @@ class Bakpol:
         result["ŹRÓDŁO"] = url
 
         # Find shipping time
-        result["CZAS REALIZACJI [dni]"] = ""
+        result["CZAS REALIZACJI [dni]"] = self.get_status(url, soup)
 
         # Warranty
         result["GWARANCJA [miesiące]"] = "2 lata"

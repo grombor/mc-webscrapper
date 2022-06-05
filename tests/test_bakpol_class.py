@@ -69,7 +69,7 @@ def test_scrapped_page_data(bakpol):
 
     bakpol.scrap_link(link)
 
-    assert records[0]["DYSTRYBUTOR"] == "Bakpol"
+    assert records[0]["DYSTRYBUTOR"].lower() == "Bakpol".lower()
     assert records[0]["MODEL"].lower() == "L300/42 SZAFA UBRANIOWA".lower()
     assert records[0]["CENA SKLEPU INTERNETOWEGO NETTO"] == "2424"
     assert records[0]["WYSOKOŚĆ"] == "1800"

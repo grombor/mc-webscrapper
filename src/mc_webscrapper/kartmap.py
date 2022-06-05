@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup as bs4
 import requests
 from src.mc_webscrapper.kartmap_links import links
-from src.mc_webscrapper.utils import get_date, compare_prices, records
+from src.mc_webscrapper.utils import get_date, compare_prices, records, requests_timeout, extract_digits, show_status
 from src.mc_webscrapper.errors import Error
 
 
@@ -15,41 +15,41 @@ class KartMap:
             if len(links) <= 0:
                 raise Error("Links list is empty or broken.")
             return links
-        except Error as ve:
-            print(ve)
+        except Error as e:
+            print(e)
 
 
     def get_model(self, url, soup) -> str:
         """ Get product model. """
+
         try:
-            return soup.find('h1', {'class': 'product_title entry-title'}).string.strip()
-            raise Error(f"Something wrong with product name in {url}.")
-        except Error as ve:
-            print(ve)
+            return soup.find('h1', {'class': 'product_title entry-title'}).text
+        except ValueError as e:
+            print(e, f", method: {self.get_model.__name__} link: {url}")
             return ""
 
 
     def get_price(self, url, soup):
         """ Get product price. """
         try:
-            return soup.find_all('bdi')[0].text.split(",")[0].replace(" ", "")
-            raise Error(f"Something wrong with product price in {url}.")
-        except (Error, IndexError) as ve:
-            print(ve)
+            price = soup.find("span", class_="price").text
+            if type(price) != None:
+                return price.replace(" ", "").split(",")[0]
+            else:
+                raise Error
+        except Error as e:
+            print(e, f", method: {self.get_price.__name__} link: {url}")
             return ""
-        # except (Error, IndexError) as ve:
-        #     print(ve)
-        #     return ""
+
 
 
     def get_height(self, url, soup) -> str:
         """ Get product height. """
         try:
-            height = soup.find_all('td', {'width': '302'})[1].text[:-2]
-            return height
-            raise Error(f"Something wrong with height in {url}.")
-        except (Error, IndexError) as ve:
-            print(ve)
+            height = soup.find_all('td', {'width': '302'})[1].text
+            return extract_digits(height)
+        except (ValueError, IndexError) as e:
+            print(e)
             return f""
 
 
@@ -57,20 +57,19 @@ class KartMap:
         """ Get product width. """
         try:
             szerokosc = soup.find_all('td', {'width': '302'})[3].string
-            return szerokosc[:-2]
-            raise Error(f"Something wrong with width in {url}.")
-        except (Error, IndexError) as ve:
-            print(ve)
+            return extract_digits(szerokosc)
+        except (ValueError, IndexError) as e:
+            print(e)
             return f""
 
 
     def get_depth(self, url, soup) -> str:
         """ Get product depth. """
         try:
-            return soup.find_all('td', {'width': '302'})[5].string
-            raise Error(f"Something wrong with depth in {url}.")
-        except (Error, IndexError) as ve:
-            print(ve)
+            depth = soup.find_all('td', {'width': '302'})[5].text
+            return extract_digits(depth)
+        except (ValueError, IndexError) as e:
+            print(e)
             return f""
 
 
@@ -78,10 +77,14 @@ class KartMap:
         """ Get product description. """
         try:
             return soup.find(id="tab-description").text
-            raise Error(f"Something wrong with description in {url}.")
-        except Error as ve:
-            print(ve)
+        except (IndexError, AttributeError) as e:
+            print(url)
             return f""
+
+
+    def get_status(self, url, soup):
+        """ Get shipping status. """
+        return soup.find('p', {"style":"text-align: center;"}).text
 
 
     def get_comment(self, previous_price, nett) -> str:
@@ -114,7 +117,7 @@ class KartMap:
         headers.update({
             'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0',
         })
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, timeout=requests_timeout, headers=headers)
 
         # Parse the whole HTML page using BeautifulSoup
         soup = bs4(response.text, 'html.parser')
@@ -147,10 +150,10 @@ class KartMap:
         result["ŹRÓDŁO"] = url
 
         # Find shipping time
-        result["CZAS REALIZACJI [dni]"] = soup.find_all('p', {"style":"text-align: center;"})
+        result["CZAS REALIZACJI [dni]"] = self.get_status(url, soup)
 
         # Warranty
-        result["GWARANCJA [miesiące]"] = "24 miesiące"
+        result["GWARANCJA [miesiące]"] = "2 lata"
 
         # Comment
         if type(result["CENA SKLEPU INTERNETOWEGO NETTO"]) == int:
@@ -164,8 +167,11 @@ class KartMap:
         """Scrap through all links in a list."""
 
         print("Starting scrapping Kartmap.")
+        i = 0
         for link in links:
             try:
+                i += 1
+                show_status(i, links)
                 self.scrap_link(link)
             except Error as e:
                 print(e, f"Something wrong with {link[0]}")

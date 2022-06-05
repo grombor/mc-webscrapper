@@ -8,5 +8,5 @@ class Error(Exception):
 
 
     def __str__(self):
-        return f"ERROR: Somethign went wrong with {self.message}"
+        return f"ERROR: Something went wrong with {self.message}"
 

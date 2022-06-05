@@ -102,3 +102,13 @@ links = [
   ("https://sklep.metalkas.com.pl/szafa-schowkowa-1mss-met-m.html", "1189", "SUS 312"),
 ]
 
+links = [
+  ("https://sklep.metalkas.com.pl/szafa-ubraniowa-3-msu-eco-mtd.html", "899", "SUM 420"),
+  ("https://sklep.metalkas.com.pl/szafa-ubraniowa-2-msu-eco-mtd.html", "655", "SUM 320"),
+  ("https://sklep.metalkas.com.pl/szafa-na-dokumenty-1sdb-1-eco.html", "1391", "SBM 201"),
+  ("https://sklep.metalkas.com.pl/szafa-metalowa-biurowa-tg-2sdb-eco-z-niebieskimi-drzwiami.html", "1414", "SBM 203"),
+  ("https://sklep.metalkas.com.pl/szafa-biurowa-tg-sdb-m60-n-1980x800x400-dodatkowy-cokol.html", "2025", "SBM 202"),
+  ("https://sklep.metalkas.com.pl/szafa-schowkowa-4mss-met-m.html", "1864", "SUS 322"),
+  ("https://sklep.metalkas.com.pl/szafa-schowkowa-1mss-met-m.html", "1189", "SUS 312"),
+]
+
