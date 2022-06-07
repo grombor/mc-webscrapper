@@ -9,6 +9,7 @@ records = []
 requests_timeout = 10
 
 
+
 def get_date() -> str:
     return datetime.now().strftime("%d/%m/%Y")
 
@@ -63,6 +64,7 @@ def write_to_csv_file(name='results', test=False):
 
         for row in records:
             writer.writerow(row)
+
 
 
 def wait(time=2):
