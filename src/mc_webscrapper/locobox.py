@@ -192,7 +192,7 @@ class Locobox:
         result["CZAS REALIZACJI [dni]"] = self.get_status(url, soup)
 
         # Warranty
-        result["GWARANCJA [miesiące]"] = "60 miesięcy"
+        result["GWARANCJA [miesiące]"] = "5"
 
         # Comment
         if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":

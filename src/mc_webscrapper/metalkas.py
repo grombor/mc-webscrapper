@@ -174,7 +174,7 @@ class Metalkas:
         result["CZAS REALIZACJI [dni]"] = self.get_shipping_time(url, soup)
 
         # Warranty
-        result["GWARANCJA [miesiące]"] = "2 lata"
+        result["GWARANCJA [miesiące]"] = "2"
 
         # Comment
         if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":

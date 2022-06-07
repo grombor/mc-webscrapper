@@ -160,7 +160,7 @@ class JanNowak:
         result["CZAS REALIZACJI [dni]"] = self.get_status(url, soup)
 
         # Warranty
-        result["GWARANCJA [miesiące]"] = "6 lat"
+        result["GWARANCJA [miesiące]"] = "6"
 
         # Comment
         if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":
@@ -169,6 +169,7 @@ class JanNowak:
             result["msg"] = ""
 
         return records.append(result)
+
 
     def scrap(self):
         """Scrap through all links in a list."""

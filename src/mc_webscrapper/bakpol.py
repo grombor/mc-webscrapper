@@ -47,8 +47,13 @@ class Bakpol:
             height = soup.find('table', class_='table-data-sheet').find_all('td')[1].text
             return extract_digits(height)
         except (ValueError, AttributeError) as e:
-            print(e, f", method: {self.get_height.__name__} link: {url}")
-            return ""
+            try:
+                height = soup.find('div', {'class': 'rte'}).find('ul').find_all('li')[3]
+                height = height.text.split('mm')
+                return extract_digits(height[0])
+            except (ValueError, AttributeError):
+                print(e, f", method: {self.get_height.__name__} link: {url}")
+                return ""
 
 
     def get_width(self, url, soup) -> str:
@@ -57,8 +62,13 @@ class Bakpol:
             width = soup.find('table', class_='table-data-sheet').find_all('td')[3].text
             return extract_digits(width)
         except (ValueError, AttributeError) as e:
-            print(e, f", method: {self.get_width.__name__} link: {url}")
-            return ""
+            try:
+                width = soup.find('div', {'class': 'rte'}).find('ul').find_all('li')[3]
+                width = width.text.split('mm')
+                return extract_digits(width[1])
+            except (ValueError, AttributeError):
+                print(e, f", method: {self.get_height.__name__} link: {url}")
+                return ""
 
 
     def get_depth(self, url, soup) -> str:
@@ -66,9 +76,14 @@ class Bakpol:
         try:
             depth = soup.find('table', class_='table-data-sheet').find_all('td')[5].text
             return extract_digits(depth)
-        except (ValueError, IndexError, AttributeError) as e:
-            print(e, f", method: {self.get_depth.__name__} link: {url}")
-            return ""
+        except (ValueError, AttributeError) as e:
+            try:
+                depth = soup.find('div', {'class': 'rte'}).find('ul').find_all('li')[3]
+                depth = depth.text.split('mm')
+                return extract_digits(depth[2])
+            except (ValueError, AttributeError):
+                print(e, f", method: {self.get_height.__name__} link: {url}")
+                return ""
 
 
     def get_description(self, url, soup) -> str:
@@ -151,7 +166,7 @@ class Bakpol:
         result["CZAS REALIZACJI [dni]"] = self.get_status(url, soup)
 
         # Warranty
-        result["GWARANCJA [miesiące]"] = "2 lata"
+        result["GWARANCJA [miesiące]"] = "2"
 
         # Comment
         if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":
