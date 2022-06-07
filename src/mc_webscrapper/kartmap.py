@@ -24,7 +24,7 @@ class KartMap:
 
         try:
             return soup.find('h1', {'class': 'product_title entry-title'}).text
-        except ValueError as e:
+        except (AttributeError, ValueError) as e:
             print(e, f", method: {self.get_model.__name__} link: {url}")
             return ""
 
@@ -48,7 +48,7 @@ class KartMap:
         try:
             height = soup.find_all('td', {'width': '302'})[1].text
             return extract_digits(height)
-        except (ValueError, IndexError) as e:
+        except (ValueError, IndexError, AttributeError) as e:
             print(e)
             return f""
 
@@ -58,7 +58,7 @@ class KartMap:
         try:
             szerokosc = soup.find_all('td', {'width': '302'})[3].string
             return extract_digits(szerokosc)
-        except (ValueError, IndexError) as e:
+        except (ValueError, IndexError, AttributeError) as e:
             print(e)
             return f""
 
@@ -68,7 +68,7 @@ class KartMap:
         try:
             depth = soup.find_all('td', {'width': '302'})[5].text
             return extract_digits(depth)
-        except (ValueError, IndexError) as e:
+        except (ValueError, IndexError, AttributeError) as e:
             print(e)
             return f""
 
@@ -84,7 +84,12 @@ class KartMap:
 
     def get_status(self, url, soup):
         """ Get shipping status. """
-        return soup.find('p', {"style":"text-align: center;"}).text
+        try:
+            return soup.find('p', {"style":"text-align: center;"}).text
+        except (IndexError, AttributeError) as e:
+            print(url)
+            return f""
+
 
 
     def get_comment(self, previous_price, nett) -> str:
@@ -94,8 +99,7 @@ class KartMap:
                 return ""
             else:
                 return compare_prices(nett, previous_price)
-            raise Error(f"Something wrong with comment in {url}.")
-        except Error as ve:
+        except AttributeError as ve:
             print(ve)
             return f""
 

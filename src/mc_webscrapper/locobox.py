@@ -23,7 +23,7 @@ class Locobox:
         """ Get product model. """
         try:
             return soup.find('h1', {'class': 'name'}).string.strip()
-        except ValueError as e:
+        except (AttributeError, ValueError) as e:
             print(e, f", method: {self.get_model.__name__} link: {url}")
             return ""
 
@@ -51,14 +51,14 @@ class Locobox:
                 temp = soup.find('div', {'itemprop': 'description'}).contents[4].text.split(": ")[1]
                 height = str(temp)[:3]+"0"
                 return height
-            except IndexError:
+            except (AttributeError, IndexError):
                 try:
                     temp = soup.find('div', {'itemprop': 'description'}).contents[6].text.split(": ")[1]
                     height = str(temp)[:3]+"0"
                     return (height)
-                except IndexError:
+                except (AttributeError, ValueError, IndexError):
                     return ""
-        except ValueError as e:
+        except (AttributeError, ValueError) as e:
             print(e, f", method: {self.get_height.__name__} link: {url}")
             return ""
 
@@ -74,9 +74,9 @@ class Locobox:
                 temp = soup.find('div', {'itemprop': 'description'}).contents[4].text.split(": ")[1][4:7]
                 width = str(temp)+"0"
                 return extract_digits(width)
-            except IndexError:
+            except (AttributeError, IndexError):
                 return ""
-        except ValueError as e:
+        except (AttributeError, ValueError) as e:
             print(e, f", method: {self.get_height.__name__} link: {url}")
             return ""
 
@@ -90,9 +90,9 @@ class Locobox:
             try:
                 depth = soup.find('div', {'itemprop': 'description'}).contents[4].text.split(": ")[1][7:12]
                 return extract_digits(depth)
-            except IndexError:
+            except (AttributeError, IndexError):
                 return ""
-        except ValueError as e:
+        except (AttributeError, ValueError) as e:
             print(e, f", method: {self.get_height.__name__} link: {url}")
             return ""
 
@@ -101,20 +101,29 @@ class Locobox:
         """ Get product description. """
         try:
             return soup.find('div', {"itemprop": 'description', "class": "resetcss"}).text
-        except (ValueError, IndexError) as e:
-            print(e, f", method: {self.get_height.__name__} link: {url}")
-            return soup.find('div', {"class": 'resetcss', "itemprop": "description"}).findChildren("p")[2]
+        except (AttributeError, ValueError, IndexError) as e:
+            try:
+                print(e, f", method: {self.get_height.__name__} link: {url}")
+                return soup.find('div', {"class": 'resetcss', "itemprop": "description"}).findChildren("p")[2]
+            except (AttributeError, ValueError) as e:
+                print(e, f", method: {self.get_height.__name__} link: {url}")
+                return ""
 
 
     def get_status(self, url, soup):
         """ Get shipping status. """
-        t_ship = str(soup.find('span', {'class': 'second'}).string)
-        if t_ship == '48 - 72 H':
-            index = t_ship.find("- ")
-            czas_realizacji = str(int(t_ship[index + 2:-2]) / 24).split('.')[0]
-        if t_ship == '3-4 tygodnie':
-            czas_realizacji = t_ship.split('-')[1]
-        return czas_realizacji
+        try:
+            czas_realizacji = ''
+            t_ship = str(soup.find('span', {'class': 'second'}).string)
+            if t_ship == '48 - 72 H':
+                index = t_ship.find("- ")
+                czas_realizacji = str(int(t_ship[index + 2:-2]) / 24).split('.')[0]
+            if t_ship == '3-4 tygodnie':
+                czas_realizacji = t_ship.split('-')[1]
+            return czas_realizacji
+        except (AttributeError, ValueError) as e:
+            print(e, f", method: {self.get_height.__name__} link: {url}")
+            return ""
 
     def get_comment(self, previous_price, nett) -> str:
         """ Create product comment. """

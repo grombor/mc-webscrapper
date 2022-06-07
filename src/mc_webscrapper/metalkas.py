@@ -54,7 +54,7 @@ class Metalkas:
         try:
             height = soup.find('td', {'data-th': 'Wysokość zewnętrzna [mm]'}).text
             return extract_digits(height)
-        except (ValueError) as e:
+        except (AttributeError, ValueError) as e:
             print(e, f", method: {self.get_height.__name__} link: {url}")
             return ""
 
@@ -64,7 +64,7 @@ class Metalkas:
         try:
             width = soup.find('td', {'data-th': 'Szerokość zewnętrzna [mm]'}).text
             return extract_digits(width)
-        except (ValueError) as e:
+        except (AttributeError, ValueError) as e:
             print(e, f", method: {self.get_width.__name__} link: {url}")
             return ""
 
@@ -74,7 +74,7 @@ class Metalkas:
         try:
             depth = soup.find('td', {'data-th': 'Głębokość zewnętrzna'}).text
             return extract_digits(depth)
-        except (ValueError, IndexError) as e:
+        except (AttributeError, ValueError, IndexError) as e:
             print(e, f", method: {self.get_depth.__name__} link: {url}")
             return ""
 
@@ -92,9 +92,9 @@ class Metalkas:
                     temp.append(cecha.text)
                 cechy_charakterystyczne = ' '.join(temp)
                 return cechy_charakterystyczne
-            except IndexError:
+            except (AttributeError, IndexError):
                 return soup.find('div', {"class": 'resetcss', "itemprop": "description"}).findChildren("p")[2]
-        except ValueError as e:
+        except (AttributeError, ValueError) as e:
             print(e, f", method: {self.get_description.__name__} link: {url}")
             return ""
 
@@ -103,7 +103,7 @@ class Metalkas:
         """ Get product shipping time. """
         try:
             return soup.find('td', {'data-th': 'Czas realizacji'}).text
-        except (ValueError, IndexError) as e:
+        except (AttributeError, ValueError, IndexError) as e:
             print(e, f", method: {self.get_depth.__name__} link: {url}")
             return ""
 

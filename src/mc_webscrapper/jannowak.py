@@ -39,7 +39,7 @@ class JanNowak:
             brutto = soup.find('div', {"class": "pricing"}).find('p', {"class": "current-price js-price"}).string.replace(" ", "").split(",")[0]
             brutto = extract_digits(brutto)
             return int(int(brutto)/1.23)
-        except Error as e:
+        except AttributeError as e:
             print(e, f", method: {self.get_price.__name__} link: {url}")
             return ""
 
@@ -81,7 +81,7 @@ class JanNowak:
         """ Get product description. """
         try:
             return soup.find(class_="product-desc").text[1:]
-        except (ValueError, IndexError) as e:
+        except (ValueError, IndexError, AttributeError) as e:
             print(e, f", method: {self.get_description.__name__} link: {url}")
             return ""
 
@@ -90,7 +90,7 @@ class JanNowak:
         """ Get shipping status. """
         try:
             return soup.find("p", class_="status").text
-        except (ValueError, IndexError) as e:
+        except (ValueError, IndexError, AttributeError) as e:
             print(e, f", method: {self.get_description.__name__} link: {url}")
             return ""
 

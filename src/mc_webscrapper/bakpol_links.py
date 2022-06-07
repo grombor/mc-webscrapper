@@ -705,105 +705,195 @@ links = [
 
 links = [
     ("https://bakpol.pl/szafy-na-kartoteki/797-ska4-2-szafa-kartotekowa.html", "1104", "SZK 101"),
-    ("https://bakpol.pl/szafy-na-kartoteki/798-ska4-3-szafa-kartotekowa.html", "1368", "SZK 201"),
-    ("https://bakpol.pl/szafy-na-kartoteki/799-ska4-4-szafa-kartotekowa.html", "1632", "SZK 301"),
-    ("https://bakpol.pl/szafy-na-kartoteki/2215-ska54xv-szafa-kartotekowa.html", "2532", "SZK 305"),
-    ("https://bakpol.pl/szafy-na-kartoteki/2216-ska44x-szafa-kartotekowa.html", "2268", "SZK 302"),
-    ("https://bakpol.pl/szafy-zaluzjowe/2203-sz10005-szafa-zaluzjowa.html", "2688", "SBM 208"),
-    ("https://bakpol.pl/szafy-zaluzjowe/2204-sz12006-szafa-zaluzjowa.html", "2952", "SBM 217"),
-    ("https://bakpol.pl/szafy-zaluzjowe/2206-kz10005-szafa-zaluzjowa.html", "2004", "SBM 105"),
-    ("https://bakpol.pl/szafy-zaluzjowe/2207-kz12006-szafa-zaluzjowa.html", "2184", "SBM 109"),
-    ("https://bakpol.pl/szafy-zaluzjowe/2209-nsz10005-szafa-zaluzjowa.html", "1416", "SBM 404"),
-    ("https://bakpol.pl/szafy-zaluzjowe/2210-nsz12006-szafa-zaluzjowa.html", "1512", "SBM 406"),
-    ("https://bakpol.pl/szafy-przesuwne-wysokie/670-sp1000-4-szafa-przesuwna.html", "2520", "SBM 222"),
-    ("https://bakpol.pl/szafy-przesuwne-wysokie/675-sp1200-4-szafa-przesuwna.html", "2652", "SBM 220"),
-    ("https://bakpol.pl/szafy-przesuwne-niskie/680-kp1000-4-szafa-przesuwna-niska.html", "1884", "SBM 112"),
-    ("https://bakpol.pl/szafy-przesuwne-niskie/682-kp1200-4-szafa-przesuwna.html", "1968", "SBM 110"),
-    ("https://bakpol.pl/szafy-biurowe-wysokie/689-sb600-6-szafa-biurowa.html", "1476", "SBM 201"),
-    ("https://bakpol.pl/szafy-biurowe-wysokie/692-sb800-4-szafa-biurowa.html", "1668", "SBM 202"),
-    ("https://bakpol.pl/szafy-biurowe-wysokie/694-sb800-6-szafa-biurowa.html", "1836", "SBM 202"),
-    ("https://bakpol.pl/szafy-biurowe-wysokie/698-sb1000-4-szafa-biurowa.html", "1788", "SBM 203"),
-    ("https://bakpol.pl/szafy-biurowe-wysokie/700-sb1200-4-szafa-biurowa.html", "1968", "SBM 212"),
-    ("https://bakpol.pl/szafy-biurowe-rozne/756-sr600-4-regal-biurowy.html", "1128", "RZ 201"),
-    ("https://bakpol.pl/szafy-biurowe-rozne/757-sr800-4-regal-biurowy.html", "1212", "RZ 202"),
-    ("https://bakpol.pl/szafy-biurowe-wysokie/2276-sb10005sk-sk20.html", "2148", "SBM 204"),
-    ("https://bakpol.pl/szafy-biurowe-niskie/704-kb500-4-szafa-biurowa.html", "900", "SBM 101"),
-    ("https://bakpol.pl/szafy-biurowe-niskie/707-kb800-4-szafa-biurowa.html", "1140", "SBM 102"),
-    ("https://bakpol.pl/szafy-biurowe-niskie/710-kb1000-4-szafa-biurowa.html", "1212", "SBM 103"),
-    ("https://bakpol.pl/szafy-biurowe-niskie/714-kb1200-4-szafa-biurowa.html", "1296", "SBM 107"),
-    ("https://bakpol.pl/szafy-biurowe-rozne/752-sb1000-5-s-b-szafa-ubraniowa.html", "2352", "SBM 206"),
-    ("https://bakpol.pl/tablice-na-narzedzia/1461-tfr600k-wolnostojaca-tablica-na-narzedzia-z-polka.html", "1044", "Wózek WW"),
-    ("https://bakpol.pl/stanowiska-komputerowe/1414-swk00c-stanowisko-komputerowe.html", "3060", "SMK 2"),
-    ("https://bakpol.pl/wozki-narzedziowe/1332-wn09a-aa-wozek-narzedziowy.html", "1716", "WWT 75D"),
-    ("https://bakpol.pl/wozki-narzedziowe/1343-wn09a-2xe-wozek-narzedziowy.html", "2232", "WWT 75B"),
-    ("https://bakpol.pl/szafy-do-serwerowni/1856-skn1000-5-szafa-na-serwery.html", "1584", "Szafa serwerowa SBM 203M lx"),
-    ("https://bakpol.pl/regaly-ocynkowane/2222-rms10005.html", "576", "RMM 301"),
-    ("https://bakpol.pl/regaly-ocynkowane/2225-rmsw10005n-regal-metalowy-ocynkowany.html", "360", "RMM 302"),
-    ("https://bakpol.pl/szafy-ubraniowe-na-nogach/338-ln400-22-szafa-ubraniowa.html", "1632", "SUL 421"),
-    ("https://bakpol.pl/szafy-ubraniowe-na-cokole/245-su300-2-szafa-ubraniowa.html", "972", "SUM 320"),
-    ("https://bakpol.pl/szafy-ubraniowe-z-drzwiami-z-mdf/241-msu300-2-szafa-z-drzwiami-mdf.html", "1992", "MSUM 320 MDF"),
-    ("https://bakpol.pl/wolnostojace/1660-lw1500a-lawka.html", "612", "ŁSZ 3a"),
-    ("https://bakpol.pl/wolnostojace/1662-lw1000b-lawka.html", "1032", "ŁSZ 1"),
-    ("https://bakpol.pl/wolnostojace/1659-lw1000a-lawka.html", "1032", "ŁSZ 3"),
-    ("https://bakpol.pl/wolnostojace/1663-lw1500b-lawka.html", "1032", "ŁSZ 1a"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/511-ss300-25-szafa-skrytkowa.html", "1764", "SUS 325"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/503-ss300-12-szafa-skrytkowa.html", "864", "SUS 312"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/504-ss300-13-szafa-skrytkowa.html", "936", "SUS 313"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/505-ss300-14-szafa-skrytkowa.html", "1008", "SUS 314"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/508-ss300-22-szafa-skrytkowa.html", "1428", "SUS 322"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/509-ss300-23-szafa-skrytkowa.html", "1560", "SUS 323"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/510-ss300-24-szafa-skrytkowa.html", "1656", "SUS 324"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/512-ss300-26-szafa-skrytkowa.html", "1872", "SUS 325"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/513-ss300-32-szafa-skrytkowa.html", "2040", "SUS 332"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/514-ss300-33-szafa-skrytkowa.html", "2172", "SUS 333"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/515-ss300-34-szafa-skrytkowa.html", "2304", "SUS 334"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/516-ss300-35-szafa-skrytkowa.html", "2436", "SUS 335"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/517-ss300-36-szafa-skrytkowa.html", "2580", "SUS 336"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/518-ss300-42-szafa-skrytkowa.html", "2628", "SUS 342"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/519-ss300-43-szafa-skrytkowa.html", "2784", "SUS 343"),
-    ("https://bakpol.pl/szerokosc-skrytki-300-mm/520-ss300-44-szafa-skrytkowa.html", "2952", "SUS 344"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/521-ss300-45-szafa-skrytkowa.html", "3108", "SUS 345"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/522-ss300-46-szafa-skrytkowa.html", "3276", "SUS 346"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/536-ss400-15-szafa-skrytkowa.html", "1200", "SUS 415"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/537-ss350-35-szafa-skrytkowa.html", "2592", "SUS 435"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/538-ss400-24-szafa-skrytkowa.html", "1936", "SUS 424"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/539-ss400-16-szafa-skrytkowa.html", "1296", "SUS 416"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/540-ss400-25-szafa-skrytkowa.html", "1956", "SUS 425"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/541-ss400-26-szafa-skrytkowa.html", "2064", "SUS 426"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/542-ss400-34-szafa-skrytkowa.html", "2544", "SUS 434"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/543-ss400-35-szafa-skrytkowa.html", "2700", "SUS 435"),
-    ("https://bakpol.pl/szafy-szkolne-skrytkowe/544-ss400-36-szafa-skrytkowa.html", "2844", "SUS 436"),
-    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1604-ss400-12-szafa-skrytkowa.html", "960", "MSUS 412S"),
-    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1605-ss400-13-szafa-skrytkowa.html", "1044", "SUS 413"),
-    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1606-ss400-14-szafa-skrytkowa.html", "1128", "SUS 414"),
-    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1609-ss400-22-szafa-skrytkowa.html", "1584", "SUS 422"),
-    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1610-ss400-23-szafa-skrytkowa.html", "1716", "SUS 423"),
-    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1614-ss400-32-szafa-skrytkowa.html", "2244", "SUS 432"),
-    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1615-ss400-33-szafa-skrytkowa.html", "2400", "SUS 433"),
-    ("https://bakpol.pl/szafy-gospodarcze-i-na-odziez-brudna/1468-su-g300-2-szafa-gospodarcza.html", "1080", "MSU 61"),
-    ("https://bakpol.pl/szafy-gospodarcze-i-na-odziez-brudna/1470-su-g400-2-szafa-gospodarcza.html", "1404", "MSU 81"),
-    ("https://bakpol.pl/szafy-gospodarcze-i-na-odziez-brudna/1471-su-g600-1-szafa-socjalna.html", "1080", "MSU 61"),
-    ("https://bakpol.pl/szafy-gospodarcze-i-na-odziez-brudna/2107-sgos8005-szafa-gospodarcza.html", "1752", "MSU 81"),
-    ("https://bakpol.pl/szafy-szerokosci-400/2392-strn4001.html", "876", "SUS 41"),
-    ("https://bakpol.pl/szafy-szerokosci-400/2399-strn4002.html", "1296", "SUS 42"),
-    ("https://bakpol.pl/szafy-szerokosci-400/2450-strn4001h.html", "876", "SUS 41"),
-    ("https://bakpol.pl/szafy-szerokosci-400/2451-strn4002h.html", "1296", "SUS 42"),
-    ("https://bakpol.pl/wozki-narzedziowe/1347-wn09a-ah-wozek-warsztatowy.html", "2508", "SZWN 251"),
-    ("https://bakpol.pl/wozki-narzedziowe/1356-wn09a-ih-wozek-warsztatowy.html", "2508", "SZWN 252"),
-    ("https://bakpol.pl/szafy-typ-l/11-l300-12-szafa-ubraniowa.html", "948", "SUL 31"),
-    ("https://bakpol.pl/szafy-typ-l/12-l300-22-szafa-ubraniowa.html", "1416", "SUL 32"),
-    ("https://bakpol.pl/szafy-typ-l/13-l300-32-szafa-ubraniowa.html", "1944", "SUL 33"),
-    ("https://bakpol.pl/szafy-typ-l/14-l300-42-szafa-ubraniowa.html", "2424", "SUL 34"),
-    ("https://bakpol.pl/szafy-ubraniowe-na-nogach/338-ln400-22-szafa-ubraniowa.html", "1632", "SUL 42"),
-    ("https://bakpol.pl/szafy-l/318-l400-12-szafa-ubraniowa.html", "996", "SUL 41"),
-    ("https://bakpol.pl/szafy-typ-l/319-l400-22-szafa-ubraniowa.html", "1524", "SUL 42"),
-    ("https://bakpol.pl/szafy-typ-l/320-l400-32-szafa-ubraniowa.html", "2112", "SUL 43"),
-    ]
 
-links = [
+    ("https://bakpol.pl/szafy-na-kartoteki/798-ska4-3-szafa-kartotekowa.html", "1368", "SZK 201"),
+
+    ("https://bakpol.pl/szafy-na-kartoteki/799-ska4-4-szafa-kartotekowa.html", "1632", "SZK 301"),
+
+    ("https://bakpol.pl/szafy-na-kartoteki/2215-ska54xv-szafa-kartotekowa.html", "2532", "SZK 305"),
+
+    ("https://bakpol.pl/szafy-na-kartoteki/2216-ska44x-szafa-kartotekowa.html", "2268", "SZK 302"),
+
+    ("https://bakpol.pl/szafy-zaluzjowe/2203-sz10005-szafa-zaluzjowa.html", "2688", "SBM 208"),
+
+    ("https://bakpol.pl/szafy-zaluzjowe/2204-sz12006-szafa-zaluzjowa.html", "2952", "SBM 217"),
+
+    ("https://bakpol.pl/szafy-zaluzjowe/2206-kz10005-szafa-zaluzjowa.html", "2004", "SBM 105"),
+
+    ("https://bakpol.pl/szafy-zaluzjowe/2207-kz12006-szafa-zaluzjowa.html", "2184", "SBM 109"),
+
+    ("https://bakpol.pl/szafy-zaluzjowe/2209-nsz10005-szafa-zaluzjowa.html", "1416", "SBM 404"),
+
+    ("https://bakpol.pl/szafy-zaluzjowe/2210-nsz12006-szafa-zaluzjowa.html", "1512", "SBM 406"),
+
+    ("https://bakpol.pl/szafy-przesuwne-wysokie/670-sp1000-4-szafa-przesuwna.html", "2520", "SBM 222"),
+
+    ("https://bakpol.pl/szafy-przesuwne-wysokie/675-sp1200-4-szafa-przesuwna.html", "2652", "SBM 220"),
+
+    ("https://bakpol.pl/szafy-przesuwne-niskie/680-kp1000-4-szafa-przesuwna-niska.html", "1884", "SBM 112"),
+
+    ("https://bakpol.pl/szafy-przesuwne-niskie/682-kp1200-4-szafa-przesuwna.html", "1968", "SBM 110"),
+
+    ("https://bakpol.pl/szafy-biurowe-wysokie/689-sb600-6-szafa-biurowa.html", "1476", "SBM 201"),
+
+    ("https://bakpol.pl/szafy-biurowe-wysokie/692-sb800-4-szafa-biurowa.html", "1668", "SBM 202"),
+
+    ("https://bakpol.pl/szafy-biurowe-wysokie/694-sb800-6-szafa-biurowa.html", "1836", "SBM 202"),
+
+    ("https://bakpol.pl/szafy-biurowe-wysokie/698-sb1000-4-szafa-biurowa.html", "1788", "SBM 203"),
+
+    ("https://bakpol.pl/szafy-biurowe-wysokie/700-sb1200-4-szafa-biurowa.html", "1968", "SBM 212"),
+
+    ("https://bakpol.pl/szafy-biurowe-rozne/756-sr600-4-regal-biurowy.html", "1128", "RZ 201"),
+
+    ("https://bakpol.pl/szafy-biurowe-rozne/757-sr800-4-regal-biurowy.html", "1212", "RZ 202"),
+
+    ("https://bakpol.pl/szafy-biurowe-wysokie/2276-sb10005sk-sk20.html", "2148", "SBM 204"),
+
+    ("https://bakpol.pl/szafy-biurowe-niskie/704-kb500-4-szafa-biurowa.html", "900", "SBM 101"),
+
+    ("https://bakpol.pl/szafy-biurowe-niskie/707-kb800-4-szafa-biurowa.html", "1140", "SBM 102"),
+
+    ("https://bakpol.pl/szafy-biurowe-niskie/710-kb1000-4-szafa-biurowa.html", "1212", "SBM 103"),
+
+    ("https://bakpol.pl/szafy-biurowe-niskie/714-kb1200-4-szafa-biurowa.html", "1296", "SBM 107"),
+
+    ("https://bakpol.pl/szafy-biurowe-rozne/752-sb1000-5-s-b-szafa-ubraniowa.html", "2352", "SBM 206"),
+
+    ("https://bakpol.pl/szafy-biurowe-rozne/756-sr600-4-regal-biurowy.html", "1128", "RZ 201"),
+
+    ("https://bakpol.pl/szafy-biurowe-rozne/757-sr800-4-regal-biurowy.html", "1212", "RZ 202"),
+
+    ("https://bakpol.pl/szafy-biurowe-rozne/758-sr1000-4-regal-biurowy.html", "1308", "RZ 203"),
+
+    ("https://bakpol.pl/tablice-na-narzedzia/1461-tfr600k-wolnostojaca-tablica-na-narzedzia-z-polka.html", "",
+     "Wózek WW"),
+
+    ("https://bakpol.pl/stanowiska-komputerowe/1414-swk00c-stanowisko-komputerowe.html", "", "SMK 2"),
+
+    ("https://bakpol.pl/wozki-narzedziowe/1332-wn09a-aa-wozek-narzedziowy.html", "1716", "WWT 75D"),
+
+    ("https://bakpol.pl/wozki-narzedziowe/1343-wn09a-2xe-wozek-narzedziowy.html", "2232", "WWT 75B"),
+
+    ("https://bakpol.pl/szafy-do-serwerowni/1856-skn1000-5-szafa-na-serwery.html", "1584",
+     "Szafa serwerowa SBM 203M lx"),
+
+    ("https://bakpol.pl/regaly-ocynkowane/2225-rmsw10005n-regal-metalowy-ocynkowany.html", "360", "RMM 302"),
+
+    ("https://bakpol.pl/szafy-typ-l/11-l300-12-szafa-ubraniowa.html", "948", "SUL 31"),
+
+    ("https://bakpol.pl/szafy-typ-l/12-l300-22-szafa-ubraniowa.html", "1416", "SUL 32"),
+
+    ("https://bakpol.pl/szafy-typ-l/13-l300-32-szafa-ubraniowa.html", "1944", "SUL 33"),
+
     ("https://bakpol.pl/szafy-typ-l/14-l300-42-szafa-ubraniowa.html", "2424", "SUL 34"),
+
     ("https://bakpol.pl/szafy-ubraniowe-na-nogach/338-ln400-22-szafa-ubraniowa.html", "1632", "SUL 42"),
+
     ("https://bakpol.pl/szafy-l/318-l400-12-szafa-ubraniowa.html", "996", "SUL 41"),
+
+    ("https://bakpol.pl/szafy-ubraniowe-na-cokole/245-su300-2-szafa-ubraniowa.html", "972", "SUM 320"),
+
     ("https://bakpol.pl/szafy-typ-l/319-l400-22-szafa-ubraniowa.html", "1524", "SUL 42"),
+
     ("https://bakpol.pl/szafy-typ-l/320-l400-32-szafa-ubraniowa.html", "2112", "SUL 43"),
+
+    ("https://bakpol.pl/wolnostojace/1660-lw1500a-lawka.html", "612", "ŁSZ 3a"),
+
+    ("https://bakpol.pl/wolnostojace/1662-lw1000b-lawka.html", "1032", "ŁSZ 1"),
+
+    ("https://bakpol.pl/wolnostojace/1659-lw1000a-lawka.html", "1032", "ŁSZ 3"),
+
+    ("https://bakpol.pl/wolnostojace/1663-lw1500b-lawka.html", "1032", "ŁSZ 1a"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/511-ss300-25-szafa-skrytkowa.html", "1764", "SUS 325"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/503-ss300-12-szafa-skrytkowa.html", "864", "SUS 312"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/504-ss300-13-szafa-skrytkowa.html", "936", "SUS 313"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/505-ss300-14-szafa-skrytkowa.html", "1008", "SUS 314"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/508-ss300-22-szafa-skrytkowa.html", "1428", "SUS 322"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/509-ss300-23-szafa-skrytkowa.html", "1560", "SUS 323"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/510-ss300-24-szafa-skrytkowa.html", "1656", "SUS 324"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/512-ss300-26-szafa-skrytkowa.html", "1872", "SUS 325"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/513-ss300-32-szafa-skrytkowa.html", "2040", "SUS 332"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/514-ss300-33-szafa-skrytkowa.html", "2172", "SUS 333"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/515-ss300-34-szafa-skrytkowa.html", "2304", "SUS 334"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/516-ss300-35-szafa-skrytkowa.html", "2436", "SUS 335"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/517-ss300-36-szafa-skrytkowa.html", "2580", "SUS 336"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/518-ss300-42-szafa-skrytkowa.html", "2628", "SUS 342"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/519-ss300-43-szafa-skrytkowa.html", "2784", "SUS 343"),
+
+    ("https://bakpol.pl/szerokosc-skrytki-300-mm/520-ss300-44-szafa-skrytkowa.html", "2952", "SUS 344"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/521-ss300-45-szafa-skrytkowa.html", "3108", "SUS 345"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/522-ss300-46-szafa-skrytkowa.html", "3276", "SUS 346"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/536-ss400-15-szafa-skrytkowa.html", "1200", "SUS 415"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/537-ss350-35-szafa-skrytkowa.html", "2592", "SUS 435"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/538-ss400-24-szafa-skrytkowa.html", "1936", "SUS 424"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/539-ss400-16-szafa-skrytkowa.html", "1296", "SUS 416"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/540-ss400-25-szafa-skrytkowa.html", "1956", "SUS 425"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/541-ss400-26-szafa-skrytkowa.html", "2064", "SUS 426"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/542-ss400-34-szafa-skrytkowa.html", "2544", "SUS 434"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/543-ss400-35-szafa-skrytkowa.html", "2700", "SUS 435"),
+
+    ("https://bakpol.pl/szafy-szkolne-skrytkowe/544-ss400-36-szafa-skrytkowa.html", "2844", "SUS 436"),
+
+    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1604-ss400-12-szafa-skrytkowa.html", "960", "MSUS 412S"),
+
+    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1605-ss400-13-szafa-skrytkowa.html", "1044", "SUS 413"),
+
+    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1606-ss400-14-szafa-skrytkowa.html", "1128", "SUS 414"),
+
+    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1609-ss400-22-szafa-skrytkowa.html", "1584", "SUS 422"),
+
+    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1610-ss400-23-szafa-skrytkowa.html", "1716", "SUS 423"),
+
+    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1614-ss400-32-szafa-skrytkowa.html", "2244", "SUS 432"),
+
+    ("https://bakpol.pl/szerokosc-skrytki-400-mm/1615-ss400-33-szafa-skrytkowa.html", "2400", "SUS 433"),
+
+    ("https://bakpol.pl/szafy-gospodarcze-i-na-odziez-brudna/1468-su-g300-2-szafa-gospodarcza.html", "1080", "MSU 61"),
+
+    ("https://bakpol.pl/szafy-gospodarcze-i-na-odziez-brudna/1469-su-w400-1-szafa-na-odziez-brudna.html", "1056",
+     "MKB 5E"),
+
+    ("https://bakpol.pl/szafy-gospodarcze-i-na-odziez-brudna/1470-su-g400-2-szafa-gospodarcza.html", "1404", "MSU 81"),
+
+    ("https://bakpol.pl/szafy-gospodarcze-i-na-odziez-brudna/1471-su-g600-1-szafa-socjalna.html", "1080", "MSU 61"),
+
+    ("https://bakpol.pl/szafy-gospodarcze-i-na-odziez-brudna/2107-sgos8005-szafa-gospodarcza.html", "1752", "MSU 81"),
+
+    ("https://bakpol.pl/szafy-szerokosci-400/2392-strn4001.html", "876", "SUS 41"),
+
+    ("https://bakpol.pl/szafy-szerokosci-400/2399-strn4002.html", "1296", "SUS 42"),
+
+    ("https://bakpol.pl/szafy-szerokosci-400/2450-strn4001h.html", "876", "SUS 41"),
+
+    ("https://bakpol.pl/szafy-szerokosci-400/2451-strn4002h.html", "1296", "SUS 42"),
+
+    ("https://bakpol.pl/wozki-narzedziowe/1347-wn09a-ah-wozek-warsztatowy.html", "2508", "SZWN 251"),
+
+    ("https://bakpol.pl/wozki-narzedziowe/1356-wn09a-ih-wozek-warsztatowy.html", "2508", "SZWN 252"),
 ]

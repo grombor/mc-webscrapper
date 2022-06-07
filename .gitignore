@@ -74,5 +74,8 @@ __pypackages__/
 # My files
 *test*.txt
 *results*.txt
+*_log*.txt
+*.log
+*.csv
 
 # End of https://www.toptal.com/developers/gitignore/api/pythonvanilla

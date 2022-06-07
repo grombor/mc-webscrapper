@@ -31,12 +31,12 @@ def show_status(item, set):
 
 
 
-def write_to_csv_file(test=False):
+def write_to_csv_file(name='results', test=False):
 
     if test:
-        file_name = 'test_results.csv'
+        file_name = f"test_{name}.csv"
     else:
-        file_name = 'results.csv'
+        file_name = f"{name}.csv"
 
     with open(file_name, 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = [

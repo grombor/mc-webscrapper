@@ -46,7 +46,7 @@ class Bakpol:
         try:
             height = soup.find('table', class_='table-data-sheet').find_all('td')[1].text
             return extract_digits(height)
-        except (ValueError) as e:
+        except (ValueError, AttributeError) as e:
             print(e, f", method: {self.get_height.__name__} link: {url}")
             return ""
 
@@ -56,7 +56,7 @@ class Bakpol:
         try:
             width = soup.find('table', class_='table-data-sheet').find_all('td')[3].text
             return extract_digits(width)
-        except (ValueError) as e:
+        except (ValueError, AttributeError) as e:
             print(e, f", method: {self.get_width.__name__} link: {url}")
             return ""
 
@@ -66,7 +66,7 @@ class Bakpol:
         try:
             depth = soup.find('table', class_='table-data-sheet').find_all('td')[5].text
             return extract_digits(depth)
-        except (ValueError, IndexError) as e:
+        except (ValueError, IndexError, AttributeError) as e:
             print(e, f", method: {self.get_depth.__name__} link: {url}")
             return ""
 

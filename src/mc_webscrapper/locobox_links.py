@@ -480,9 +480,335 @@ links = [
 
 links = [
   ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O120200-RODO/547", "1212", "SBM 212"),
+
   ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O100200-czarna-znakowana-RODO/910", "1458", "SBM 203"),
+
   ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O100200-RODO/546", "905", "SBM 203"),
+
   ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O80200-RODO/545", "855", "SBM 202"),
+
   ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O60200-RODO/544", "936", "SBM 201"),
+
   ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O120104/551", "935", "SBM 107"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O100104-RODO/550", "798", "SBM 103"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O80104/549", "711", "SBM 102"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O60104/548", "663", "SBM 101"),
+
+  ("https://locobox.pl/pl/p/Nadstawka-do-szafy-aktowej-PROFI-ON12081/559", "733", "SBM 804"),
+
+  ("https://locobox.pl/pl/p/Nadstawka-do-szafy-aktowej-PROFI-ON10081/558", "661", "SBM 803"),
+
+  ("https://locobox.pl/pl/p/Nadstawka-do-szafy-aktowej-PROFI-ON8081/557", "603", "SBM 802"),
+
+  ("https://locobox.pl/pl/p/Nadstawka-do-szafy-aktowej-PROFI-ON6081/556", "496", "SBM 801"),
+
+  ("https://locobox.pl/pl/p/Nadstawka-do-szafy-aktowej-PROFI-ON12046/555", "563", "SBM 405"),
+
+  ("https://locobox.pl/pl/p/Nadstawka-do-szafy-aktowej-PROFI-ON10046/554", "529", "SBM 403"),
+
+  ("https://locobox.pl/pl/p/Nadstawka-do-szafy-aktowej-PROFI-ON8046/553", "500", "SBM 402"),
+
+  ("https://locobox.pl/pl/p/Nadstawka-do-szafy-aktowej-PROFI-ON6046/552", "473", "SBM 401"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O100200-ze-skarbczykiem/569", "1270", "SBM 204"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-O120200-ze-skarbczykiem/570", "1472", "SBM 213"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowo-ubraniowa-PROFI-O120200u/572", "1416", "SBM 215"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowo-ubraniowa-PROFI-O100200u/571", "1196", "SBM 206"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-OS100200/573", "1937", "SBM 210"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-OS100200-ze-skarbczykiem/574", "2158", "SBM 211"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-OP140200/565", "2623", "SBM 221"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-OP120200/563", "2428", "SBM 220"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-OP100200/562", "2282", "SBM 222"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-OP140104/568", "1592", "SBM 111"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-OP120104/567", "1506", "SBM 110"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-OP100104/566", "1475", "SBM 112"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-ZL100200/575", "1945", "SBM 208"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-ZL120200/584", "2191", "SBM 217"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowo-ubraniowa-PROFI-ZL100200u/576", "2216", "SBM 218"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowo-ubraniowa-PROFI-ZL120200u/577", "2478", "SBM 219"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-ZL100104/578", "1332", "SBM 105"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowa-PROFI-ZL120104/580", "1501", "SBM 109"),
+
+  ("https://locobox.pl/pl/p/Nadstawka-do-szafy-aktowej-PROFI-ZLN10046/581", "951", "SBM 404"),
+
+  ("https://locobox.pl/pl/p/Nadstawka-do-szafy-aktowej-PROFI-ZLN12046/583", "1098", "SBM 406"),
+
+  ("https://locobox.pl/pl/p/Szafa-otwarta-PROFI-OR-60200/1009", "797", "RZ 201"),
+
+  ("https://locobox.pl/pl/p/Szafa-otwarta-PROFI-OR-80200/1010", "801", "RZ 202"),
+
+  ("https://locobox.pl/pl/p/Szafa-otwarta-PROFI-OR-120200/1012", "989", "RZ 212"),
+
+  ("https://locobox.pl/pl/p/Szafa-otwarta-PROFI-OR-60104/1013", "543", "RZ 101"),
+
+  ("https://locobox.pl/pl/p/Szafa-otwarta-PROFI-OR-80104/1017", "539", "RZ 102"),
+
+  ("https://locobox.pl/pl/p/Szafa-otwarta-PROFI-OR-120104/1015", "669", "RZ 107"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowo-ubraniowa-PROFI-ZL100200u/576", "2216", "SBM 218"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowo-ubraniowa-PROFI-ZL120200u/577", "2478", "SBM 219"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowo-kartotekowa-PROFI-OF2100200/1025", "3300", "SKB 2"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowo-kartotekowa-PROFI-OF3100200/1026", "3300", "SKB 3"),
+
+  ("https://locobox.pl/pl/p/Szafa-aktowo-kartotekowa-PROFI-OF4100200/1027", "3458", "SKB 1"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4xA4/1028", "775", "SZK 301"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4x2A4/1029", "1195", "SZK 302"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F2xA4/1030", "620", "SZK 101"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3xA4/1062", "756", "SZK 201"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F5xA4/1063", "1149", "SZK 301/5"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F2x2A4/1064", "901", "SZK 102"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3x2A4/1065", "1065", "SZK 202"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F5x2A5/1031", "1284", "SZK 322"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F2x2A5/1032", "793", "SZK 104"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3x2A5/1033", "959", "SZK 114"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4x2A5/1034", "1044", "SZK 204"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4x4A6/1036", "1256", "SZK 103"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F6x4A6/1037", "1605", "SZK 203"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F8x4A6/1038", "2094", "SZK 303"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F5x2B5/1039", "995", "SZK 319"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F5xB5/1040", "795", "SZK 320"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3xDinA3/1049", "1215", "SZK 3A3"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F2xDinA4/1046", "916", "SZK 104"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3xDinA4/1047", "1123", "SZK 204"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4xDinA4/1048", "1382", "SZK 306"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3x-71%2C5x52x63cm/1050", "655", "SZK 114"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F3x-71%2C5x52x63cm/1051", "742", "SZK 115"),
+
+  ("https://locobox.pl/pl/p/Szafa-kartotekowa-PROFI-F4x-71%2C5x47x63cm/1053", "883", "SZK 117"),
+
+  ("https://locobox.pl/pl/p/Szafa-gospodarcza-PROFI-M1-s60cm%2C-3P/346", "625", "MSU 60"),
+
+  ("https://locobox.pl/pl/p/Szafa-gospodarcza-PROFI-M2-s60cm%2C-3P/349", "952", "MSU 61"),
+
+  ("https://locobox.pl/pl/p/Szafa-gospodarcza-PROFI-M3-s60cm%2C-3P/352", "942", "MSU 62"),
+
+  ("https://locobox.pl/pl/p/Szafa-gospodarcza-PROFI-M1-s80cm%2C-3P/347", "765", "MSU 81"),
+
+  ("https://locobox.pl/pl/p/Szafa-gospodarcza-PROFI-M2-s80cm%2C-3P/350", "1053", "MSU 82"),
+
+  ("https://locobox.pl/pl/p/Szafa-gospodarcza-PROFI-M3-s80cm%2C-3P/353", "725", "MSU 83"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M5/1077", "826", "WSS 5"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M10/1078", "1249", "WSS 10"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M20/1079", "2428", "WSS 20"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M30/1080", "3584", "WSS 30"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M35/1081", "4229", "WSS 35"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M50/1082", "5921", "WSS 50"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M55/1083", "6510", "WSS 55"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M60/1084", "7080", "WSS 60"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M80/1085", "9349", "WSS 80"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M90/1086", "10688", "WSS 90"),
+
+  ("https://locobox.pl/pl/p/Szafka-na-10-laptopow-z-zasilaniem-230V/337", "2948", "SZNL 4110"),
+
+  ("https://locobox.pl/pl/p/Szafka-na-10-laptopow/338", "2360", "SZNL 4110"),
+
+  ("https://locobox.pl/pl/p/Wozek-na-10-laptopow-z-zasilaniem-230V/339", "3192", "WNL 110+"),
+
+  ("https://locobox.pl/pl/p/Wozek-na-16-laptopow-z-zasilaniem-230V/340", "4559", "WNL 208+"),
+
+  ("https://locobox.pl/pl/p/Wozek-na-20-laptopow-z-zasilaniem-230V/341", "4949", "WNL 210+"),
+
+  ("https://locobox.pl/pl/p/Wozek-na-26-laptopow-z-zasilaniem-230V/342", "5713", "WNL 213+"),
+
+  ("https://locobox.pl/pl/p/Wozek-na-30-laptopow-z-zasilaniem-230V/343", "6694", "WNL 310+"),
+
+  ("https://locobox.pl/pl/p/Szafka-na-32-tablety-i-1-laptopa-z-zasilaniem-230V/344", "6639", "WNT 33Q"),
+
+  ("https://locobox.pl/pl/p/Szafka-sniadaniowa-wiszaca-PROFI-S5%2C-szer.-22%2C2cm/876", "495", "SUS 215"),
+
+  ("https://locobox.pl/pl/p/Szafka-sniadaniowa-wiszaca-PROFI-S10%2C-szer.-41%2C5cm/877", "859", "SUS 225"),
+
+  ("https://locobox.pl/pl/p/Szafka-sniadaniowa-wiszaca-PROFI-S15%2C-szer.-60%2C7cm/878", "1232", "SUS 235"),
+
+  ("https://locobox.pl/pl/p/Szafka-sniadaniowa-wiszaca-PROFI-S20%2C-szer.-80cm/879", "1580", "SUS 245"),
+
+  ("https://locobox.pl/pl/p/Szafka-sniadaniowa-wiszaca-PROFI-S25%2C-szer.-99%2C2cm/880", "1953", "WSS 25"),
+
+  ("https://locobox.pl/pl/p/Szafka-sniadaniowa-PROFI-S1010%2C-szer.-39%2C3cm/904", "1088", "SUS 3110"),
+
+  ("https://locobox.pl/pl/p/Szafka-sniadaniowa-PROFI-S2010%2C-szer.-75%2C6cm/905", "1939", "SUS 3210"),
+
+  ("https://locobox.pl/pl/p/Szafka-sniadaniowa-PROFI-S3010%2C-szer.-112cm/906", "2812", "SUS 3310"),
+
+  ("https://locobox.pl/pl/p/Szafka-sniadaniowa-na-stelazu-PROFI-S99%2C-szer.-39%2C3cm/907", "1280", "SUS 4110"),
+
+  ("https://locobox.pl/pl/p/Szafka-sniadaniowa-na-stelazu-PROFI-S189%2C-szer.-75%2C6cm/908", "2256", "SUS 4210"),
+
+  ("https://locobox.pl/pl/p/Szafka-sniadaniowa-na-stelazu-PROFI-S279%2C-szer.-112cm/909", "3232", "SUS 4310"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B66-s41.%2C5-cm%2C-h180-cm/246", "744", "MSUS 416"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B126-s80-cm%2C-h180-cm/247", "1243", "MSUS 426"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B186-s118%2C5-cm%2C-h180-cm/248", "1650", "MSUS 436"),
+
+  ("https://locobox.pl/pl/p/Lawka-wolnostojaca-PROFI-L100/525", "294", "LSZ 3"),
+
+  ("https://locobox.pl/pl/p/Lawka-wolnostojaca-PROFI-L150/521", "382", "ŁSZ 3A"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-niska-PROFI-LN120/538", "198", "WCN 341"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-niska-PROFI-LN30/535", "126", "WCN 311"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-niska-PROFI-LN40/539", "137", "WCN 411"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-niska-PROFI-LN60/536", "156", "WCN 321"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-niska-PROFI-LN80/540", "177", "WCN 421"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-niska-PROFI-LN90/537", "186", "WCN 331"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-PROFI-L120/529", "249", "P 431"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-PROFI-L30/526", "158", "P 311"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-PROFI-L40/530", "168", "P 411"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-PROFI-L60/527", "188", "P 321"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-PROFI-L80/531", "209", "P 421"),
+
+  ("https://locobox.pl/pl/p/Podstawa-pod-szafki-bez-lawki-PROFI-L90/528", "217", "P 331"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-U2-s60-cm/284", "449", "SUM 320"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-U3-s88%2C5-cm/285", "788", "SUM 330"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-U1-s41%2C5-cm/287", "384", "SUM 410"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-U2-s80-cm/288", "583", "SUM 420"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-U3-s118%2C5-cm/289", "969", "SUM 430"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-L2-s31%2C5-cm/322", "754", "SUL 31"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-L4-s60-cm/323", "1013", "SUL 32"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-L6-s88%2C5-cm/324", "1539", "SUL 33"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-L8-s117-cm/1099", "2115", "SUL 34"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-L2-s41%2C5-cm/319", "623", "SUL 41"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-L4-s80-cm/320", "945", "SUL 42"),
+
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-L6-s118%2C5-cm/321", "1715", "SUL 43"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B22-s31%2C5-cm%2C-h180-cm/186", "397", "SUS 312"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B42-s60-cm%2C-h180-cm/187", "648", "SUS 322"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B62-s88%2C5-cm%2C-h180-cm/188", "947", "SUS 332"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B82-s117-cm%2C-h180-cm/189", "1190", "SUS 342"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B22-s31%2C5-cm%2C-h150cm/193", "377", "MSUS 312S"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B42-s60-cm%2C-h150cm/194", "615", "MSUS 322S"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B62-s88%2C5-cm%2C-h150cm/195", "899", "MSUS 332S"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B82-s117-cm%2C-h150cm/196", "1330", "MSUS 342S"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B22-s41%2C5-cm%2C-h180-cm/190", "437", "SUS 412"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B42-s80-cm%2C-h180-cm/191", "755", "SUS 422"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B62-s118%2C5-cm%2C-h180-cm/192", "1083", "SUS 432"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B22-s41%2C5-cm%2C-h150cm/197", "415", "MSUS 412S"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B42-s80-cm%2C-h150cm/198", "717", "MSUS 422S"),
+
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B62-s118%2C5-cm%2C-h150cm/199", "1028", "MSUS 432S"),
+
+  ("https://locobox.pl/pl/p/Szafa-strazacka-1-kolumnowa-F1_5/997", "505", "SUS 41"),
+
+  ("https://locobox.pl/pl/p/Szafa-strazacka-2-kolumnowa-F1_5/999", "728", "SUS 42"),
+
+  ("https://locobox.pl/pl/p/Szafa-na-odziez-brudna-PROFI-DC-10/985", "620", "MKB 5E"),
+
+  ("https://locobox.pl/pl/p/Szafa-na-odziez-czysta-PROFI-CC1111/986", "1361", "MKB 4"),
+
+  ("https://locobox.pl/pl/p/Szafa-na-odziez-czysta-PROFI-CC2211/987", "2451", "MKB 2"),
+
+  ("https://locobox.pl/pl/p/Szafa-na-odziez-brudna-PROFI-DC-11/990", "667", "MKB 5"),
+
+  ("https://locobox.pl/pl/p/Lawka-stala-PROFI-LS-pod-szafy-s120-cm-4K/117", "351", "P 421"),
+
+  ("https://locobox.pl/pl/p/Lawka-stala-PROFI-LS-pod-szafy-s120-cm-3K/120", "354", "P 421"),
+
+  ("https://locobox.pl/pl/p/Lawka-stala-PROFI-LS-pod-szafy-s90-cm-3K/116", "290", "P 331"),
+
+  ("https://locobox.pl/pl/p/Lawka-stala-PROFI-LS-pod-szafy-s80-cm-2K/119", "275", "P 421"),
+
+  ("https://locobox.pl/pl/p/Lawka-wysuwana-PROFI-LR-pod-szafy-s120-cm-4K/153", "447", "PW 431"),
+
+  ("https://locobox.pl/pl/p/Lawka-wysuwana-PROFI-LR-pod-szafy-s120-cm-3K/156", "452", "PW 431"),
+
+  ("https://locobox.pl/pl/p/Lawka-wysuwana-PROFI-LR-pod-szafy-s90-cm-3K/152", "374", "PW 321"),
+
+  ("https://locobox.pl/pl/p/Lawka-wysuwana-PROFI-LR-pod-szafy-s80-cm-2K/155", "354", "PW 421"),
+
+  ("https://locobox.pl/pl/p/Lawka-wysuwana-PROFI-LR-pod-szafy-s60-cm-2K/151", "307", "PW 321"),
+
+  ("https://locobox.pl/pl/p/Lawka-wysuwana-PROFI-LR-pod-szafy-s40-cm-1K/154", "266", "PW 411"),
+
+  ("https://locobox.pl/pl/p/Lawka-wysuwana-PROFI-LR-pod-szafy-s30-cm-1K/150", "242", "PW 311"),
+
 ]
