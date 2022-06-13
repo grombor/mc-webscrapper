@@ -32,7 +32,7 @@ class Bakpol:
         """ Get product price. """
         try:
             price = soup.find('span', {"id": "our_price_display"}).string
-            if type(price) != None:
+            if type(price) is not None:
                 return price.replace(" ", "").split(",")[0]
             else:
                 raise Error

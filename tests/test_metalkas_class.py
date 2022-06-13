@@ -14,18 +14,21 @@ def test_class():
     return Metalkas()
 
 
+@pytest.mark.smoke
 def test_get_list_is_list(test_class):
     """ Check is get_list returns a list"""
 
     assert type(test_class.get_links()) == list
 
 
+@pytest.mark.smoke
 def test_get_list_is_tuple(test_class):
     """ Check is get_list items is a tuple"""
 
     assert type(test_class.get_links()[0]) == tuple
 
 
+@pytest.mark.smoke
 def test_get_model(test_class):
     """ Checks output is a string type."""
 
@@ -41,7 +44,7 @@ def test_get_model(test_class):
 
     assert type(test_class.get_model(url, soup)) == str
 
-
+@pytest.mark.integration
 def test_random_link(test_class):
     """ Takes random links and run it. """
 

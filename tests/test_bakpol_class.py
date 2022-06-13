@@ -14,18 +14,20 @@ def bakpol():
     return Bakpol()
 
 
+@pytest.mark.smoke
 def test_get_list_is_list(bakpol):
     """ Check is get_list returns a list"""
 
     assert type(bakpol.get_links()) == list
 
 
+@pytest.mark.smoke
 def test_get_list_is_tuple(bakpol):
     """ Check is get_list items is a tuple"""
 
     assert type(bakpol.get_links()[0]) == tuple
 
-
+@pytest.mark.smoke
 def test_get_model(bakpol):
     """ Checks output is a string type."""
 
@@ -42,6 +44,7 @@ def test_get_model(bakpol):
     assert type(bakpol.get_model(url, soup)) == str
 
 
+@pytest.mark.integration
 def test_random_link(bakpol):
     """ Takes random links and run it. """
 
@@ -62,6 +65,8 @@ def test_random_link(bakpol):
     assert len(records) == sample_links_range
 
 
+@pytest.mark.integration
+# need parametrization here
 def test_scrapped_page_data(bakpol):
     """ Check scrapped page data. """
 
@@ -75,3 +80,8 @@ def test_scrapped_page_data(bakpol):
     assert records[0]["WYSOKOŚĆ"] == "1800"
     assert records[0]["SZEROKOŚĆ"] == "1190"
     assert records[0]["GŁĘBOKOŚĆ"] == "480"
+
+
+@pytest.mark.retest
+def test_price_check(bakpol):
+    """ Check the price change. """

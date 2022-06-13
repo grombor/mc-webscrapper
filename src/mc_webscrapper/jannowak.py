@@ -40,8 +40,13 @@ class JanNowak:
             brutto = extract_digits(brutto)
             return int(int(brutto)/1.23)
         except AttributeError as e:
-            print(e, f", method: {self.get_price.__name__} link: {url}")
-            return ""
+            try:
+                brutto = soup.find('div', {"class": "pricing"}).find('p', {"class": "current-price js-price"}).text.split(",")[0]
+                brutto = extract_digits(brutto)
+                return int(int(brutto) / 1.23)
+            except AttributeError as e:
+                print(e, f", method: {self.get_price.__name__} link: {url}")
+                return ""
 
 
     def get_height(self, url, soup) -> str:

@@ -1,10 +1,11 @@
 from datetime import datetime
-import csv, sys
+import csv
+import sys
 from random import randint as r
 from time import sleep
 from src.mc_webscrapper.errors import Error
 
-# Main data holder
+# Configuration variables
 records = []
 requests_timeout = 10
 
@@ -14,12 +15,12 @@ def get_date() -> str:
     return datetime.now().strftime("%d/%m/%Y")
 
 
-def compare_prices(current_price=int, previous_price=int):
+def compare_prices(current_price: int, previous_price: int) -> str:
     try:
-        if (current_price != '' and previous_price!=''):
+        if current_price is not '' and current_price != previous_price:
             percent = str((int(current_price)*100 / int(previous_price))-100).split(".")
             return f"Cena zmieniła się o {percent[0]}%"
-        raise Error()
+        else: raise Error()
     except Error as e:
         print(e, f"price change logic")
         return f""
