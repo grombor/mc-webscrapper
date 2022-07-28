@@ -174,7 +174,8 @@ class Bakpol:
         else:
             result["msg"] = ""
 
-        return records.append(result)
+        records.append(result)
+        return result
 
     def scrap(self):
         """Scrap through all links in a list."""

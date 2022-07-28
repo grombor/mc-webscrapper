@@ -8,6 +8,9 @@ from random import randint
 
 
 # class TestClass:
+@pytest.fixture
+def bakpol_links():
+    return links
 
 @pytest.fixture
 def bakpol():
@@ -81,7 +84,3 @@ def test_scrapped_page_data(bakpol):
     assert records[0]["SZEROKOŚĆ"] == "1190"
     assert records[0]["GŁĘBOKOŚĆ"] == "480"
 
-
-@pytest.mark.retest
-def test_price_check(bakpol):
-    """ Check the price change. """
