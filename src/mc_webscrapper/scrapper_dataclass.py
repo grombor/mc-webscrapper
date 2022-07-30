@@ -18,7 +18,7 @@ def get_current_year():
 
 
 @dataclass
-class Scrapper:
+class ScrapperDataClass:
     name: str
     dealer: str = field(init=False)                     # Dystrybutor
     manufacturer: str = field(init=False)               # Producent
@@ -26,7 +26,7 @@ class Scrapper:
     year: int = get_current_year()                      # Rok
     model: str = field(init=False)                      # Model
     substitute: str = field(init=False)                 # Odpowiednik
-    catalogue_price_nett: int = field(init=False)       # Cena katalogowa netto [PLN]
+    catalogue_price_nett: str = field(default='')       # Cena katalogowa netto [PLN]
     shop_price_nett: int = field(init=False)            # Cena sklepu internetowego netto [PLN]
     product_height: int = field(init=False)             # Wysokość
     product_width: int = field(init=False)              # Szerokość
@@ -35,7 +35,7 @@ class Scrapper:
     product_card_link: str = field(init=False)          # Link do sklepu
     lead_time: int = field(init=False)                  # Czas realizacji [dni]
     product_warranty: int = field(init=False)           # Gwarancja [lata]
-    comment: str = field(init=False)                    # Komentarz
+    comment: str = field(default='')                    # Komentarz
 
     
 

@@ -9,6 +9,11 @@ Facilitate:
 - products comparision
 - comparision of products subtitutes
 
+## Features
+- TDD methodology
+- uses @dataclass and @abstractmethod
+- open for extensions
+
 ### TODO: ###
 - add Umstahl
 - add Techmark

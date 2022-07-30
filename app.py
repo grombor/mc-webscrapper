@@ -29,11 +29,12 @@
 # metalkas.scrap()
 # write_to_csv_file("metalkas")
 
-import src.mc_webscrapper.bakpol
+from src.mc_webscrapper.bakpol.bakpol import Bakpol
 
 
 def main():
-    print("hello world")
+    bakpol = Bakpol()
+    bakpol.run()
 
 if __name__ == "__main__":
     main()
