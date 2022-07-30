@@ -65,7 +65,7 @@ def test_get_comment():
     assert bakpol.get_comment() == ""
 
 def test_save():
-    assert isinstance(bakpol.save(), str)
+    assert bakpol.save()
 
 def test_run():
     assert isinstance(bakpol.run(), list)

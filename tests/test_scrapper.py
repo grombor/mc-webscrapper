@@ -2,8 +2,8 @@ import pytest
 from src.mc_webscrapper.scrapper_dataclass import ScrapperDataClass, get_current_month, get_current_year
 
 STRING_TESTING: str = "#$KF"
-MONTH_TESTING: int = 7
-YEAR_TESTING = 2022
+MONTH_TESTING: int = "07"
+YEAR_TESTING = "2022"
 INT_TESTING = 999
 
 

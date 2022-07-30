@@ -10,11 +10,11 @@ from attr import field
 
 
 def get_current_month():
-    return datetime.now().month
+    return datetime.now().strftime("%m")
 
 
 def get_current_year():
-    return datetime.now().year
+    return datetime.now().strftime("%Y")
 
 
 @dataclass
@@ -22,8 +22,8 @@ class ScrapperDataClass:
     name: str
     dealer: str = field(init=False)                     # Dystrybutor
     manufacturer: str = field(init=False)               # Producent
-    month_of_year: int = get_current_month()            # Miesiąc
-    year: int = get_current_year()                      # Rok
+    month_of_year: int = int(get_current_month())       # Miesiąc
+    year: int = int(get_current_year())                 # Rok
     model: str = field(init=False)                      # Model
     substitute: str = field(init=False)                 # Odpowiednik
     catalogue_price_nett: str = field(default='')       # Cena katalogowa netto [PLN]

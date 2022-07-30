@@ -3,7 +3,6 @@ import csv
 import sys
 from random import randint as r
 from time import sleep
-from src.mc_webscrapper.errors import Error
 
 # Configuration variables
 records = []
@@ -20,7 +19,6 @@ def compare_prices(current_price: int, previous_price: int) -> str:
         if current_price is not '' and current_price != previous_price:
             percent = str((int(current_price)*100 / int(previous_price))-100).split(".")
             return f"Cena zmieniła się o {percent[0]}%"
-        else: raise Error()
     except Error as e:
         print(e, f"price change logic")
         return f""
