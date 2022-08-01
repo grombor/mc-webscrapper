@@ -1,5 +1,5 @@
 import pytest
-from src.mc_webscrapper.scrapper_dataclass import ScrapperDataClass, get_current_month, get_current_year
+from mc_webscrapper.scrapper_dataclass import ScrapperDataClass, get_current_month, get_current_year
 
 STRING_TESTING: str = "#$KF"
 MONTH_TESTING: int = "07"

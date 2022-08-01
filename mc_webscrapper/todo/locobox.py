@@ -1,12 +1,12 @@
 from bs4 import BeautifulSoup as bs4
 import requests
-from src.mc_webscrapper.kartmap_links import links
-from src.mc_webscrapper.utils import get_date, compare_prices, records, requests_timeout, extract_digits, show_status
-from src.mc_webscrapper.errors import Error
+from mc_webscrapper.locobox_links import links
+from mc_webscrapper.utils import get_date, compare_prices, records, requests_timeout, extract_digits, show_status
+from mc_webscrapper.errors import Error
 
 
-class KartMap:
-    """ This class represents products of Bakpol manufacturer (https://bakpol.pl/)"""
+class Locobox:
+    """ This class represents products of Bakpol manufacturer (https://locobox.pl/)"""
 
 
     def get_links(self) -> list:
@@ -21,9 +21,8 @@ class KartMap:
 
     def get_model(self, url, soup) -> str:
         """ Get product model. """
-
         try:
-            return soup.find('h1', {'class': 'product_title entry-title'}).text
+            return soup.find('h1', {'class': 'name'}).string.strip()
         except (AttributeError, ValueError) as e:
             print(e, f", method: {self.get_model.__name__} link: {url}")
             return ""
@@ -32,11 +31,10 @@ class KartMap:
     def get_price(self, url, soup):
         """ Get product price. """
         try:
-            price = soup.find("span", class_="price").text
-            if type(price) != None:
-                return price.replace(" ", "").split(",")[0]
-            else:
-                raise Error
+            netto = soup.find_all('em')[1].string
+            netto = str(netto).split(',')
+            return extract_digits(netto[0])
+            raise Error(f"Something wrong with product price in {url}.")
         except Error as e:
             print(e, f", method: {self.get_price.__name__} link: {url}")
             return ""
@@ -48,49 +46,84 @@ class KartMap:
         try:
             height = soup.find_all('td', {'width': '302'})[1].text
             return extract_digits(height)
-        except (ValueError, IndexError, AttributeError) as e:
-            print(e)
-            return f""
+        except IndexError as e:
+            try:
+                temp = soup.find('div', {'itemprop': 'description'}).contents[4].text.split(": ")[1]
+                height = str(temp)[:3]+"0"
+                return height
+            except (AttributeError, IndexError):
+                try:
+                    temp = soup.find('div', {'itemprop': 'description'}).contents[6].text.split(": ")[1]
+                    height = str(temp)[:3]+"0"
+                    return (height)
+                except (AttributeError, ValueError, IndexError):
+                    return ""
+        except (AttributeError, ValueError) as e:
+            print(e, f", method: {self.get_height.__name__} link: {url}")
+            return ""
+
 
 
     def get_width(self, url, soup) -> str:
         """ Get product width. """
         try:
-            szerokosc = soup.find_all('td', {'width': '302'})[3].string
-            return extract_digits(szerokosc)
-        except (ValueError, IndexError, AttributeError) as e:
-            print(e)
-            return f""
+            width = soup.find_all('td', {'width': '302'})[3].string
+            return extract_digits(width)
+        except IndexError as e:
+            try:
+                temp = soup.find('div', {'itemprop': 'description'}).contents[4].text.split(": ")[1][4:7]
+                width = str(temp)+"0"
+                return extract_digits(width)
+            except (AttributeError, IndexError):
+                return ""
+        except (AttributeError, ValueError) as e:
+            print(e, f", method: {self.get_height.__name__} link: {url}")
+            return ""
 
 
     def get_depth(self, url, soup) -> str:
         """ Get product depth. """
         try:
-            depth = soup.find_all('td', {'width': '302'})[5].text
+            depth = soup.find_all('td', {'width': '302'})[5].string
             return extract_digits(depth)
-        except (ValueError, IndexError, AttributeError) as e:
-            print(e)
-            return f""
+        except IndexError as e:
+            try:
+                depth = soup.find('div', {'itemprop': 'description'}).contents[4].text.split(": ")[1][7:12]
+                return extract_digits(depth)
+            except (AttributeError, IndexError):
+                return ""
+        except (AttributeError, ValueError) as e:
+            print(e, f", method: {self.get_height.__name__} link: {url}")
+            return ""
 
 
     def get_description(self, url, soup) -> str:
         """ Get product description. """
         try:
-            return soup.find(id="tab-description").text
-        except (IndexError, AttributeError) as e:
-            print(url)
-            return f""
+            return soup.find('div', {"itemprop": 'description', "class": "resetcss"}).text
+        except (AttributeError, ValueError, IndexError) as e:
+            try:
+                print(e, f", method: {self.get_height.__name__} link: {url}")
+                return soup.find('div', {"class": 'resetcss', "itemprop": "description"}).findChildren("p")[2]
+            except (AttributeError, ValueError) as e:
+                print(e, f", method: {self.get_height.__name__} link: {url}")
+                return ""
 
 
     def get_status(self, url, soup):
         """ Get shipping status. """
         try:
-            return soup.find('p', {"style":"text-align: center;"}).text
-        except (IndexError, AttributeError) as e:
-            print(url)
-            return f""
-
-
+            czas_realizacji = ''
+            t_ship = str(soup.find('span', {'class': 'second'}).string)
+            if t_ship == '48 - 72 H':
+                index = t_ship.find("- ")
+                czas_realizacji = str(int(t_ship[index + 2:-2]) / 24).split('.')[0]
+            if t_ship == '3-4 tygodnie':
+                czas_realizacji = t_ship.split('-')[1]
+            return czas_realizacji
+        except (AttributeError, ValueError) as e:
+            print(e, f", method: {self.get_height.__name__} link: {url}")
+            return ""
 
     def get_comment(self, previous_price, nett) -> str:
         """ Create product comment. """
@@ -99,7 +132,8 @@ class KartMap:
                 return ""
             else:
                 return compare_prices(nett, previous_price)
-        except AttributeError as ve:
+            raise Error(f"Something wrong with comment in {url}.")
+        except Error as ve:
             print(ve)
             return f""
 
@@ -110,7 +144,7 @@ class KartMap:
         result = dict()
 
         # Save current dealer
-        result["DYSTRYBUTOR"] = "Kart-Map"
+        result["DYSTRYBUTOR"] = "Locobox"
 
         # Save current date
         result["DATA"] = get_date()
@@ -154,13 +188,14 @@ class KartMap:
         result["ŹRÓDŁO"] = url
 
         # Find shipping time
+
         result["CZAS REALIZACJI [dni]"] = self.get_status(url, soup)
 
         # Warranty
-        result["GWARANCJA [miesiące]"] = "2"
+        result["GWARANCJA [miesiące]"] = "5"
 
         # Comment
-        if type(result["CENA SKLEPU INTERNETOWEGO NETTO"]) == int:
+        if result["CENA SKLEPU INTERNETOWEGO NETTO"] != "":
             result["msg"] = self.get_comment(link[1], result["CENA SKLEPU INTERNETOWEGO NETTO"])
         else:
             result["msg"] = ""
@@ -170,7 +205,7 @@ class KartMap:
     def scrap(self):
         """Scrap through all links in a list."""
 
-        print("Starting scrapping Kartmap.")
+        print("Starting scrapping Locobox.")
         i = 0
         for link in links:
             try:

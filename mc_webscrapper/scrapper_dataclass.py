@@ -1,8 +1,3 @@
-# TODOS:
-# add dataclass to csv feature https://pypi.org/project/dataclass-csv/
-
-
-
 from dataclasses import dataclass
 from datetime import datetime
 

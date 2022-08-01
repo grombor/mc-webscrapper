@@ -2,9 +2,9 @@ import random
 import pytest
 from bs4 import BeautifulSoup as bs4
 import requests
-from src.mc_webscrapper.scrapper_dataclass import ScrapperDataClass
-from src.mc_webscrapper.bakpol.bakpol_links import LINKS
-from src.mc_webscrapper.bakpol.bakpol import Bakpol
+from mc_webscrapper.scrapper_dataclass import ScrapperDataClass
+from mc_webscrapper.bakpol.bakpol_links import LINKS
+from mc_webscrapper.bakpol.bakpol import Bakpol
 
 
 LINK = ("https://bakpol.pl/szafy-biurowe-wysokie/698-sb1000-4-szafa-biurowa.html", "SBM 203")

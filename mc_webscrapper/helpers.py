@@ -2,7 +2,7 @@ from datetime import datetime
 import sys
 from dataclasses import dataclass
 from dataclass_csv import DataclassWriter
-from src.mc_webscrapper.scrapper_dataclass import ScrapperDataClass
+from mc_webscrapper.scrapper_dataclass import ScrapperDataClass
 
 
 def show_status(item, set):
