@@ -204,7 +204,7 @@ links = [
   ("https://sklep.metalkas.com.pl/tg-2msu-j.html", "1403", "SUM 320"),
   ("https://sklep.metalkas.com.pl/szafa-ubraniowa-tg-3msu-k7035-d3020.html", "1386", "SUM 420W"),
   ("https://sklep.metalkas.com.pl/szafa-ubraniowa-l-tg-2msl-7035.html", "2366", "SUM 420W"),
-  ("https://sklep.metalkas.com.pl/szafa-ubraniowa-2-msu-eco-mtd-2.html", "730", "SUM 320W"),
+  # ("https://sklep.metalkas.com.pl/szafa-ubraniowa-2-msu-eco-mtd-2.html", "730", "SUM 320W"),
   ("https://sklep.metalkas.com.pl/szafy-schowkowe-metalowe-tg-4mss-eco.html", "897", "SUS 322W"),
   ("https://sklep.metalkas.com.pl/szafa-ubraniowa-tg-2msl-eco.html", "1892", "SUL 42W"),
   ("https://sklep.metalkas.com.pl/szafa-ubraniowa-3-msu-1-ryglowanie.html", "1728", "SUM 420W"),
@@ -218,5 +218,5 @@ links = [
   ("https://sklep.metalkas.com.pl/szafa-biurowa-3-sdb-met.html", "2614", "SBM 203"),
   ("https://sklep.metalkas.com.pl/szafa-biurowa-metalowa-tg-1sdb-eco.html", "1516", "SBM 202"),
   ("https://sklep.metalkas.com.pl/szafa-biurowa-metalowa-tg-2sdb-eco.html", "1607", "SBM 202"),
-  ("https://sklep.metalkas.com.pl/szafa-schowkowa-4mss-met-m.html", "1864", "SUS 322W"),
+  # ("https://sklep.metalkas.com.pl/szafa-schowkowa-4mss-met-m.html", "1864", "SUS 322W"),
 ]

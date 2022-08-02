@@ -68,8 +68,8 @@ links = [
 # Lista do analizy przekrojowej
 links = [
     ("https://jannowak.com/8-szafa-metalowa-jan-h-szara", "891", "SBM 202"),
-    ("https://jannowak.com/127-szafa-metalowa-sara-szara-kartotekowa", "526", "SZK 201"),
-    ("https://jannowak.com/134-szafa-metalowa-sara-szara-kartotekowa", "810", "SZK 301/5"),
+    # ("https://jannowak.com/127-szafa-metalowa-sara-szara-kartotekowa", "526", "SZK 201"),
+    # ("https://jannowak.com/134-szafa-metalowa-sara-szara-kartotekowa", "810", "SZK 301/5"),
     ("https://jannowak.com/119-szafa-metalowa-kacper-ii-szara-socjalna", "810", "SUM 320"),
     ("https://jannowak.com/120-szafa-metalowa-kacper-szara-socjalna", "891", "SUM 420"),
     ("https://jannowak.com/176-szafa-metalowa-socjalna-julia-szara", "647", "SUL 42"),
