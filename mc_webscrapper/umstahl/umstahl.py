@@ -7,13 +7,13 @@ from mc_webscrapper.config import REQUEST_TIMEOUT, HEADERS
 from mc_webscrapper.helpers import show_status, clear_price, extract_digits, save_dataclass_to_file
 
 
-class KartMap(ScrapperClass):
+class Umstahl():
     """
-    This class represents scrapper of Kart-Map (https://www.kart-map.pl/). It is using BeatifulSoup scrapper to get products data from product's card at online shop.
+    This class represents scrapper of Umstahl (https://umstahl.pl/). It is using BeatifulSoup scrapper to get products data from product's card at online shop.
     """
 
     stored_data_list: list = list()
-    company_name = "Kart-Map"
+    company_name = "Umstahl"
 
     def setup_scrapper(self, link: str):
         response = requests.get(link, timeout=REQUEST_TIMEOUT, headers=HEADERS)
@@ -27,55 +27,28 @@ class KartMap(ScrapperClass):
         return self.company_name
 
     def get_model_name(self, soup) -> str:
-        try:
-            return soup.find('h1', {'class': 'product_title entry-title'}).text
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_model_name.__name__} link: {soup.title.string}")
+        pass
 
     def get_shop_price_nett(self, soup) -> int:
-        try:
-            # price = soup.find("span", class_="price").text
-            price = soup.find("bdi").text
-            if type(price):
-                nett_price = clear_price(price)
-                return nett_price
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+        pass
 
     def get_product_height(self, soup):
-        try:
-            height = soup.find_all('td', {'width': '302'})[1].text
-            return extract_digits(height)
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
-        except IndexError:
-            return ""
+        pass
 
     def get_product_width(self, soup):
-        try:
-            szerokosc = soup.find_all('td', {'width': '302'})[3].string
-            return extract_digits(szerokosc)
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+        pass
 
     def get_product_depth(self, soup):
-        try:
-            depth = soup.find_all('td', {'width': '302'})[5].text
-            return extract_digits(depth)
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+        pass
 
     def get_product_features(self, soup):
-        try:
-            return soup.find(id="tab-description").text
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+        pass
  
     def get_lead_time(self):
-        return "Przeciętny czas dostawy 1-4 tygodnie"
+        pass
 
     def get_product_warranty(self):
-        return 2
+        return 3
 
     def get_comment(self):
         pass
@@ -101,7 +74,7 @@ class KartMap(ScrapperClass):
         return bakpol
 
     def save(self):
-        save_dataclass_to_file("kart_map", self.stored_data_list)
+        save_dataclass_to_file("umstahl", self.stored_data_list)
         return True
 
     def run(self):

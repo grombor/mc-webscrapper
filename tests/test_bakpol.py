@@ -59,7 +59,7 @@ def test_get_lead_time():
     assert lead_time == ""
 
 def test_get_product_warranty():
-    assert bakpol.get_product_warranty() == 24
+    assert bakpol.get_product_warranty() == 2
 
 def test_get_comment():
     assert bakpol.get_comment() == ""

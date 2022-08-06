@@ -87,7 +87,7 @@ class Bakpol(ScrapperClass):
        return "" 
 
     def get_product_warranty(self):
-        return 24 
+        return 2 
 
     def get_comment(self):
         return ""

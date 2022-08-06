@@ -59,7 +59,7 @@ def test_get_lead_time():
     assert lead_time == "Przeciętny czas dostawy 1-4 tygodnie"
 
 def test_get_product_warranty():
-    assert km.get_product_warranty() == 24
+    assert km.get_product_warranty() == 2
 
 @pytest.mark.skip()
 def test_get_comment():
