@@ -13,7 +13,7 @@ class Bakpol(ScrapperClass):
     """
 
 
-    stored_data_list: list = []
+    stored_data_list: list = list()
 
     def setup_scrapper(self, link: str):
         response = requests.get(link, timeout=REQUEST_TIMEOUT, headers=HEADERS)
@@ -30,15 +30,15 @@ class Bakpol(ScrapperClass):
         try:
             model = soup.find('h1', {'class': 'nazwa-produktu'}).string.strip()
             return str(model.lower())
-        except Exception(f"Something went wrong with getting model name in {soup.title.string}") as e:
-            print(e)
+        except Exception:
+            print(f", method: {self.get_model_name.__name__} link: {soup.title.string}")
 
     def get_shop_price_nett(self, soup) -> int:
         try:
             nett_price = soup.find('span', {"id": "our_price_display"}).string
             return clear_price(nett_price)
-        except Exception(f"Something went wrong with getting price in {soup.title.string}") as e:
-            print(e)
+        except Exception:
+            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
 
     def get_product_height(self, soup):
         try:
@@ -50,8 +50,7 @@ class Bakpol(ScrapperClass):
                 height = height.text.split('mm')
                 return extract_digits(height[0])
             except (ValueError, AttributeError):
-                print(f", method: {self.get_height.__name__} link: {soup.title.string}")
-                return ""
+                print(f", method: {self.get_product_height.__name__} link: {soup.title.string}")
 
     def get_product_width(self, soup):
         try:
@@ -63,8 +62,7 @@ class Bakpol(ScrapperClass):
                 width = width.text.split('mm')
                 return extract_digits(width[1])
             except (ValueError, AttributeError):
-                print(f", method: {self.get_height.__name__} link: {soup.title.string}")
-                return ""
+                print(f", method: {self.get_product_width.__name__} link: {soup.title.string}")
 
     def get_product_depth(self, soup):
         try:
@@ -76,16 +74,14 @@ class Bakpol(ScrapperClass):
                 depth = depth.text.split('mm')
                 return extract_digits(depth[2])
             except (ValueError, AttributeError):
-                print(f", method: {self.get_height.__name__} link: {soup.title.string}")
-                return "" 
+                print(f", method: {self.get_product_depth.__name__} link: {soup.title.string}")
 
     def get_product_features(self, soup):
         try:
             desc = soup.find(class_="rte").text
             return str(desc)
-        except (ValueError, IndexError) as e:
-            print(e, f", method: {self.get_description.__name__} link: {soup.title.string}")
-            return ""
+        except (ValueError, AttributeError):
+            print(f", method: {self.get_product_features.__name__} link: {soup.title.string}")
  
     def get_lead_time(self):
        return "" 

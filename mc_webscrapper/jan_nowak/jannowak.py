@@ -204,7 +204,8 @@ class JanNowak(ScrapperClass):
     This class represents scrapper of Jan Nowak (https://jannowak.com/). It is using BeatifulSoup scrapper to get products data from product's card at online shop.
     """
 
-    stored_data_list: list = []
+    stored_data_list: list = list()
+    company_name = "Jan Nowak"
 
     def setup_scrapper(self, link: str):
         response = requests.get(link, timeout=REQUEST_TIMEOUT, headers=HEADERS)
@@ -212,10 +213,10 @@ class JanNowak(ScrapperClass):
         return soup
 
     def get_dealer_name(self) -> str:
-        return "Jan Nowak"
+        return self.company_name
 
     def get_manufacturer_name(self) -> str:
-        return "Jan Nowak"
+        return self.company_name
 
     def get_model_name(self, soup) -> str:
         try:
