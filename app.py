@@ -31,13 +31,16 @@
 
 from mc_webscrapper.bakpol.bakpol import Bakpol
 from mc_webscrapper.jan_nowak.jannowak import JanNowak
+from mc_webscrapper.kartmap.kartmap import KartMap
 
 
 def main():
     # bakpol = Bakpol()
     # bakpol.run()
-    jan_nowak = JanNowak()
-    jan_nowak.run()
+    # jan_nowak = JanNowak()
+    # jan_nowak.run()
+    kart_map = KartMap()
+    kart_map.run()
 
 if __name__ == "__main__":
     main()

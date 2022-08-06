@@ -55,23 +55,23 @@ class Umstahl():
 
     def gather_data_from_link(self, link):
         url = link[0]
-        bakpol = ScrapperDataClass(name="Bakpol")
+        umstahl = ScrapperDataClass(name="Umstahl")
         soup = self.setup_scrapper(url)
-        bakpol.dealer = self.get_dealer_name()
-        bakpol.manufacturer = self.get_manufacturer_name()
-        bakpol.model = self.get_model_name(soup)
-        bakpol.substitute = link[1]
-        bakpol.catalogue_price_nett = None
-        bakpol.shop_price_nett = self.get_shop_price_nett(soup)
-        bakpol.product_height = self.get_product_height(soup)
-        bakpol.product_width = self.get_product_width(soup)
-        bakpol.product_depth = self.get_product_depth(soup)
-        bakpol.product_features = self.get_product_features(soup)
-        bakpol.product_card_link = url
-        bakpol.lead_time = self.get_lead_time()
-        bakpol.product_warranty = self.get_product_warranty()
-        bakpol.comment = self.get_comment()
-        return bakpol
+        umstahl.dealer = self.get_dealer_name()
+        umstahl.manufacturer = self.get_manufacturer_name()
+        umstahl.model = self.get_model_name(soup)
+        umstahl.substitute = link[1]
+        umstahl.catalogue_price_nett = None
+        umstahl.shop_price_nett = self.get_shop_price_nett(soup)
+        umstahl.product_height = self.get_product_height(soup)
+        umstahl.product_width = self.get_product_width(soup)
+        umstahl.product_depth = self.get_product_depth(soup)
+        umstahl.product_features = self.get_product_features(soup)
+        umstahl.product_card_link = url
+        umstahl.lead_time = self.get_lead_time()
+        umstahl.product_warranty = self.get_product_warranty()
+        umstahl.comment = self.get_comment()
+        return umstahl
 
     def save(self):
         save_dataclass_to_file("umstahl", self.stored_data_list)

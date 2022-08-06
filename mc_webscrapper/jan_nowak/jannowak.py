@@ -296,23 +296,23 @@ class JanNowak(ScrapperClass):
 
     def gather_data_from_link(self, link):
         url = link[0]
-        bakpol = ScrapperDataClass(name="Bakpol")
+        jannowak = ScrapperDataClass(name="Jan Nowak")
         soup = self.setup_scrapper(url)
-        bakpol.dealer = self.get_dealer_name()
-        bakpol.manufacturer = self.get_manufacturer_name()
-        bakpol.model = self.get_model_name(soup)
-        bakpol.substitute = link[1]
-        bakpol.catalogue_price_nett = None
-        bakpol.shop_price_nett = self.get_shop_price_nett(soup)
-        bakpol.product_height = self.get_product_height(soup)
-        bakpol.product_width = self.get_product_width(soup)
-        bakpol.product_depth = self.get_product_depth(soup)
-        bakpol.product_features = self.get_product_features(soup)
-        bakpol.product_card_link = url
-        bakpol.lead_time = self.get_lead_time(soup)
-        bakpol.product_warranty = self.get_product_warranty()
-        bakpol.comment = self.get_comment()
-        return bakpol
+        jannowak.dealer = self.get_dealer_name()
+        jannowak.manufacturer = self.get_manufacturer_name()
+        jannowak.model = self.get_model_name(soup)
+        jannowak.substitute = link[1]
+        jannowak.catalogue_price_nett = None
+        jannowak.shop_price_nett = self.get_shop_price_nett(soup)
+        jannowak.product_height = self.get_product_height(soup)
+        jannowak.product_width = self.get_product_width(soup)
+        jannowak.product_depth = self.get_product_depth(soup)
+        jannowak.product_features = self.get_product_features(soup)
+        jannowak.product_card_link = url
+        jannowak.lead_time = self.get_lead_time(soup)
+        jannowak.product_warranty = self.get_product_warranty()
+        jannowak.comment = self.get_comment()
+        return jannowak
 
     def save(self):
         save_dataclass_to_file("jan_nowak", self.stored_data_list)
