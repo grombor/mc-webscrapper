@@ -3,11 +3,12 @@ import pytest
 from bs4 import BeautifulSoup as bs4
 import requests
 from mc_webscrapper.scrapper_dataclass import ScrapperDataClass
-from mc_webscrapper.jan_nowak.jannowak_links import LINKS
+from mc_webscrapper.umstahl.umstahl_links import LINKS
 from mc_webscrapper.umstahl.umstahl import Umstahl
 
 
-LINK = ("https://www.kart-map.pl/produkt/szafa-ubraniowa-bhp-dwudrzwiowa/", "SUM 320")
+LINK = ("https://umstahl.pl/metalowa-szafa-ubraniowa-z-podzialem-wewnetrznym-se-40r2-24h,id550.html", "SUM 420")
+LINK = ("https://umstahl.pl/metalowa-szafa-ubraniowa-se-30r1,id190.html", "SUM 420")
 HTML = requests.get(LINK[0])
 SOUP = bs4(HTML.text, 'html.parser')
 us = Umstahl()
@@ -30,43 +31,44 @@ def test_dealer_name():
 def test_get_manufacturer_name():
     assert us.get_manufacturer_name() == "Umstahl"
 
-# def test_get_model_name():
-#     model = us.get_model_name(SOUP).lower()
-#     assert model == "SZAFA UBRANIOWA BHP DWUDRZWIOWA".lower()
+def test_get_model_name():
+    model = us.get_model_name(SOUP).lower()
+    assert model == "Metalowa szafka ubraniowa z podziałem wewnętrznym SE 40R2".lower()
 
-# def test_get_shop_price_nett():
-#     price_nett = us.get_shop_price_nett(SOUP)
-#     assert price_nett == int(778)
+def test_get_shop_price_nett():
+    price_nett = us.get_shop_price_nett(SOUP)
+    assert price_nett == int(776)
 
-# def test_get_product_height():
-#     height = us.get_product_height(SOUP)
-#     assert height == 1800
+def test_get_product_height():
+    height = us.get_product_height(SOUP)
+    assert height == 1800
 
-# def test_get_product_width():
-#     width = us.get_product_width(SOUP)
-#     assert width == 600
+def test_get_product_width():
+    width = us.get_product_width(SOUP)
+    assert width == 800
 
-# def test_get_product_depth():
-#     depth = us.get_product_depth(SOUP)
-#     assert depth == 490
+def test_get_product_depth():
+    depth = us.get_product_depth(SOUP)
+    assert depth == 490
 
-# def test_get_product_features():
-#     features = us.get_product_features(SOUP)
-#     assert (features != "") and features is not None
+def test_get_product_features():
+    features = us.get_product_features(SOUP)
+    assert (features != "") and features
 
-# def test_get_lead_time():
-#     lead_time = us.get_lead_time()
-#     assert lead_time == "Przeciętny czas dostawy 1-4 tygodnie"
+def test_get_lead_time():
+    lead_time = us.get_lead_time(SOUP)
+    assert lead_time == "Przeciętny czas dostawy 1-4 tygodnie"
 
+@pytest.mark.xfail
 def test_get_product_warranty():
     assert us.get_product_warranty() == 3
 
-# @pytest.mark.skip()
-# def test_get_comment():
-#     pass
+@pytest.mark.skip()
+def test_get_comment():
+    pass
 
-# def test_save():
-#     assert us.save()
+def test_save():
+    assert us.save()
 
-# def test_run():
-#     assert isinstance(us.run(), list)
+def test_run():
+    assert isinstance(us.run(), list)
