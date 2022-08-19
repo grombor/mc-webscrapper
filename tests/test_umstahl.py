@@ -7,8 +7,7 @@ from mc_webscrapper.umstahl.umstahl_links import LINKS
 from mc_webscrapper.umstahl.umstahl import Umstahl
 
 
-LINK = ("https://umstahl.pl/metalowa-szafa-ubraniowa-z-podzialem-wewnetrznym-se-40r2-24h,id550.html", "SUM 420")
-LINK = ("https://umstahl.pl/metalowa-szafa-ubraniowa-se-30r1,id190.html", "SUM 420")
+LINK = ("https://umstahl.pl/metalowa-szafa-ubraniowa-cp-duq-61,id857.html", "SUM 420")
 HTML = requests.get(LINK[0])
 SOUP = bs4(HTML.text, 'html.parser')
 us = Umstahl()
@@ -57,9 +56,8 @@ def test_get_product_features():
 
 def test_get_lead_time():
     lead_time = us.get_lead_time(SOUP)
-    assert lead_time == "Przeciętny czas dostawy 1-4 tygodnie"
+    assert lead_time == "5-10 dni roboczych (dla zamówienia do 5 sztuk). W przypadku szaf marki C+P dostawa nie obejmuje rozładunku i wniesienia towaru."
 
-@pytest.mark.xfail
 def test_get_product_warranty():
     assert us.get_product_warranty() == 3
 
