@@ -44,10 +44,13 @@ class Metalkas(ScrapperClass):
             netto = soup.find("div", {"class": "price-netto"}).text
             price = str(netto).split(',')
             return extract_digits(price[0])
-        except (AttributeError):
-            price_gross = soup.find('span', class_="price-wrapper ").text
-            price_nett = int(int(price_gross) / 1.3)
-            return price_nett
+        except (AttributeError): # AttributeError: 'NoneType' object has no attribute 'text'
+            try: 
+                price_gross = soup.find('span', class_="price-wrapper ").text
+                price_nett = int(int(price_gross) / 1.3)
+                return price_nett
+            except Exception:
+                return ""
         except Exception:
             print(f"method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
 

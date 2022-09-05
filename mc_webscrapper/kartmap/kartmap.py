@@ -41,6 +41,8 @@ class KartMap(ScrapperClass):
                 return nett_price
         except (ValueError, AttributeError):
             print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+        except Exception: #UnicodeEncodeError: 'charmap' codec can't encode character '\u0142' in position 39: character maps to <undefined>
+            return ""
 
     def get_product_height(self, soup):
         try:

@@ -7,7 +7,7 @@ from mc_webscrapper.umstahl.umstahl import Umstahl
 
 
 def main():
-    # Bakpol().run()
+    # Bakpol().run() # errors
     # JanNowak().run()
     # KartMap().run()
     # LocoBox().run()

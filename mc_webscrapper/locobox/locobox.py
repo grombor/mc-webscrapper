@@ -82,11 +82,11 @@ class LocoBox(ScrapperClass):
         try:
             depth = soup.find_all('td', {'width': '302'})[5].string
             return extract_digits(depth)
-        except IndexError as e:
+        except (IndexError, ValueError) as e: # ValueError: invalid literal for int() with base 10: ''
             try:
                 depth = soup.find('div', {'itemprop': 'description'}).contents[4].text.split(": ")[1][7:12]
                 return extract_digits(depth)
-            except (AttributeError, IndexError):
+            except (AttributeError, IndexError, ValueError) as e: # ValueError: invalid literal for int() with base 10: ''
                 return ""
         except Exception:
             print(f"method: {self.get_product_depth.__name__} link: {soup.title.string}")

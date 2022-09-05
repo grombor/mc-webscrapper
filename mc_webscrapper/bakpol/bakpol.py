@@ -49,8 +49,10 @@ class Bakpol(ScrapperClass):
                 height = soup.find('div', {'class': 'rte'}).find('ul').find_all('li')[3]
                 height = height.text.split('mm')
                 return extract_digits(height[0])
-            except (ValueError, AttributeError):
+            except (ValueError, AttributeError, UnicodeEncodeError): #UnicodeEncodeError critical error here
                 print(f", method: {self.get_product_height.__name__} link: {soup.title.string}")
+            except Exception: # UnicodeEncodeError: 'charmap' codec can't encode character '\u0142' in position 53: character maps to <undefined>
+                return ""
 
     def get_product_width(self, soup):
         try:
@@ -61,7 +63,7 @@ class Bakpol(ScrapperClass):
                 width = soup.find('div', {'class': 'rte'}).find('ul').find_all('li')[3]
                 width = width.text.split('mm')
                 return extract_digits(width[1])
-            except (ValueError, AttributeError):
+            except (ValueError, AttributeError, IndexError): #Index error here
                 print(f", method: {self.get_product_width.__name__} link: {soup.title.string}")
 
     def get_product_depth(self, soup):
@@ -73,7 +75,7 @@ class Bakpol(ScrapperClass):
                 depth = soup.find('div', {'class': 'rte'}).find('ul').find_all('li')[3]
                 depth = depth.text.split('mm')
                 return extract_digits(depth[2])
-            except (ValueError, AttributeError):
+            except (ValueError, AttributeError, IndexError): #Index error here
                 print(f", method: {self.get_product_depth.__name__} link: {soup.title.string}")
 
     def get_product_features(self, soup):
