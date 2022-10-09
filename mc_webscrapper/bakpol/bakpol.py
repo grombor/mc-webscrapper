@@ -31,14 +31,14 @@ class Bakpol(ScrapperClass):
             model = soup.find('h1', {'class': 'nazwa-produktu'}).string.strip()
             return str(model.lower())
         except Exception:
-            print(f", method: {self.get_model_name.__name__} link: {soup.title.string}")
+            print(f"Error in method: {self.get_model_name.__name__} link: {soup.title.string}")
 
     def get_shop_price_nett(self, soup) -> int:
         try:
             nett_price = soup.find('span', {"id": "our_price_display"}).string
             return clear_price(nett_price)
         except Exception:
-            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+            print(f"Error in method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
 
     def get_product_height(self, soup):
         try:
@@ -50,7 +50,7 @@ class Bakpol(ScrapperClass):
                 height = height.text.split('mm')
                 return extract_digits(height[0])
             except (ValueError, AttributeError, UnicodeEncodeError): #UnicodeEncodeError critical error here
-                print(f", method: {self.get_product_height.__name__} link: {soup.title.string}")
+                print(f"Error in method: {self.get_product_height.__name__} link: {soup.title.string}")
             except Exception: # UnicodeEncodeError: 'charmap' codec can't encode character '\u0142' in position 53: character maps to <undefined>
                 return ""
 
@@ -64,7 +64,7 @@ class Bakpol(ScrapperClass):
                 width = width.text.split('mm')
                 return extract_digits(width[1])
             except (ValueError, AttributeError, IndexError): #Index error here
-                print(f", method: {self.get_product_width.__name__} link: {soup.title.string}")
+                print(f"Error in method: {self.get_product_width.__name__} link: {soup.title.string}")
 
     def get_product_depth(self, soup):
         try:
@@ -76,14 +76,14 @@ class Bakpol(ScrapperClass):
                 depth = depth.text.split('mm')
                 return extract_digits(depth[2])
             except (ValueError, AttributeError, IndexError): #Index error here
-                print(f", method: {self.get_product_depth.__name__} link: {soup.title.string}")
+                print(f"Error in method: {self.get_product_depth.__name__} link: {soup.title.string}")
 
     def get_product_features(self, soup):
         try:
             desc = soup.find(class_="rte").text
             return str(desc)
         except (ValueError, AttributeError):
-            print(f", method: {self.get_product_features.__name__} link: {soup.title.string}")
+            print(f"Error in method: {self.get_product_features.__name__} link: {soup.title.string}")
  
     def get_lead_time(self):
        return "" 

@@ -7,11 +7,11 @@ from mc_webscrapper.umstahl.umstahl import Umstahl
 
 
 def main():
-    # Bakpol().run() # errors
-    # JanNowak().run()
-    # KartMap().run()
-    # LocoBox().run()
-    # Metalkas().run()
+    Bakpol().run()
+    JanNowak().run()
+    KartMap().run()
+    LocoBox().run()
+    Metalkas().run()
     Umstahl().run()
 
 if __name__ == "__main__":

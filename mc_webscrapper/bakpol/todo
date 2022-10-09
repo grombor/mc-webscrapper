@@ -1,0 +1,9 @@
+link:
+https://bakpol.pl/pl/szafy-gospodarcze-i-na-odziez-brudna/1468-su-g300-2-szafa-gospodarcza.html
+
+znalezc w tekscie opisu slowo "wysokosc" i odczytac jej wartosc
+
+nastepnie zaimplementowany i przetestowany kod przeniesc do try/except do funkcji:
+get_product_height
+get_product_width
+get_product_depth
