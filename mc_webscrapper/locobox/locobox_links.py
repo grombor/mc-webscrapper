@@ -1,0 +1,17 @@
+LINKS = [
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-U2-s60-cm/284", "SUM 320W"),
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-UT2-s60-cm/308", "SUM 420W"),
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B42-s60-cm%2C-h180-cm/187", "SUS 322W"),
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-PROFI-B42-s80-cm%2C-h180-cm/191", "SUS 422W"),
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-L4-s60-cm/323", "SUL 32W"),
+  ("https://locobox.pl/pl/p/Szafa-ubraniowa-PROFI-L4-s80-cm/320", "SUL 42W"),
+  ("https://locobox.pl/pl/p/Szafa-na-odziez-czysta-PROFI-CC2211/987", "MKB 2"),
+  ("https://locobox.pl/pl/p/Szafa-na-odziez-brudna-PROFI-DC-11/990", "MKB 5e"),
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M10/1078", "WSS 10"),
+  ("https://locobox.pl/pl/p/Szafka-skrytkowa-na-komorki-PROFI-M20/1079", "WSS 20"),
+  ("https://locobox.pl/pl/p/Stol-warsztatowy-PROFI-L2S1-PDG/787", "STW 121"),
+  ("https://locobox.pl/pl/p/Stol-warsztatowy-PROFI-L2PD/783", "STW 321"),
+  ("https://locobox.pl/pl/p/Szafa-warsztatowa-LIGHT-PROFIWS100200M43/738", "SWM 205"),
+  ("https://locobox.pl/pl/p/Szafa-gospodarcza-PROFI-M2-s60cm%2C-3P/349", "MSU 61"),
+  ("https://locobox.pl/pl/p/Szafa-gospodarcza-PROFI-M3-s80cm%2C-3P/353", "MSU 81"),
+]
