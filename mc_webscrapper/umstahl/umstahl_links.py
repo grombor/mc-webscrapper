@@ -35,4 +35,7 @@ LINKS = [
     ("https://umstahl.pl/metalowa-szafka-medyczna-wiszaca-smw-dp-1000,id571.html", "SZL 103"),
     ("https://umstahl.pl/metalowa-szafa-gospodarczo-ubraniowa-sgu-60,id177.html", "MSU 61"),
     ("https://umstahl.pl/metalowa-szafa-gospodarczo-ubraniowa-sgu-80,id178.html", "MSU 81"),
+    ("https://umstahl.pl/metalowa-szafa-ubraniowa-cp-duq-60,id659.html", "SUM 320W"),
+    ("https://umstahl.pl/metalowa-szafa-ubraniowa-cp-duq-80,id660.html", "SUM 420W"),
+    ("https://umstahl.pl/metalowa-szafa-skrytkowa-dsq-61,id860.html", "SUS 322W"),
 ]
