@@ -126,6 +126,7 @@ class Metalkas(ScrapperClass):
 
     def save(self):
         save_dataclass_to_file("metalkas", self.stored_data_list)
+        print(f'\n ---------------------------------------- \n')
         return True
 
     def run(self):
@@ -134,5 +135,4 @@ class Metalkas(ScrapperClass):
             data = self.gather_data_from_link(link)
             self.stored_data_list.append(data)
             self.save()
-            print(f'\n ---------------------------------------- \n')
         return self.stored_data_list

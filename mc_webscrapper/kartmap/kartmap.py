@@ -104,6 +104,7 @@ class KartMap(ScrapperClass):
 
     def save(self):
         save_dataclass_to_file("kart_map", self.stored_data_list)
+        print(f'\n ---------------------------------------- \n')
         return True
 
     def run(self):
