@@ -10,8 +10,8 @@ def main():
     # Bakpol().run()
     # JanNowak().run()
     # KartMap().run()
-    # LocoBox().run()
-    Metalkas().run()
+    LocoBox().run()
+    # Metalkas().run()
     # Umstahl().run()
 
 if __name__ == "__main__":

@@ -120,4 +120,5 @@ class Umstahl(ScrapperClass):
             data = self.gather_data_from_link(link)
             self.stored_data_list.append(data)
             self.save()
+            print(f'\n ---------------------------------------- \n')
         return self.stored_data_list
