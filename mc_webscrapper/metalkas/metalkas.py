@@ -134,4 +134,5 @@ class Metalkas(ScrapperClass):
             data = self.gather_data_from_link(link)
             self.stored_data_list.append(data)
             self.save()
+            print('done')
         return self.stored_data_list
