@@ -1,4 +1,3 @@
-# Lista do analizy przekrojowej
 LINKS = [
     ("https://bakpol.pl/pl/szafki-fitness/2305-su300-2-szafa-ubraniowa.html", "SUM 320W"),
     ("https://bakpol.pl/pl/szafy-ubraniowe-bez-cokolu/273-su400-2bc-szafa-ubraniowa-bez-cokolu.html", "SUM 420W"),

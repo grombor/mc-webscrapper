@@ -116,6 +116,7 @@ class Bakpol(ScrapperClass):
 
     def save(self):
         save_dataclass_to_file("bakpol", self.stored_data_list)
+        print(f'\n ---------------------------------------- \n')
         return True
 
     def run(self):

@@ -6,9 +6,9 @@ from mc_webscrapper.scrapper_dataclass import ScrapperDataClass
 
 
 def show_status(item, set):
-    for i in range(len(set)):
-        sys.stdout.write(f"Progress: {item} of {len(set)} \r")
-        sys.stdout.flush()
+    print(set[item][0])
+    sys.stdout.write(f"Scrapping: {item + 1} of {len(set)} \r")
+    sys.stdout.flush()
 
 def clear_price(nett_price: str) -> int:
     nett_price = nett_price.split(",")[0]
