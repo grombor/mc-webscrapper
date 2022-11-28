@@ -28,12 +28,11 @@ class Promag(ScrapperClass):
 
     def get_model_name(self, soup) -> str:
         try:
-            model = soup.find('div', {'class': 'subtitle'}).stripped_strings
-            return str(model.lower())
-        except AttributeError:
-            print(f"Error in method: {self.get_model_name.__name__} link: {soup.title.string}")
-            model = soup.find('h1', {'itemprop': 'name'}).string
-            return str(model.lower())
+            model = soup.find("h1", attrs={"itemprop": "name"}).parent.find("div", class_="subtitle").string.strip()
+            return str(model).lower()
+        except:
+            model = soup.find_all("h1", attrs={"itemprop": "name"}).string
+            return model.lower()
 
 
     def get_shop_price_nett(self, soup) -> int:
@@ -42,12 +41,14 @@ class Promag(ScrapperClass):
             return extract_digits(nett_price)
         except Exception:
             print(f"Error in method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+            return ""
 
     def get_product_height(self, soup):
         try:
             height = soup.find_all("div", class_="col-xs-5 value")[3].string.split("mm")[0].strip()
             return extract_digits(height)
         except Exception:
+            print(f"Error in method: {self.get_product_height.__name__} link: {soup.title.string}")
             return ""
 
     def get_product_width(self, soup):
@@ -55,6 +56,7 @@ class Promag(ScrapperClass):
             width = soup.find_all("div", class_="col-xs-5 value")[0].string.split("mm")[0].strip()
             return extract_digits(width)
         except Exception:
+            print(f"Error in method: {self.get_product_width.__name__} link: {soup.title.string}")
             return ""
 
     def get_product_depth(self, soup):
@@ -62,11 +64,16 @@ class Promag(ScrapperClass):
             depth = soup.find_all("div", class_="col-xs-5 value")[4].string.split("mm")[0].strip()
             return extract_digits(depth)
         except Exception:
+            print(f"Error in method: {self.get_product_depth.__name__} link: {soup.title.string}")
             return ""
 
     def get_product_features(self, soup):
+        try:
             desc = soup.find("div", {"itemprop": "description"}).text
             return str(desc)
+        except:
+            print(f"Error in method: {self.get_product_features.__name__} link: {soup.title.string}")
+            return ""
  
     def get_lead_time(self):
        return ""

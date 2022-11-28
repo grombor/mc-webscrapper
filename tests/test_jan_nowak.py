@@ -32,11 +32,11 @@ def test_get_manufacturer_name():
 
 def test_get_model_name():
     model = jn.get_model_name(SOUP).lower()
-    assert model == "KACPER-II-szara".lower()
+    assert model == "JAN NOWAK model KACPER 2 szafa socjalna ubraniowa czterokomorowa szara".lower()
 
 def test_get_shop_price_nett():
     price_nett = jn.get_shop_price_nett(SOUP)
-    assert price_nett == int(997/1.23)
+    assert price_nett == int(1067/1.23)
 
 def test_get_product_height():
     height = jn.get_product_height(SOUP)

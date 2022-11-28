@@ -28,53 +28,57 @@ class JanNowak(ScrapperClass):
 
     def get_model_name(self, soup) -> str:
         try:
-            model = soup.find('form', {'id': 'product-cart-form'}).find('p').contents
-            temp_string = str(model).replace("\\n", "")
-            temp_index = str(temp_string).find('Model')
-            model = temp_string[temp_index + 6:-2]
-            return model.lower()
-        except Exception as e:
-            print(e)
+            model = soup.find("span", class_="base").string
+            return str(model)
+        except:
+            print(f", method: {self.get_model_name.__name__} link: {soup.title.string}")
+            return ""
+        # try:
+        #     model = soup.find('form', {'id': 'product-cart-form'}).find('p').contents
+        #     temp_string = str(model).replace("\\n", "")
+        #     temp_index = str(temp_string).find('Model')
+        #     model = temp_string[temp_index + 6:-2]
+        #     return model.lower()
+        # except Exception:
+        #     print(f", method: {self.get_model_name.__name__} link: {soup.title.string}")
+        #     return ""
 
     def get_shop_price_nett(self, soup) -> int:
         try:
-            brutto = soup.find('div', {"class": "pricing"}).find('p', {"class": "current-price js-price"}).string.replace(" ", "").split(",")[0]
+            brutto = soup.find("span", class_="price").string.split(",")[0]
             brutto = extract_digits(brutto)
             return int(int(brutto)/1.23)
-        except AttributeError as e:
-            try:
-                brutto = soup.find('div', {"class": "pricing"}).find('p', {"class": "current-price js-price"}).text.split(",")[0]
-                brutto = extract_digits(brutto)
-                return int(int(brutto) / 1.23)
-            except Exception as e:
-                print(e)
+        except:
+            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+            return ""
+
 
     def get_product_height(self, soup):
         try:
-            height = soup.find_all("p", {"class": "normal"})[0].text
+            height = soup.find_all("div", class_="value", attrs={"itemprop": "height_ext"})[0].string.split("cm")[0]
             height = extract_digits(height)
             return height*10
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_height.__name__} link: {soup.title.string}")
+        except Exception:
+            print(f", method: {self.get_product_height.__name__} link: {soup.title.string}")
             return ""
 
     def get_product_width(self, soup):
         try:
-            width = soup.find_all("p", class_="normal")[1].text[:-2]
+            width = soup.find_all("div", class_="value", attrs={"itemprop": "width_ext"})[0].string.split("cm")[0]
             width = extract_digits(width)
             return width*10
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_height.__name__} link: {soup.title.string}")
+        except Exception:
+            print(f", method: {self.get_product_width.__name__} link: {soup.title.string}")
             return ""
 
     def get_product_depth(self, soup):
         """ Get product depth. """
         try:
-            depth = soup.find_all("p", class_="normal")[2].text[:-2]
+            depth = soup.find_all("div", class_="value", attrs={"itemprop": "depth_ext"})[0].string.split("cm")[0]
             depth = extract_digits(depth)
             return depth*10
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_height.__name__} link: {soup.title.string}")
+        except Exception:
+            print(f", method: {self.get_product_depth.__name__} link: {soup.title.string}")
             return "" 
 
     def get_product_features(self, soup):
@@ -83,6 +87,11 @@ class JanNowak(ScrapperClass):
         except (ValueError, IndexError) as e:
             print(e, f", method: {self.get_description.__name__} link: {soup.title.string}")
             return ""
+        except AttributeError:
+            return soup.find("div", id="product.info.details-tab_1").string
+        except Exception:
+            return ""
+
  
     def get_lead_time(self, soup):
         try:
@@ -90,10 +99,12 @@ class JanNowak(ScrapperClass):
             return lead_time[1]
         except (ValueError, IndexError, AttributeError):
             try:
-                lead_time = soup.find("p", class_="status").text
+                lead_time = soup.find("div", class_="stock available").text
                 return lead_time
             except (ValueError, IndexError, AttributeError):
                 print(f", method: get_lead_time")
+                return ""
+        except:
             return ""
 
     def get_product_warranty(self):

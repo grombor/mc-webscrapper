@@ -31,7 +31,8 @@ def test_get_manufacturer_name():
     assert promag.get_manufacturer_name() == "Promag"
 
 def test_get_model_name():
-    model = promag.get_model_name(SOUP).lower()
+    model = promag.get_model_name(SOUP)
+    print(model)
     assert model == "SUPE 300-02".lower()
 
 def test_get_shop_price_nett():
