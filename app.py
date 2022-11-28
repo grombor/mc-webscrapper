@@ -5,6 +5,7 @@ from mc_webscrapper.locobox.locobox import LocoBox
 from mc_webscrapper.metalkas.metalkas import Metalkas
 from mc_webscrapper.umstahl.umstahl import Umstahl
 from mc_webscrapper.jotkel.jotkel import Jotkel
+from mc_webscrapper.promag.promag import Promag
 
 
 def main():
@@ -14,7 +15,8 @@ def main():
     # LocoBox().run()
     # Metalkas().run()
     # Umstahl().run()
-    Jotkel().run()
+    # Jotkel().run()
+    Promag().run()
 
 if __name__ == "__main__":
     main()

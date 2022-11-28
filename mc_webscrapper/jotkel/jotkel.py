@@ -76,8 +76,8 @@ class Jotkel(ScrapperClass):
 
     def get_product_features(self, soup):
         try:
-            features = soup.find_all({"class": "resetcss"})
-            return features
+            # features = soup.find_all({"class": "resetcss"})
+            return ""
         except (ValueError, IndexError) as e:
             print(e, f", method: {self.get_product_features.__name__} link: {soup.title.string}")
             return ""
