@@ -7,7 +7,7 @@ from mc_webscrapper.umstahl.umstahl_links import LINKS
 from mc_webscrapper.umstahl.umstahl import Umstahl
 
 
-LINK = ("https://umstahl.pl/metalowa-szafa-ubraniowa-cp-duq-61,id857.html", "SUM 420")
+LINK = ("https://umstahl.pl/metalowa-szafa-skrytkowa-ssm-23r2,id355.html", "SUM 420")
 HTML = requests.get(LINK[0])
 SOUP = bs4(HTML.text, 'html.parser')
 us = Umstahl()

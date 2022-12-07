@@ -37,7 +37,7 @@ class Promag(ScrapperClass):
 
     def get_shop_price_nett(self, soup) -> int:
         try:
-            nett_price = soup.find('span', {"itemprop": "price"}).string
+            nett_price = soup.find('span', {"itemprop": "price"}).string.split(",")[0]
             return extract_digits(nett_price)
         except Exception:
             print(f"Error in method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")

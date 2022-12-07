@@ -18,6 +18,7 @@ class Umstahl(ScrapperClass):
     def setup_scrapper(self, link: str):
         response = requests.get(link, timeout=REQUEST_TIMEOUT, headers=HEADERS)
         soup = bs4(response.text, 'html.parser')
+        print(link)
         return soup
 
     def get_dealer_name(self) -> str:
@@ -30,16 +31,18 @@ class Umstahl(ScrapperClass):
         try:
             model = soup.find('h1', {"itemprop": "name"}).text
             return model.lower()
-        except Exception as e:
+        except Exception:
             print(f"method: {self.get_model_name.__name__} link: {soup.title.string}")
+            return ""
 
     def get_shop_price_nett(self, soup) -> int:
         try:
             nett_price = soup.find("strong", {"id": "net_price"}).text
             nett_price = extract_digits(nett_price.split(".")[0])
             return nett_price
-        except Exception as e:
+        except Exception:
             print(f"method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+            return ""
         
 
     def get_product_height(self, soup):
@@ -47,38 +50,53 @@ class Umstahl(ScrapperClass):
             desc_short = soup.find("p", {"class": "desc-short"}).contents[1]
             desc_short = extract_digits(desc_short.split("x")[2]+"0")
             return desc_short
-        except Exception as e:
+        except Exception:
             print(f"method: {self.get_product_height.__name__} link: {soup.title.string}")
+            return ""
 
     def get_product_width(self, soup):
         try:
             desc_short = soup.find("p", {"class": "desc-short"}).contents[1]
             desc_short = extract_digits(desc_short.split("x")[0]+"0")
             return desc_short
-        except Exception as e:
+        except Exception:
             print(f"method: {self.get_product_width.__name__} link: {soup.title.string}")
+            return ""
 
     def get_product_depth(self, soup):
         try:
             desc_short = soup.find("p", {"class": "desc-short"}).contents[1]
             desc_short = extract_digits(desc_short.split("x")[1]+"0")
             return desc_short
-        except Exception as e:
+        except Exception:
             print(f"method: {self.get_product_width.__name__} link: {soup.title.string}")
+            return ""
 
     def get_product_features(self, soup):
         try:
-            desc_long = soup.find("div", {"class": "desc-text"}).stripped_strings
-            return desc_long
-        except Exception as e:
+            features = soup.select("div > .desc-text").text
+            print(features)
+            return features
+        except AttributeError:
             print(f"method: {self.get_product_features.__name__} link: {soup.title.string}")
+            return ""
+            # try:
+            #     desc = soup.find("div", {"class": "desc-text"}).find_all("p")[0].text
+            #     return desc
+            # except:
+            #     print(f"method: {self.get_product_features.__name__} link: {soup.title.string}")
+            #     return ""
  
-    def get_lead_time(self, soup):  # TODO: fix -> None
+    def get_lead_time(self, soup):
         try:
-            desc_long = soup.find("p", class_="pitem clearfix").find("span").text.strip()
-            return desc_long
-        except Exception as e:
-            print(f"method: {self.get_lead_time.__name__} link: {soup.title.string}")
+            lead_time = soup.find("p", class_="pitem clearfix").find("span").string
+            return lead_time
+        except Exception:
+            try:
+                lead_time = soup.find_all("p", class_="pitem clearfix")
+            except Exception:
+                print(f"method: {self.get_lead_time.__name__} link: {soup.title.string}")
+                return ""
 
     def get_product_warranty(self):
         return 3
@@ -99,13 +117,11 @@ class Umstahl(ScrapperClass):
         umstahl.product_height = self.get_product_height(soup)
         umstahl.product_width = self.get_product_width(soup)
         umstahl.product_depth = self.get_product_depth(soup)
-        umstahl.product_features = self.get_product_features(soup)
-        # Error here
-        umstahl.product_features = "self.get_product_features(soup)"
+        # TODO: fix recurence loop
+        # umstahl.product_features = self.get_product_features(soup)
+        umstahl.product_features = ""
         umstahl.product_card_link = url
-        # Error here
-        # umstahl.lead_time = self.get_lead_time(soup)
-        umstahl.lead_time = "self.get_lead_time(soup)"
+        umstahl.lead_time = self.get_lead_time(soup)
         umstahl.product_warranty = self.get_product_warranty()
         umstahl.comment = self.get_comment()
         return umstahl

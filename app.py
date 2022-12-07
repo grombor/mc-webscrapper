@@ -14,9 +14,9 @@ def main():
     # KartMap().run()
     # LocoBox().run()
     # Metalkas().run()
-    # Umstahl().run()
+    Umstahl().run()
     # Jotkel().run()
-    Promag().run()
+    # Promag().run()
 
 if __name__ == "__main__":
     main()
