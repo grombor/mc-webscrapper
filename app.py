@@ -9,14 +9,14 @@ from mc_webscrapper.promag.promag import Promag
 
 
 def main():
-    # Bakpol().run()
-    # JanNowak().run()
-    # KartMap().run()
-    # LocoBox().run()
-    # Metalkas().run()
-    # Umstahl().run()
-    # Jotkel().run()
-    Promag().run()
+    Bakpol().run()
+    JanNowak().run()
+    KartMap().run()
+    LocoBox().run()
+    Metalkas().run()
+    Umstahl().run()
+    Jotkel().run()
+    # Promag().run()
 
 if __name__ == "__main__":
     main()
