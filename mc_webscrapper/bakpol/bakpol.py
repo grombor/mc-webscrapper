@@ -42,29 +42,41 @@ class Bakpol(ScrapperClass):
 
     def get_product_height(self, soup):
         try:
-            height = soup.find('table', class_='table-data-sheet').find_all('td')[1].text
+            height = soup.find('table', class_='table-data-sheet').find_all('td')[1].text.replace("\\u0142", "").replace("\\u017c", "")
             return extract_digits(height)
-        except (ValueError, AttributeError) as e:
+        except Exception:
             try:
                 height = soup.find('div', {'class': 'rte'}).find('ul').find_all('li')[3]
-                height = height.text.split('mm')
-                return extract_digits(height[0])
-            except (ValueError, AttributeError, UnicodeEncodeError): #UnicodeEncodeError critical error here
-                print(f"Error in method: {self.get_product_height.__name__} link: {soup.title.string}")
-            except Exception: # UnicodeEncodeError: 'charmap' codec can't encode character '\u0142' in position 53: character maps to <undefined>
+                height = height.text.split('mm')[0].replace("\\u0142", "").replace("\\u017c", "")
+                if height is None: 
+                    return ""
+                else: 
+                    return extract_digits(height)
+            except Exception:
+                # print(f"Error in method: {self.get_product_height.__name__} link: {soup.title.string}")
                 return ""
 
     def get_product_width(self, soup):
         try:
-            width = soup.find('table', class_='table-data-sheet').find_all('td')[3].text
-            return extract_digits(width)
+            width = soup.find('table', class_='table-data-sheet').find_all('td')[3].text.replace("\\u0142", "").replace("\\u017c", "")
+            if width is None:
+                return ""
+            else:
+                return extract_digits(width)
         except (ValueError, AttributeError) as e:
             try:
                 width = soup.find('div', {'class': 'rte'}).find('ul').find_all('li')[3]
-                width = width.text.split('mm')
-                return extract_digits(width[1])
+                width = width.text.split('mm')[1].replace("\\u0142", "").replace("\\u017c", "")
+                if width is None:
+                    return ""
+                else: 
+                    return extract_digits(width)
             except (ValueError, AttributeError, IndexError): #Index error here
-                print(f"Error in method: {self.get_product_width.__name__} link: {soup.title.string}")
+                # print(f"Error in method: {self.get_product_width.__name__} link: {soup.title.string}")
+                return ""
+        except Exception:
+            # print(f"Error in method: {self.get_product_width.__name__} link: {soup.title.string}")
+            return ""
 
     def get_product_depth(self, soup):
         try:
@@ -76,7 +88,8 @@ class Bakpol(ScrapperClass):
                 depth = depth.text.split('mm')
                 return extract_digits(depth[2])
             except (ValueError, AttributeError, IndexError): #Index error here
-                print(f"Error in method: {self.get_product_depth.__name__} link: {soup.title.string}")
+                # print(f"Error in method: {self.get_product_depth.__name__} link: {soup.title.string}")
+                return ""
 
     def get_product_features(self, soup):
         try:
@@ -84,6 +97,8 @@ class Bakpol(ScrapperClass):
             return str(desc)
         except (ValueError, AttributeError):
             print(f"Error in method: {self.get_product_features.__name__} link: {soup.title.string}")
+            return ""
+
  
     def get_lead_time(self):
        return "" 

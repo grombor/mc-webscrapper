@@ -14,7 +14,7 @@ def main():
     # KartMap().run()
     # LocoBox().run()
     # Metalkas().run()
-    Umstahl().run()
+    # Umstahl().run()
     # Jotkel().run()
     # Promag().run()
 

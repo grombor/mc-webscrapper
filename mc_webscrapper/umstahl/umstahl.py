@@ -74,10 +74,9 @@ class Umstahl(ScrapperClass):
 
     def get_product_features(self, soup):
         try:
-            features = soup.select("div > .desc-text").text
-            print(features)
-            return features
-        except AttributeError:
+            desc = soup.find("div", {"class": "desc-text"}).find_all("p")[0].text
+            return desc
+        except Exception:
             print(f"method: {self.get_product_features.__name__} link: {soup.title.string}")
             return ""
             # try:
@@ -89,14 +88,19 @@ class Umstahl(ScrapperClass):
  
     def get_lead_time(self, soup):
         try:
-            lead_time = soup.find("p", class_="pitem clearfix").find("span").string
+            # lead_time = soup.find("p", class_="pitem clearfix").find("span").string
+            # return lead_time
+            lead_time = soup.find("div", class_="product-right-box").find("p", class_="pitem clearfix").text
             return lead_time
         except Exception:
-            try:
-                lead_time = soup.find_all("p", class_="pitem clearfix")
-            except Exception:
-                print(f"method: {self.get_lead_time.__name__} link: {soup.title.string}")
-                return ""
+            print(f"method: {self.get_lead_time.__name__} link: {soup.title.string}")
+            return ""
+            # try:
+            #     lead_time = soup.find_all("p", class_="pitem clearfix")
+            #     return lead_time
+            # except Exception:
+            #     print(f"method: {self.get_lead_time.__name__} link: {soup.title.string}")
+            #     return ""
 
     def get_product_warranty(self):
         return 3
@@ -117,13 +121,13 @@ class Umstahl(ScrapperClass):
         umstahl.product_height = self.get_product_height(soup)
         umstahl.product_width = self.get_product_width(soup)
         umstahl.product_depth = self.get_product_depth(soup)
-        # TODO: fix recurence loop
-        # umstahl.product_features = self.get_product_features(soup)
-        umstahl.product_features = ""
+        umstahl.product_features = self.get_product_features(soup)
         umstahl.product_card_link = url
         umstahl.lead_time = self.get_lead_time(soup)
         umstahl.product_warranty = self.get_product_warranty()
+        umstahl.product_warranty = ""
         umstahl.comment = self.get_comment()
+        umstahl.comment = ""
         return umstahl
 
     def save(self):

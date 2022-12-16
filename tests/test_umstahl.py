@@ -7,7 +7,7 @@ from mc_webscrapper.umstahl.umstahl_links import LINKS
 from mc_webscrapper.umstahl.umstahl import Umstahl
 
 
-LINK = ("https://umstahl.pl/metalowa-szafa-skrytkowa-ssm-23r2,id355.html", "SUM 420")
+LINK = ("https://umstahl.pl/metalowa-szafka-ubraniowa-se-30r2-24h,id102.html", "SUM 320")
 HTML = requests.get(LINK[0])
 SOUP = bs4(HTML.text, 'html.parser')
 us = Umstahl()
@@ -32,11 +32,11 @@ def test_get_manufacturer_name():
 
 def test_get_model_name():
     model = us.get_model_name(SOUP).lower()
-    assert model == "Metalowa szafka ubraniowa z podziałem wewnętrznym SE 40R2".lower()
+    assert model == "Metalowa szafka ubraniowa SE 30R2".lower()
 
 def test_get_shop_price_nett():
     price_nett = us.get_shop_price_nett(SOUP)
-    assert price_nett == int(776)
+    assert price_nett == int(566)
 
 def test_get_product_height():
     height = us.get_product_height(SOUP)
@@ -52,7 +52,8 @@ def test_get_product_depth():
 
 def test_get_product_features():
     features = us.get_product_features(SOUP)
-    assert (features != "") and features
+    print(features)
+    assert features == ''
 
 def test_get_lead_time():
     lead_time = us.get_lead_time(SOUP)
