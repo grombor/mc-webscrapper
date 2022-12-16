@@ -40,17 +40,16 @@ class KartMap(ScrapperClass):
                 nett_price = clear_price(price)
                 return nett_price
         except (ValueError, AttributeError):
-            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
-        except Exception: #UnicodeEncodeError: 'charmap' codec can't encode character '\u0142' in position 39: character maps to <undefined>
+            # print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+            return ""
+        except Exception:
             return ""
 
     def get_product_height(self, soup):
         try:
             height = soup.find_all('td', {'width': '302'})[1].text
             return extract_digits(height)
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
-        except IndexError:
+        except Exception:
             return ""
 
     def get_product_width(self, soup):
@@ -58,20 +57,24 @@ class KartMap(ScrapperClass):
             szerokosc = soup.find_all('td', {'width': '302'})[3].string
             return extract_digits(szerokosc)
         except (ValueError, AttributeError):
-            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+            # print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+            return ""
 
     def get_product_depth(self, soup):
         try:
             depth = soup.find_all('td', {'width': '302'})[5].text
             return extract_digits(depth)
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+        except Exception:
+            # print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+            return ""
 
     def get_product_features(self, soup):
         try:
             return soup.find(id="tab-description").text
-        except (ValueError, AttributeError):
-            print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+        except Exception:
+            # print(f", method: {self.get_shop_price_nett.__name__} link: {soup.title.string}")
+            return ""
+
  
     def get_lead_time(self):
         return "Przeciętny czas dostawy 1-4 tygodnie"

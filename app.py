@@ -16,7 +16,7 @@ def main():
     # Metalkas().run()
     # Umstahl().run()
     # Jotkel().run()
-    # Promag().run()
+    Promag().run()
 
 if __name__ == "__main__":
     main()
